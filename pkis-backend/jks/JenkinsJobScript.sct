@@ -1,0 +1,27 @@
+### 此處專案自行撰寫傳送至主機的對應目錄
+### $1 為jenkins進行編譯後的工作目錄
+### $2 為登入遠端的位置及帳號，會在Jenkins Job進行設定並傳入此script
+
+ssh $2 "
+### 刪除SCT ###
+rm -rf /APPKIS/SCT/*;
+### 刪除lib檔 ###
+rm -rf /APPKIS/INCLUDE/*;
+### 刪除jar檔 ###
+rm -rf /APPKIS/JAR/*;
+"
+
+### 上傳jar檔 ###
+scp -r $1/pkis-backend-1.0.0.jar $2:/APPKIS/JAR/;
+### 上傳lib檔 ###
+scp -r $1/lib/* $2:/APPKIS/INCLUDE/;
+### 上傳SCT檔 ###
+scp -r $1/SCT/* $2:/APPKIS/SCT/;
+
+### 呼叫updown.sct重啟服務 ###
+ssh $2 "
+. ~/.profile
+chmod 755 /APPKIS/SCT/*;
+cd /APPKIS/SCT;
+
+"

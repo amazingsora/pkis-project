@@ -1,0 +1,55 @@
+{
+	"place": { "id": 1, "type": "quesRadioOther", "value": "評量地點", "required": true,
+		"options": [ "門診", "急診", "一般病房", "加護病房", "手術室", "其它" ]
+	},
+	"secPatient": [
+		{ "id": 1, "type": "quesRadioVal", "value": "病人資訊", "required": true,
+			"options": [ "男", "女" ]
+		},
+		{ "id": 2, "type": "quesNumber", "value": "年齡", "required": true },
+		{ "id": 3, "type": "quesRadioVal", "value": "類型", "required": true,
+			"options": [ "新病人", "舊病人" ]
+		}
+	],
+	"secDiagnosis": [
+		{ "id": 1, "type": "quesRadioVal", "value": "病情複雜", "required": true,
+			"options": [ "低", "中", "高" ]
+		},
+		{ "id": 2, "type": "question", "value": "診斷說明", "required": true }
+	],
+	"phase": { "id": 1, "type": "quesRadioOther", "value": "評量階段", "required": true,
+		"options": [ "學前", "學後", "輔導後", "其它" ]
+	},
+	"secEvaluation": [
+		{ "id": 1, "type": "question", "value": "評量主題", "required": true },
+		{ "id": 2, "type": "quesRadioVal", "value": "評量次數", "required": true,
+			"options": [ "1", "2", "3", "4次以上" ]
+		},
+		{ "id": 3, "type": "quesRadioVal", "value": "評量技術複雜程度", "required": true,
+			"options": [ "低", "中", "高" ]
+		}
+	],
+	"secEvalItems": [
+		{ "id": 1, "type": "ques09Point", "value": "醫療面談", "required": true },
+		{ "id": 2, "type": "ques09Point", "value": "身體檢查", "required": true },
+		{ "id": 3, "type": "ques09Point", "value": "操作技能", "required": true },
+		{ "id": 4, "type": "ques09Point", "value": "諮商衛教", "required": true },
+		{ "id": 5, "type": "ques09Point", "value": "臨床判斷", "required": true },
+		{ "id": 6, "type": "ques09Point", "value": "組織效能", "required": true },
+		{ "id": 7, "type": "ques09Point", "value": "人道專業", "required": true }
+	],
+	"result": { "id": 2, "type": "quesRadioVal", "value": "評量者認為這位受評者的表現是", "required": true,
+		"options": [ "達預期標準(含)以上（通過）", "少部分必須再加強及評估", "未達預期標準，無法通過" ]
+	},
+	"secTiming": [
+		{ "id": 1, "type": "quesNumber", "value": "直接觀察時間", "required": true },
+		{ "id": 2, "type": "quesNumber", "value": "回饋時間", "required": true }
+	],
+	"secComment": [
+		{ "id": 1, "type": "question", "value": "表現優良項目", "required": true },
+		{ "id": 2, "type": "question", "value": "建議加強項目", "required": true }
+	],
+	"satisfactionOnOff": true,
+	"satisfaction": { "id": 1999, "type": "ques10Point", "value": "受評者對此次評量滿意度", "required": false },
+	"satisfaction2": { "id": 2000, "type": "ques10Point", "value": "評量者對此次評量滿意度", "required": false }
+}

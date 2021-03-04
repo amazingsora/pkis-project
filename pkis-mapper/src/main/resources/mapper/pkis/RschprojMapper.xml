@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.RschprojMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Rschproj">
+        <id column="SERNO" property="serno" />
+        <result column="PROJID" property="projid" />
+        <result column="APPLYNO" property="applyno" />
+        <result column="STATUS" property="status" />
+        <result column="ISOUTER" property="isouter" />
+        <result column="CHECKNUM" property="checknum" />
+        <result column="ORGANSERNO" property="organserno" />
+        <result column="OUTPROJID" property="outprojid" />
+        <result column="PROJTYPE" property="projtype" />
+        <result column="OTHERTYPE" property="othertype" />
+        <result column="PROJNAME" property="projname" />
+        <result column="PROJENGNAME" property="projengname" />
+        <result column="BEGDATE" property="begdate" />
+        <result column="ENDDATE" property="enddate" />
+        <result column="PLACE" property="place" />
+        <result column="PLACENAME" property="placename" />
+        <result column="NATURE" property="nature" />
+        <result column="USETYPE" property="usetype" />
+        <result column="HOSTTYPE" property="hosttype" />
+        <result column="EXPERIMENT" property="experiment" />
+        <result column="BIONAME" property="bioname" />
+        <result column="LEV" property="lev" />
+        <result column="STOPDATE" property="stopdate" />
+        <result column="REASON" property="reason" />
+        <result column="CONTDATE" property="contdate" />
+        <result column="CONTREASON" property="contreason" />
+        <result column="CHANGEAPPLYUSERID" property="changeapplyuserid" />
+        <result column="REFSERNO" property="refserno" />
+        <result column="BUDGETNO" property="budgetno" />
+        <result column="ISSYNCEXPENSES" property="issyncexpenses" />
+        <result column="CREATEUSERID" property="createuserid" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, PROJID, APPLYNO, STATUS, ISOUTER, CHECKNUM, ORGANSERNO, OUTPROJID, PROJTYPE, OTHERTYPE, PROJNAME, PROJENGNAME, BEGDATE, ENDDATE, PLACE, PLACENAME, NATURE, USETYPE, HOSTTYPE, EXPERIMENT, BIONAME, LEV, STOPDATE, REASON, CONTDATE, CONTREASON, CHANGEAPPLYUSERID, REFSERNO, BUDGETNO, ISSYNCEXPENSES, CREATEUSERID
+    </sql>
+
+</mapper>

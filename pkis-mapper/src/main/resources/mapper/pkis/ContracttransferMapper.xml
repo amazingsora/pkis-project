@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.ContracttransferMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Contracttransfer">
+        <result column="SERNO" property="serno" />
+        <result column="DATAID" property="dataid" />
+        <result column="DEPTID" property="deptid" />
+        <result column="ROLEID" property="roleid" />
+        <result column="USERID" property="userid" />
+        <result column="UNDERTAKEDEPTID" property="undertakedeptid" />
+        <result column="UNDERTAKEROLEID" property="undertakeroleid" />
+        <result column="UNDERTAKEUSERID" property="undertakeuserid" />
+        <result column="CRATEUSER" property="crateuser" />
+        <result column="CRATEDATE" property="cratedate" />
+        <result column="UPDATEUSER" property="updateuser" />
+        <result column="UPDATEDATE" property="updatedate" />
+        <result column="DISPORD" property="dispord" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, DATAID, DEPTID, ROLEID, USERID, UNDERTAKEDEPTID, UNDERTAKEROLEID, UNDERTAKEUSERID, CRATEUSER, CRATEDATE, UPDATEUSER, UPDATEDATE, DISPORD
+    </sql>
+
+</mapper>

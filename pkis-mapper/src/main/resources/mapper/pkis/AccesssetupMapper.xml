@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.AccesssetupMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Accesssetup">
+        <result column="COLUMN1" property="column1" />
+        <result column="COLUMN2" property="column2" />
+        <result column="COLUMN3" property="column3" />
+        <result column="COLUMN4" property="column4" />
+        <result column="COLUMN5" property="column5" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        COLUMN1, COLUMN2, COLUMN3, COLUMN4, COLUMN5
+    </sql>
+
+</mapper>

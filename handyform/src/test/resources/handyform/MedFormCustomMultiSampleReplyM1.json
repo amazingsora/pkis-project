@@ -1,0 +1,16 @@
+{
+	"id":2, "title":"二、學習記錄", "subTitle":"", "detailList":[
+		{ "id":1, "topic":"日期", "type":"date", "reply":"2018/11/04" },
+		{ "id":2, "topic":"病歷號碼", "type":"text", "max":20, "reply":"12345678" },
+		{ "id":3, "topic":"親自照護", "type":"radio", "options":[{ "value":"是" }, { "value":"否" }], "reply":"否" },
+		{ "id":4, "topic":"參與討論", "type":"radio", "options":[{ "value":"是" }, { "value":"否" }], "reply":"是" },
+		{ "id":5, "topic":"學習重點", "type":"area", "max":300, "rows":3, "reply":"學習重點..." },
+		{ "id":6, "topic":"評分", "type":"num", "min":0, "max":100, "formResult":"FS", "reply":"60" },
+		{ "id":7, "topic":"成功/失敗", "forReview":true, "type":"radio", "options":[
+				{ "value":"成功", "passConv":true }, { "value":"失敗" }
+			], "formResult":"ST", "reply":"失敗"
+		}
+	],
+	"flow":"A→B→C",
+	"comments": "張三：OK^李四：好"
+}

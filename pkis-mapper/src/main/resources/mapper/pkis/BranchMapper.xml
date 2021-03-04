@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.BranchMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Branch">
+        <id column="POSTCODE" property="postcode" />
+        <result column="POSTGLN" property="postgln" />
+        <result column="POSTBRIEFNAME" property="postbriefname" />
+        <result column="POSTNAME" property="postname" />
+        <result column="STORETYPE" property="storetype" />
+        <result column="OPENDATE" property="opendate" />
+        <result column="CLOSEDATE" property="closedate" />
+        <result column="AREACODE" property="areacode" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        POSTGLN, POSTCODE, POSTBRIEFNAME, POSTNAME, STORETYPE, OPENDATE, CLOSEDATE, AREACODE
+    </sql>
+
+</mapper>

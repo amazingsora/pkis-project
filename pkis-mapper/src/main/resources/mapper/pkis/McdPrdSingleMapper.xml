@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdPrdSingleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdPrdSingle">
+        <id column="SINGLE_SUBID" property="singleSubid" />
+        <result column="SINGLE_ID" property="singleId" />
+        <result column="ITEM_CODE" property="itemCode" />
+        <result column="PARENT_ITEM_CODE" property="parentItemCode" />
+        <result column="PACK_TYPE" property="packType" />
+        <result column="DIMENSION_ID" property="dimensionId" />
+        <result column="COLOR_ID" property="colorId" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+        <result column="ENTRY_NUM" property="entryNum" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SINGLE_SUBID, SINGLE_ID, ITEM_CODE, PARENT_ITEM_CODE, PACK_TYPE, DIMENSION_ID, COLOR_ID, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO, ENTRY_NUM
+    </sql>
+
+</mapper>

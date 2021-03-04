@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.LoggBdMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.LoggBd">
+        <id column="FILES_TYPE" property="filesType" />
+        <result column="STORE_NO" property="storeNo" />
+        <result column="DATE_YM" property="dateYm" />
+        <result column="D01_STATUS" property="d01Status" />
+        <result column="D01_DATE_TIME" property="d01DateTime" />
+        <result column="D02_STATUS" property="d02Status" />
+        <result column="D02_DATE_TIME" property="d02DateTime" />
+        <result column="D03_STATUS" property="d03Status" />
+        <result column="D03_DATE_TIME" property="d03DateTime" />
+        <result column="D04_STATUS" property="d04Status" />
+        <result column="D04_DATE_TIME" property="d04DateTime" />
+        <result column="D05_STATUS" property="d05Status" />
+        <result column="D05_DATE_TIME" property="d05DateTime" />
+        <result column="D06_STATUS" property="d06Status" />
+        <result column="D06_DATE_TIME" property="d06DateTime" />
+        <result column="D07_STATUS" property="d07Status" />
+        <result column="D07_DATE_TIME" property="d07DateTime" />
+        <result column="D08_STATUS" property="d08Status" />
+        <result column="D08_DATE_TIME" property="d08DateTime" />
+        <result column="D09_STATUS" property="d09Status" />
+        <result column="D09_DATE_TIME" property="d09DateTime" />
+        <result column="D10_STATUS" property="d10Status" />
+        <result column="D10_DATE_TIME" property="d10DateTime" />
+        <result column="D11_STATUS" property="d11Status" />
+        <result column="D11_DATE_TIME" property="d11DateTime" />
+        <result column="D12_STATUS" property="d12Status" />
+        <result column="D12_DATE_TIME" property="d12DateTime" />
+        <result column="D13_STATUS" property="d13Status" />
+        <result column="D13_DATE_TIME" property="d13DateTime" />
+        <result column="D14_STATUS" property="d14Status" />
+        <result column="D14_DATE_TIME" property="d14DateTime" />
+        <result column="D15_STATUS" property="d15Status" />
+        <result column="D15_DATE_TIME" property="d15DateTime" />
+        <result column="D16_STATUS" property="d16Status" />
+        <result column="D16_DATE_TIME" property="d16DateTime" />
+        <result column="D17_STATUS" property="d17Status" />
+        <result column="D17_DATE_TIME" property="d17DateTime" />
+        <result column="D18_STATUS" property="d18Status" />
+        <result column="D18_DATE_TIME" property="d18DateTime" />
+        <result column="D19_STATUS" property="d19Status" />
+        <result column="D19_DATE_TIME" property="d19DateTime" />
+        <result column="D20_STATUS" property="d20Status" />
+        <result column="D20_DATE_TIME" property="d20DateTime" />
+        <result column="D21_STATUS" property="d21Status" />
+        <result column="D21_DATE_TIME" property="d21DateTime" />
+        <result column="D22_STATUS" property="d22Status" />
+        <result column="D22_DATE_TIME" property="d22DateTime" />
+        <result column="D23_STATUS" property="d23Status" />
+        <result column="D23_DATE_TIME" property="d23DateTime" />
+        <result column="D24_STATUS" property="d24Status" />
+        <result column="D24_DATE_TIME" property="d24DateTime" />
+        <result column="D25_STATUS" property="d25Status" />
+        <result column="D25_DATE_TIME" property="d25DateTime" />
+        <result column="D26_STATUS" property="d26Status" />
+        <result column="D26_DATE_TIME" property="d26DateTime" />
+        <result column="D27_STATUS" property="d27Status" />
+        <result column="D27_DATE_TIME" property="d27DateTime" />
+        <result column="D28_STATUS" property="d28Status" />
+        <result column="D28_DATE_TIME" property="d28DateTime" />
+        <result column="D29_STATUS" property="d29Status" />
+        <result column="D29_DATE_TIME" property="d29DateTime" />
+        <result column="D30_STATUS" property="d30Status" />
+        <result column="D30_DATE_TIME" property="d30DateTime" />
+        <result column="D31_STATUS" property="d31Status" />
+        <result column="D31_DATE_TIME" property="d31DateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        FILES_TYPE, STORE_NO, DATE_YM, D01_STATUS, D01_DATE_TIME, D02_STATUS, D02_DATE_TIME, D03_STATUS, D03_DATE_TIME, D04_STATUS, D04_DATE_TIME, D05_STATUS, D05_DATE_TIME, D06_STATUS, D06_DATE_TIME, D07_STATUS, D07_DATE_TIME, D08_STATUS, D08_DATE_TIME, D09_STATUS, D09_DATE_TIME, D10_STATUS, D10_DATE_TIME, D11_STATUS, D11_DATE_TIME, D12_STATUS, D12_DATE_TIME, D13_STATUS, D13_DATE_TIME, D14_STATUS, D14_DATE_TIME, D15_STATUS, D15_DATE_TIME, D16_STATUS, D16_DATE_TIME, D17_STATUS, D17_DATE_TIME, D18_STATUS, D18_DATE_TIME, D19_STATUS, D19_DATE_TIME, D20_STATUS, D20_DATE_TIME, D21_STATUS, D21_DATE_TIME, D22_STATUS, D22_DATE_TIME, D23_STATUS, D23_DATE_TIME, D24_STATUS, D24_DATE_TIME, D25_STATUS, D25_DATE_TIME, D26_STATUS, D26_DATE_TIME, D27_STATUS, D27_DATE_TIME, D28_STATUS, D28_DATE_TIME, D29_STATUS, D29_DATE_TIME, D30_STATUS, D30_DATE_TIME, D31_STATUS, D31_DATE_TIME, SYSTEM_MEMO
+    </sql>
+
+</mapper>

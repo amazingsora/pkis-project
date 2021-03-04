@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.CodelistMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Codelist">
+        <result column="SYS" property="sys" />
+        <result column="CLASSTYPE" property="classtype" />
+        <result column="YEARS" property="years" />
+        <result column="ANUMBER" property="anumber" />
+        <result column="NOTE" property="note" />
+        <result column="DEPTNO" property="deptno" />
+        <result column="SUPPLIERCODE" property="suppliercode" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SYS, CLASSTYPE, YEARS, ANUMBER, NOTE, DEPTNO, SUPPLIERCODE
+    </sql>
+    
+    <insert id="insertCodeList" parameterType="com.tradevan.mapper.pkis.model.Codelist">
+    INSERT INTO <include refid="CommonMapper.schema"/>CODELIST (
+  		SYS, CLASSTYPE, YEARS, ANUMBER, NOTE, DEPTNO, SUPPLIERCODE
+  		) VALUES (
+  			#{sys},#{classtype},#{years},#{anumber},#{note},#{deptno},#{suppliercode}
+  		)
+    </insert>
+    
+    <select id="searchSupplierCode" parameterType="HashMap" resultType="HashMap">
+    SELECT ANUMBER
+		FROM <include refid="CommonMapper.schema"/>CODELIST
+		WHERE 1=1
+		AND SYS='SEQUENCE'
+		AND CLASSTYPE='SP'
+		<if test="deptno != null">
+			AND DEPTNO = #{deptno,jdbcType=VARCHAR}
+		</if>
+		<if test="suppliercode != null">
+			AND SUPPLIERCODE = #{suppliercode,jdbcType=VARCHAR}
+		</if>
+		
+		<include refid="CommonMapper.orderBy"/> 
+    </select>
+    
+    <update id="updataSupplierCodeList" parameterType="HashMap">
+    UPDATE <include refid="CommonMapper.schema"/>CODELIST
+       SET 
+            ANUMBER = #{anumber,jdbcType=VARCHAR}
+   		  , YEARS = #{years,jdbcType=VARCHAR}
+     WHERE SYS='SEQUENCE'
+       AND CLASSTYPE='SP'
+    	<if test="deptno != null">
+			AND DEPTNO = #{deptno,jdbcType=VARCHAR}
+		</if>
+		<if test="suppliercode != null">
+			AND SUPPLIERCODE = #{suppliercode,jdbcType=VARCHAR}
+		</if>
+    	
+    </update>
+    
+
+</mapper>

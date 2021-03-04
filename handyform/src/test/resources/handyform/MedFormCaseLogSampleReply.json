@@ -1,0 +1,27 @@
+{
+	"secStudyItems": [
+		{ "id": 1, "type": "studyItem", "value": "發燒", "caseNum": 5, "reply": "1" },
+		{ "id": 2, "type": "studyItem", "value": "胸痛", "caseNum": 10 },
+		{ "id": 3, "type": "studyItem", "value": "休克", "caseNum": 10 }
+	],
+	"caseInfo": [
+		{ "id": 1, "type": "quesPatientId", "value": "病例號碼", "required": true, "reply": "123456789" },
+		{ "id": 2, "type": "quesCaseNo", "value": "門急住診號碼", "required": true, "reply": "B123456789" },
+		{ "id": 3, "type": "quesSampleNo", "value": "檢體號碼", "required": false },
+		{ "id": 4, "type": "quesCaseLogDate", "value": "學習日期", "required": false },
+		{ "id": 5, "type": "quesProgressNoteNo", "value": "Progress Note號碼", "required": false }
+	],
+	"secLogColumns": [
+		{ "id": 1, "type": "question", "value": "學習場所", "max": 100, "required": true, "reply": "胸腔內科門診" },
+		{ "id": 2, "type": "question", "value": "學習方式代碼", "max": 30, "required": false, "reply": "胸腔內科門診" },
+		{ "id": 3, "type": "question", "value": "摘要說明", "max": 100, "required": true, "reply": "摘要說明..." }
+	],
+	"secEvalColumns": [
+		{ "id": 1, "type": "quesRadioVal", "value": "評估結果", "required": true, 
+			"options": [ "優良", "通過", "待加強" ], "reply": "通過"
+		},
+		{ "id": 2, "type": "question", "value": "建議與回饋", "max": 30, "required": true, "reply": "建議與回饋..." }
+	],
+	"flow":"A→B→C",
+	"comments": "張三：OK^李四：好"
+}

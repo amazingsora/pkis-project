@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.JobtitleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Jobtitle">
+        <id column="SERNO" property="serno" />
+        <result column="JOBTITLEID" property="jobtitleid" />
+        <result column="JOBTITLENAME" property="jobtitlename" />
+        <result column="ISSUPERVISOR" property="issupervisor" />
+        <result column="STATUS" property="status" />
+        <result column="CREATEUSERID" property="createuserid" />
+        <result column="UPDATEUSERID" property="updateuserid" />
+        <result column="CREATEAGENTID" property="createagentid" />
+        <result column="UPDATEAGENTID" property="updateagentid" />
+        <result column="CREATETIME" property="createtime" />
+        <result column="UPDATETIME" property="updatetime" />
+        <result column="SYSMEMO" property="sysmemo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, JOBTITLEID, JOBTITLENAME, ISSUPERVISOR, STATUS, CREATEUSERID, UPDATEUSERID, CREATEAGENTID, UPDATEAGENTID, CREATETIME, UPDATETIME, SYSMEMO
+    </sql>
+
+</mapper>

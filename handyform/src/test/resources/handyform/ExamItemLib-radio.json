@@ -1,0 +1,3 @@
+{ "id": 0, "type": "quesRadio", "value": "是非題ㄧ...？", "answer": "1", 
+	"options": [ "是", "否" ]
+}

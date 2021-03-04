@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdPrdPricecodeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdPrdPricecode">
+        <id column="PRICECODE_ID" property="pricecodeId" />
+        <result column="ITEM_CODE" property="itemCode" />
+        <result column="ITEM_TYPE" property="itemType" />
+        <result column="SOURCE_ID" property="sourceId" />
+        <result column="SOURCE_TYPE" property="sourceType" />
+        <result column="BARCODE" property="barcode" />
+        <result column="CURRENCY" property="currency" />
+        <result column="ADVICE_PRICE" property="advicePrice" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+        <result column="COMP_PRD_NO" property="compPrdNo" />
+        <result column="SOURCE_HEAD_ID" property="sourceHeadId" />
+        <result column="LANG_ID" property="langId" />
+        <result column="BARCODE_TYPE" property="barcodeType" />
+        <result column="PURCHASE_PRICE" property="purchasePrice" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        PRICECODE_ID, ITEM_CODE, ITEM_TYPE, SOURCE_ID, SOURCE_TYPE, BARCODE, CURRENCY, ADVICE_PRICE, CREATE_TIME, UPDATE_USER, UPDATE_TIME, CREATE_USER, SYSTEM_MEMO, COMP_PRD_NO, SOURCE_HEAD_ID, LANG_ID, BARCODE_TYPE, PURCHASE_PRICE
+    </sql>
+
+</mapper>

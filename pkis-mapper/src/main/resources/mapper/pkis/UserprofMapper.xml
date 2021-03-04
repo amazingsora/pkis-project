@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.UserprofMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Userprof">
+        <id column="SERNO" property="serno" />
+        <result column="USERID" property="userid" />
+        <result column="USERTYPE" property="usertype" />
+        <result column="USERNAME" property="username" />
+        <result column="ENGNAME" property="engname" />
+        <result column="PWDHASH" property="pwdhash" />
+        <result column="EMAIL" property="email" />
+        <result column="PHONE" property="phone" />
+        <result column="EXT" property="ext" />
+        <result column="DEPTID" property="deptid" />
+        <result column="JOBTYPESERNO" property="jobtypeserno" />
+        <result column="SUBJOBTYPESERNO" property="subjobtypeserno" />
+        <result column="JOBRANKSERNO" property="jobrankserno" />
+        <result column="JOBTITLESERNO" property="jobtitleserno" />
+        <result column="DUTYTYPESERNO" property="dutytypeserno" />
+        <result column="GENDER" property="gender" />
+        <result column="MOBILENO" property="mobileno" />
+        <result column="IDCARDNO" property="idcardno" />
+        <result column="BIRTHDAY" property="birthday" />
+        <result column="ONBOARDDATE" property="onboarddate" />
+        <result column="LEAVEDATE" property="leavedate" />
+        <result column="USERSTATE" property="userstate" />
+        <result column="TRAININGORGSERNO" property="trainingorgserno" />
+        <result column="SYSID" property="sysid" />
+        <result column="STATUS" property="status" />
+        <result column="PREEMPDATE" property="preempdate" />
+        <result column="ICHALFREALDATE" property="ichalfrealdate" />
+        <result column="IC2HRDATE" property="ic2hrdate" />
+        <result column="IC6HRDATE" property="ic6hrdate" />
+        <result column="SENDEMAIL" property="sendemail" />
+        <result column="CREATEUSERID" property="createuserid" />
+        <result column="UPDATEUSERID" property="updateuserid" />
+        <result column="CREATEAGENTID" property="createagentid" />
+        <result column="UPDATEAGENTID" property="updateagentid" />
+        <result column="CREATETIME" property="createtime" />
+        <result column="UPDATETIME" property="updatetime" />
+        <result column="SYSMEMO" property="sysmemo" />
+        <result column="PREEMPCODE" property="preempcode" />
+        <result column="DUTYPLACE" property="dutyplace" />
+        <result column="CARDNO" property="cardno" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, USERID, USERTYPE, USERNAME, ENGNAME, PWDHASH, EMAIL, PHONE, EXT, DEPTID, JOBTYPESERNO, SUBJOBTYPESERNO, JOBRANKSERNO, JOBTITLESERNO, DUTYTYPESERNO, GENDER, MOBILENO, IDCARDNO, BIRTHDAY, ONBOARDDATE, LEAVEDATE, USERSTATE, TRAININGORGSERNO, SYSID, STATUS, PREEMPDATE, ICHALFREALDATE, IC2HRDATE, IC6HRDATE, SENDEMAIL, CREATEUSERID, UPDATEUSERID, CREATEAGENTID, UPDATEAGENTID, CREATETIME, UPDATETIME, SYSMEMO, PREEMPCODE, DUTYPLACE, CARDNO
+    </sql>
+
+</mapper>

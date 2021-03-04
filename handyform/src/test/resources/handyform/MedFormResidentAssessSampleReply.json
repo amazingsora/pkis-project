@@ -1,0 +1,63 @@
+{
+"masterList":[
+	{ "id":1, "title":"一、基本資料", "subTitle":"", "detailList":[
+		{ "id":1, "topic":"訓練科別", "type":"radio", "options":[{ "value":"心臟內科" }, { "value":"胸腔內科" }], "reply":"心臟內科" },
+		{ "id":2, "topic":"訓練期間(起日)", "type":"date", "reply":"2018/01/01" },
+		{ "id":3, "topic":"訓練期間(迄日)", "type":"date", "reply":"2018/12/31" }
+	]},
+	{ "id":2, "title":"二、演練評量", "subTitle":"考核項目", "isEval":true, "detailList":[
+		{ "id":1, "topic":"學識能力", "type":"radio", "options":[
+				{ "value":"1", "scoreConv":1 }, { "value":"2", "scoreConv":2 }, { "value":"3", "scoreConv":3 }, { "value":"4", "scoreConv":4 }, { "value":"5", "scoreConv":5 }, 
+				{ "value":"6", "scoreConv":6 }, { "value":"7", "scoreConv":7 }, { "value":"8", "scoreConv":8 }, { "value":"9", "scoreConv":9 }, { "value":"10", "scoreConv":10 }
+			], "isEval":true,	"evalItems":[
+				{ "value":"基本醫學知識", "reply":"6", "reply2":"7", "replyScore":"6", "reply2Score":"7" }, 
+				{ "value":"臨床診斷能力", "reply":"7", "reply2":"8", "replyScore":"7", "reply2Score":"8" }, 
+				{ "value":"臨床病例討論表現", "reply":"5", "reply2":"6", "replyScore":"5", "reply2Score":"6" }
+			], "formScoring":"SF"
+		},
+		{ "id":2, "topic":"醫療行政", "type":"radio", "options":[
+				{ "value":"1", "scoreConv":1 }, { "value":"2", "scoreConv":2 }, { "value":"3", "scoreConv":3 }, { "value":"4", "scoreConv":4 }, { "value":"5", "scoreConv":5 }, 
+				{ "value":"6", "scoreConv":6 }, { "value":"7", "scoreConv":7 }, { "value":"8", "scoreConv":8 }, { "value":"9", "scoreConv":9 }, { "value":"10", "scoreConv":10 }
+			], "isEval":true,	"evalItems":[
+				{ "value":"處理醫務行政能力", "reply":"3", "reply2":"4", "replyScore":"30", "reply2Score":"40" }, 
+				{ "value":"病歷品質評估", "reply":"5", "reply2":"6", "replyScore":"50", "reply2Score":"60" }, 
+				{ "value":"培訓醫護人員能力", "reply":"4", "reply2":"5", "replyScore":"40", "reply2Score":"50" }
+			], "formScoring":"SF"
+		},
+		{ "id":3, "topic":"醫學論理", "type":"radio", "options":[
+				{ "value":"1", "scoreConv":1 }, { "value":"2", "scoreConv":2 }, { "value":"3", "scoreConv":3 }, { "value":"4", "scoreConv":4 }, { "value":"5", "scoreConv":5 }, 
+				{ "value":"6", "scoreConv":6 }, { "value":"7", "scoreConv":7 }, { "value":"8", "scoreConv":8 }, { "value":"9", "scoreConv":9 }, { "value":"10", "scoreConv":10 }
+			], "isEval":true,	"evalItems":[
+				{ "value":"照顧病患之態度", "reply":"6", "reply2":"7", "replyScore":"6", "reply2Score":"7" }, 
+				{ "value":"工作責任感及工作熱忱", "reply":"5", "reply2":"6", "replyScore":"5", "reply2Score":"6" }, 
+				{ "value":"與同事合作能力", "reply":"4", "reply2":"5", "replyScore":"4", "reply2Score":"5" }
+			], "formScoring":"SF"
+		},
+		{ "id":4, "topic":"加分項目", "type":"num", "min":-100, "max":100, "formScoring":"SF", "reply":"10", "reply2":"20" },
+		{ "id":5, "topic":"扣分項目", "type":"num", "min":-100, "max":100, "formScoring":"SF", "reply":"-2", "reply2":"-1" },
+		{ "id":6, "topic":"合計", "type":"num", "min":0, "max":100, "formScoring":"TF", "formResult":"FS", "reply":"53", "reply2":"73" }
+	]},
+	{ "id":3, "title":"三、考核內容", "subTitle":"", "detailList":[
+		{ "id":1, "topic":"考核內容", "type":"text", "max":100, "reply":"考核內容..." },
+		{ "id":2, "topic":"考核內容說明", "type":"area", "max":300, "rows":3, "reply":"考核內容說明..." }
+	]},
+	{ "id":4, "title":"四、滿意度", "subTitle":"", "detailList":[
+		{ "id":1, "topic":"教師對本次評量滿意程度", "type":"radio", "options":[
+				{ "value":"1", "scoreConv":1 }, { "value":"2", "scoreConv":2 }, { "value":"3", "scoreConv":3 }, 
+				{ "value":"4", "scoreConv":4 }, { "value":"5", "scoreConv":5 }, { "value":"6", "scoreConv":6 }, 
+				{ "value":"7", "scoreConv":7 }, { "value":"8", "scoreConv":8 }, { "value":"9", "scoreConv":9 }
+			],
+			"formResult":"S2", "reply":"4"
+		},
+		{ "id":2, "topic":"學員對本次評量滿意程度", "forReview":true, "type":"radio", "options":[
+				{ "value":"1", "scoreConv":1 }, { "value":"2", "scoreConv":2 }, { "value":"3", "scoreConv":3 }, 
+				{ "value":"4", "scoreConv":4 }, { "value":"5", "scoreConv":5 }, { "value":"6", "scoreConv":6 }, 
+				{ "value":"7", "scoreConv":7 }, { "value":"8", "scoreConv":8 }, { "value":"9", "scoreConv":9 }
+			],
+			"formResult":"S1", "reply":"5"
+		}
+	]}
+],
+"flow":"A→B→C",
+"comments": "張三：OK^李四：好"
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.SubflowconfMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Subflowconf">
+        <id column="SERNO" property="serno" />
+        <result column="FLOWID" property="flowid" />
+        <result column="SUBFLOWID" property="subflowid" />
+        <result column="SUBFLOWNAME" property="subflowname" />
+        <result column="SUBFLOWDESC" property="subflowdesc" />
+        <result column="FINISHTO" property="finishto" />
+        <result column="RETURNTO" property="returnto" />
+        <result column="CREATEUSERID" property="createuserid" />
+        <result column="UPDATEUSERID" property="updateuserid" />
+        <result column="CREATEAGENTID" property="createagentid" />
+        <result column="UPDATEAGENTID" property="updateagentid" />
+        <result column="CREATETIME" property="createtime" />
+        <result column="UPDATETIME" property="updatetime" />
+        <result column="SYSMEMO" property="sysmemo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, FLOWID, SUBFLOWID, SUBFLOWNAME, SUBFLOWDESC, FINISHTO, RETURNTO, CREATEUSERID, UPDATEUSERID, CREATEAGENTID, UPDATEAGENTID, CREATETIME, UPDATETIME, SYSMEMO
+    </sql>
+
+</mapper>

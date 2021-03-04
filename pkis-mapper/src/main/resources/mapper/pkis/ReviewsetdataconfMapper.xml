@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.ReviewsetdataconfMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Reviewsetdataconf">
+        <result column="SERNO" property="serno" />
+        <result column="FLOWID" property="flowid" />
+        <result column="SEQUENCE" property="sequence" />
+        <result column="REVIEWNAME" property="reviewname" />
+        <result column="REVIEWUSERIDS" property="reviewuserids" />
+        <result column="REVIEWROLES" property="reviewroles" />
+        <result column="ACTIONTYPE" property="actiontype" />
+        <result column="CREATEUSER" property="createuser" />
+        <result column="CREATEDATE" property="createdate" />
+        <result column="UPDATEUSER" property="updateuser" />
+        <result column="UPDATEDATE" property="updatedate" />
+        <result column="FLOWVERSION" property="flowversion" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, FLOWID, SEQUENCE, REVIEWNAME, REVIEWUSERIDS, REVIEWROLES, ACTIONTYPE, CREATEUSER, CREATEDATE, UPDATEUSER, UPDATEDATE, FLOWVERSION
+    </sql>
+    
+    <select id="selectReviewsetdataconf" parameterType="HashMap" resultType="HashMap">
+    SELECT   RDC.FLOWID
+			,RDC.REVIEWNAME
+	        ,RDC.FLOWVERSION
+	        ,RDC.ACTIONTYPE
+	        ,RD.SERNO
+	        ,XSC.CODE
+	  FROM   <include refid="CommonMapper.schema"/>REVIEWSETDATACONF RDC
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>REVIEWSETDATA RD ON RD.REVIEWNAME = RDC.REVIEWNAME
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_SYS_CODE XSC ON XSC.CNAME = RDC.REVIEWNAME AND XSC.GP = 'REVIEW_PER_CODE'
+	  WHERE   1=1
+	  <if test="flowid != null">
+        AND RDC.FLOWID = #{flowid,jdbcType=VARCHAR}
+      </if>
+      <if test="flowversion != null">
+        AND RDC.FLOWVERSION = #{flowversion,jdbcType=VARCHAR}
+      </if>
+  </select>
+  
+  <select id="selectFlowData" parameterType="HashMap" resultType="HashMap">
+  SELECT  r.FLOWID
+  		 ,r.SEQUENCE
+  		 ,r.REVIEWNAME
+  		 ,r.ACTIONTYPE
+  		 ,r.FLOWVERSION
+  		 ,S.USERIDS AS REVIEWUSERIDS
+  		 ,S.ROLEIDS AS REVIEWROLES
+  		 ,S.IDENIDS
+  		 ,S.IDENID
+    FROM  <include refid="CommonMapper.schema"/>REVIEWSETDATACONF R
+    LEFT JOIN <include refid="CommonMapper.schema"/> XAUTH_SYS_CODE XSC ON XSC.GP = 'REVIEW_PER_CODE' AND XSC.CNAME = R.REVIEWNAME
+  	LEFT JOIN <include refid="CommonMapper.schema"/> SYSTEMPARAM S ON  S.ACTIONTYPE =  XSC.CODE AND S.CONTRACTMODEL = 'NSC' 
+   WHERE 1 = 1
+   
+   <if test="flowid != null">
+     AND R.FLOWID = #{flowid,jdbcType=VARCHAR} 
+   </if>
+   ORDER BY r.SEQUENCE
+  </select>
+<!-- 	     <select id="selectFlowData" parameterType="HashMap" resultType="HashMap"> -->
+<!-- 		  	select  r.FLOWID  -->
+<!-- 		  	,r.SEQUENCE  -->
+<!-- 		  	,r.REVIEWNAME  -->
+<!-- 		  	,r.ACTIONTYPE  -->
+<!-- 		  	,r.FLOWVERSION -->
+<!-- 			,CASE WHEN r.REVIEWNAME = '法律顧問' then (select S.USERIDS FROM SYSTEMPARAM S, XAUTH_SYS_CODE XSC where XSC.GP = 'REVIEW_PER_CODE' and  XSC.CODE = S.ACTIONTYPE and XSC.CNAME = r.REVIEWNAME and SUBSTR(S.FLOWID,1,LENGTH(r.FLOWID)) = r.FLOWID) -->
+<!-- 			ELSE (select S.USERIDS FROM SYSTEMPARAM S, XAUTH_SYS_CODE XSC where XSC.GP = 'REVIEW_PER_CODE' and  XSC.CODE = S.ACTIONTYPE and XSC.CNAME = R.REVIEWNAME  and S.FLOWID is null) END REVIEWUSERIDS -->
+<!-- 			,CASE WHEN r.REVIEWNAME = '法律顧問' then (select S.ROLEIDS FROM SYSTEMPARAM S, XAUTH_SYS_CODE XSC where XSC.GP = 'REVIEW_PER_CODE' and  XSC.CODE = S.ACTIONTYPE and XSC.CNAME = r.REVIEWNAME and SUBSTR(S.FLOWID,1,LENGTH(r.FLOWID)) = r.FLOWID) -->
+<!-- 			ELSE (select S.ROLEIDS FROM SYSTEMPARAM S, XAUTH_SYS_CODE XSC where XSC.GP = 'REVIEW_PER_CODE' and  XSC.CODE = S.ACTIONTYPE and XSC.CNAME = R.REVIEWNAME  and S.FLOWID is null) END REVIEWROLES -->
+<!-- 			FROM PCRCMGR. REVIEWSETDATACONF R -->
+<!-- 			WHERE 1 = 1 -->
+<!-- 		   <if test="flowid != null"> -->
+<!-- 		     AND R.FLOWID = #{flowid,jdbcType=VARCHAR}  -->
+<!-- 		   </if> -->
+<!-- 		   ORDER BY SEQUENCE -->
+<!-- 		  </select> -->
+
+</mapper>

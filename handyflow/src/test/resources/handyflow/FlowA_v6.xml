@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE handyflow SYSTEM "HandyFlow.dtd">
+<handyflow id="FlowA" name="Demo流程A" version="6">
+	<flowEvent id="Begin" type="BEGIN" desc="申請開始">
+	    <flowLink name="建立" to="Task1" />
+	</flowEvent>
+	<flowTask id="Task1" name="申請人" desc="申請人處理">
+		<flowConditions>
+			<flowLink action="Apply" name="送出" to="Task2" />
+			<flowLink action="Cancel" name="作廢" to="Cancel" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task2" name="經辦" desc="經辦處理" roles="oversea">
+		<flowConditions>
+			<flowLink action="Go2Countersign" name="會簽" to="Countersign" />
+	    	<flowLink action="Rtn2Applicant" name="退回申請人" to="Task1" />
+	    </flowConditions>
+	</flowTask>
+	<flowParallel id="Countersign" name="多人平行會簽" desc="會簽處理">
+		<flowLink name="會簽" to="Sub1" isConcurrent="true" />
+	</flowParallel>
+	<flowEvent id="End" type="END" desc="申請完成" />
+	<flowEvent id="Cancel" type="CANCEL" desc="申請單作廢" />
+	
+	<subFlow id="Sub1" name="會簽子流程">
+		<flowEvent id="Sub1Begin" type="SUB_BEGIN" desc="會簽">
+	    	<flowLink name="開始" to="Sub1Task1" />
+		</flowEvent>
+		<flowTask id="Sub1Task1" name="部門會簽" desc="部門會簽" dept="dept1">
+			<flowConditions>
+	    		<flowLink action="Countersign" name="會簽同意" to="Sub1Finish" />
+	    		<flowLink action="Rtn2Applicant" name="退回申請人" to="Sub1Return" />
+	    	</flowConditions>
+		</flowTask>
+		<flowEvent id="Sub1Finish" type="SUB_FINISH" desc="會簽完成">
+			<flowLink name="完成" to="End" />
+		</flowEvent>
+		<flowEvent id="Sub1Return" type="SUB_RETURN" desc="會簽退回">
+			<flowLink name="退回" to="Task1" />
+		</flowEvent>
+	</subFlow>
+</handyflow>

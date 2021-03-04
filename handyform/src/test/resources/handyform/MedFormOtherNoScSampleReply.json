@@ -1,0 +1,18 @@
+{
+	"secNonScoring": [
+		{ "id": 1, "type": "caption", "value": "一、xxxxxx" },
+		{ "id": 2, "type": "subCaption", "value": "以下xxxxxxxxxx" },
+		{ "id": 3, "type": "question", "value": "教學活動中你最喜歡的活動為何？原因為何？", "required": true, "reply": "NO" },
+		{ "id": 4, "type": "quesRadioVal", "value": "本科整體教學活動是否要改善？", "required": true,
+			"options": [ "是", "否" ], "reply": "否"
+		},
+		{ "id": 5, "type": "quesComboVal", "value": "您是否了解實驗室安全衛生的要求是為了保護病串與工作人員的安全？", "required": true,
+			"options": [ "清楚", "不是很確定", "有聽過" ], "reply": "清楚"
+		},
+		{ "id": 6, "type": "quesCheckVal", "value": "其他建議", "required": false,
+			"options": [ "增加實際操作", "增加課堂說明" ], "reply": "增加實際操作,增加課堂說明"
+		}
+	],
+	"flow":"A→B→C",
+	"comments": "張三：OK^李四：好"
+}

@@ -1,0 +1,10 @@
+/target/
+*/target/
+*/.settings/
+*/.classpath
+*/.project
+*/.md
+README\.md
+
+readme\.txt
+/bin/

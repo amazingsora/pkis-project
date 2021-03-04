@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration>
+    <Properties>
+        <property name="LOG_HOME" value="/PPKIS/log/oxPCRC" />
+		<property name="LOG_PREFIX" value="pcrc_backend" />		
+		<property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />
+		<property name="KEEP_DAYS" value="30d" />
+    </Properties>
+
+    <Appenders>
+    
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">        	
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- Rolling File Appender -->
+        <RollingFile name="FileAppender" fileName="${LOG_HOME}/${LOG_PREFIX}.log" filePattern="${LOG_HOME}/${LOG_PREFIX}-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout charset="UTF-8" pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" />
+                <SizeBasedTriggeringPolicy size="100MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="50">
+            	<Delete basePath="${LOG_HOME}" maxDepth="1">
+            		<IfFileName glob="${LOG_PREFIX}-*.log" />
+            		<IfLastModified age="${KEEP_DAYS}" />
+            	</Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>            
+
+    </Appenders>
+
+    <Loggers>
+    	<Logger name="com.zaxxer.hikari.HikariDataSource" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender"/>
+	    </Logger>
+	    
+    	<Logger name="com.tradevan.mapper" level="DEBUG" additivity="false">
+			<AppenderRef ref="ConsoleAppender"/>
+			<AppenderRef ref="FileAppender" />
+	    </Logger>
+    	
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="FileAppender" />
+        </Root>
+    </Loggers>
+    
+</Configuration>

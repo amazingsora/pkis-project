@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.xauth.dao.XauthRoleMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.xauth.model.XauthRoleMenu">
+        <id column="APP_ID" property="appId" />
+        <result column="IDEN_ID" property="idenId" />
+        <result column="ROLE_ID" property="roleId" />
+        <result column="MENU_ID" property="menuId" />
+        <result column="CRE_USER" property="creUser" />
+        <result column="CRE_DATE" property="creDate" />
+        <result column="UPD_USER" property="updUser" />
+        <result column="UPD_DATE" property="updDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        APP_ID, IDEN_ID, ROLE_ID, MENU_ID, CRE_USER, CRE_DATE, UPD_USER, UPD_DATE
+    </sql>
+
+</mapper>

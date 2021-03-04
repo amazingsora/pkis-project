@@ -1,0 +1,108 @@
+body {
+	font-family: '微軟正黑體', sans-serif;
+}
+
+.sidebar {
+	font-family: '微軟正黑體', sans-serif;
+}
+
+.sidebar .nav .nav-item .nav-link .menu-title {
+	font-size: 16px;	
+}
+
+.sidebar .nav.sub-menu .nav-item .nav-link {
+	font-size: 16px;
+}
+
+.sidebar .nav.sub-menu .nav-item .nav-link.active {
+    /*color: #ffd847;*/
+    color: #fff;
+}
+
+.sidebar .nav .nav-item.active > .nav-link i, .sidebar .nav .nav-item.active > .nav-link .menu-title, .sidebar .nav .nav-item.active > .nav-link .menu-arrow {
+    color: #ffffff;
+}
+
+.card .card-title {
+	font-size: 16px;
+}
+
+.form-group label {
+	text-align: right;
+}
+
+.form-check {
+	margin-top: 15px;
+}
+
+.grid-margin {
+	margin-bottom: 0rem;
+}
+
+.table td {
+	font-size: 15px;
+}
+
+.select2-container .select2-selection--single {
+	height:45px;
+	font-size: 14px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	line-height:44px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+	height:42px;	
+}
+
+.form-control {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.navbar .navbar-brand-wrapper {
+	background: #4f78e8;
+	border-right: 1px solid #4f78e8;
+}
+
+.navbar .navbar-menu-wrapper {
+	background: #4f78e8;	
+}
+
+.navbar .navbar-menu-wrapper {
+	color: #ffffff;
+}
+
+.navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper {
+	margin-left: 0.0rem;
+	margin-right: 0.0rem
+}
+
+.sidebar {
+	background: #1e5bc6;
+}
+
+.sidebar .nav .nav-item .nav-link {
+	color: #ffffff;
+}
+
+.sidebar .nav .nav-item .nav-link i.menu-arrow:before {
+	color: #ffffff;
+}
+
+.sidebar .nav.sub-menu .nav-item::before {
+	background: #ffffff;
+}
+
+.sidebar .nav.sub-menu .nav-item .nav-link {
+	color: #ffffff;
+}
+
+.sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link {
+	color: #ffffff;
+}
+
+.sidebar .nav.sub-menu .nav-item .nav-link:hover {
+	color: #ffffff;
+}

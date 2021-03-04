@@ -1,0 +1,63 @@
+label.error {
+	display: block;
+	float: none;
+	color: red;
+	vertical-align: top;
+}
+
+.text-left {
+	text-align: left;
+	font-size: 14px;
+}
+
+.bootgrid-th {
+	font-size: 14px;
+}
+
+label[data-require=true]:before {
+	content: "*";
+	color: red;
+	width: 18px;
+}
+
+.ui-jqgrid tr.jqgrow td {
+	white-space: normal !important;
+	height: auto;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	word-break: break-all;
+	/*font-size: 15px;*/
+}
+
+.datepicker {
+  z-index: 9999; 
+}
+
+.col-sm-3-horizontal {
+    flex: 0 0 12.5%;
+    max-width: 12.5%;
+}
+
+.col-sm-6-horizontal {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.table > thead > tr > td.success,
+.table > tbody > tr > td.success,
+.table > tfoot > tr > td.success,
+.table > thead > tr > th.success,
+.table > tbody > tr > th.success,
+.table > tfoot > tr > th.success,
+.table > thead > tr.success > td,
+.table > tbody > tr.success > td,
+.table > tfoot > tr.success > td,
+.table > thead > tr.success > th,
+.table > tbody > tr.success > th,
+.table > tfoot > tr.success > th {
+	background-color: #dff0d8;
+}
+
+.form-inline .form-check {
+    justify-content: left;
+}

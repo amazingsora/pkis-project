@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.StoreInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.StoreInfo">
+        <result column="AREA_CODE" property="areaCode" />
+        <result column="AREA_NMAE" property="areaNmae" />
+        <result column="STORE_TYPE" property="storeType" />
+        <result column="NOTE" property="note" />
+        <result column="SORT_INDEX" property="sortIndex" />
+        <result column="STORE_CODE" property="storeCode" />
+        <result column="STORE_GLN" property="storeGln" />
+        <result column="STORE_NAME" property="storeName" />
+        <result column="STORE_BRIEF_NAME" property="storeBriefName" />
+        <result column="STORE_NAME_EN" property="storeNameEn" />
+        <result column="STORE_BRIEF_NAME_EN" property="storeBriefNameEn" />
+        <result column="STORE_TEL" property="storeTel" />
+        <result column="STORE_FAX" property="storeFax" />
+        <result column="RECEIVING_FAX" property="receivingFax" />
+        <result column="ZIPCODE" property="zipcode" />
+        <result column="MAIN_REGION" property="mainRegion" />
+        <result column="STORE_ADDRESS" property="storeAddress" />
+        <result column="STORE_INAUGURATE" property="storeInaugurate" />
+        <result column="STORE_CONCLUDE" property="storeConclude" />
+        <result column="STORE_STATE" property="storeState" />
+        <result column="PS_CODE" property="psCode" />
+        <result column="DIRECT_RETURN_CODE" property="directReturnCode" />
+        <result column="RECEIPT_MERCHANDISE_NAME" property="receiptMerchandiseName" />
+        <result column="RECEIPT_MERCHANDISE_NAME_EN" property="receiptMerchandiseNameEn" />
+        <result column="RECEIPT_MERCHANDISE_EXT" property="receiptMerchandiseExt" />
+        <result column="RECEIPT_MERCHANDISE_CELLPHONE" property="receiptMerchandiseCellphone" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        AREA_CODE, AREA_NMAE, STORE_TYPE, NOTE, SORT_INDEX, STORE_CODE, STORE_GLN, STORE_NAME, STORE_BRIEF_NAME, STORE_NAME_EN, STORE_BRIEF_NAME_EN, STORE_TEL, STORE_FAX, RECEIVING_FAX, ZIPCODE, MAIN_REGION, STORE_ADDRESS, STORE_INAUGURATE, STORE_CONCLUDE, STORE_STATE, PS_CODE, DIRECT_RETURN_CODE, RECEIPT_MERCHANDISE_NAME, RECEIPT_MERCHANDISE_NAME_EN, RECEIPT_MERCHANDISE_EXT, RECEIPT_MERCHANDISE_CELLPHONE
+    </sql>
+
+</mapper>

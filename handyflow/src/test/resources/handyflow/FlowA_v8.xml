@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE handyflow SYSTEM "HandyFlow.dtd">
+<handyflow id="FlowA" name="Demo流程A" version="8">
+	<flowEvent id="Begin" type="BEGIN" desc="申請開始">
+	    <flowLink name="建立" to="Task1" />
+	</flowEvent>
+	<flowTask id="Task1" name="申請人" desc="申請人處理">
+		<flowConditions>
+			<flowLink action="Apply" name="送出" to="Task2" />
+			<flowLink action="Cancel" name="作廢" to="Cancel" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task2" name="經辦" desc="經辦處理" roles="oversea">
+		<flowConditions>
+			<flowLink action="Approve" name="送審" to="Task3" />
+	    	<flowLink action="Rtn2Applicant" name="退回申請人" to="Task1" />
+	    </flowConditions>
+	</flowTask>
+	<flowTask id="Task3" name="課級主管" desc="課級主管處理" roles="level1Mgr">
+		<flowConditions>
+			<flowLink action="Approve" name="送審" to="Task4" />
+	    	<flowLink action="Rtn2Applicant" name="退回申請人" to="Task1" />
+	    </flowConditions>
+	</flowTask>
+	<flowTask id="Task4" name="經辦主管" desc="經辦主管處理" roles="level2Mgr" isReviewDeptRole="true">
+		<flowConditions>
+	    	<flowLink action="Approve" name="送審" to="Task5" />
+	    	<flowLink action="Rtn2Applicant" name="退回申請人" to="Task1" />
+	    </flowConditions>
+	</flowTask>
+	<flowTask id="Task5" name="部級主管" desc="部級主管處理" roles="level2Mgr">
+		<flowConditions>
+	    	<flowLink action="FinalApprove" name="核准" to="End" />
+	    	<flowLink action="Rtn2Applicant" name="退回申請人" to="Task1" />
+	    </flowConditions>
+	</flowTask>
+	<flowEvent id="End" type="END" desc="申請完成" />
+	<flowEvent id="Cancel" type="CANCEL" desc="申請單作廢" />
+</handyflow>

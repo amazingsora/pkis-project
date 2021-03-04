@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdPrfPalletMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdPrfPallet">
+        <id column="PALLET_ID" property="palletId" />
+        <result column="COMP_BAN" property="compBan" />
+        <result column="LANG_ID" property="langId" />
+        <result column="PALLET_NAME" property="palletName" />
+        <result column="MATERIAL" property="material" />
+        <result column="LOAD_WEIGHT" property="loadWeight" />
+        <result column="DIMENSION_DEEP" property="dimensionDeep" />
+        <result column="DIMENSION_WIDTH" property="dimensionWidth" />
+        <result column="DIMENSION_HEIGHT" property="dimensionHeight" />
+        <result column="DIMENSION_UNIT" property="dimensionUnit" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        PALLET_ID, COMP_BAN, LANG_ID, PALLET_NAME, MATERIAL, LOAD_WEIGHT, DIMENSION_DEEP, DIMENSION_WIDTH, DIMENSION_HEIGHT, DIMENSION_UNIT, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO
+    </sql>
+
+</mapper>

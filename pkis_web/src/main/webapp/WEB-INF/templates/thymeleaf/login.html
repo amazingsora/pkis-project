@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">	
+		<title>thymeleaf page</title>
+		
+		<link href="@{/resources/maj-layout/vendors/mdi/css/materialdesignicons.min.css}" rel="stylesheet">
+		<link href="@{/resources/maj-layout/vendors/base/vendor.bundle.base.css}" rel="stylesheet">
+		<link href="@{/resources/maj-layout/css/style.css}" rel="stylesheet">		
+		<link rel="shortcut icon" href="@{/resources/maj-layout/images/favicon.png}" />
+
+		<script type="text/javascript" src="@{/resources/maj-layout/vendors/base/vendor.bundle.base.js}"></script>
+		<script type="text/javascript" src="@{/resources/maj-layout/js/off-canvas.js}"></script>
+		<script type="text/javascript" src="@{/resources/maj-layout/js/hoverable-collapse.js}"></script>
+		<script type="text/javascript" src="@{/resources/maj-layout/js/template.js}"></script>
+		
+		<script type="text/javascript">
+			$(function() {
+				var status = '<c:out value="${status}"/>';
+				var msg = '<c:out value="${msg}"/>';
+				if (status == 'ok') {
+					alert(msg);
+				}
+			});
+		</script>
+		
+	</head>
+	
+	<body>
+		<div class="container-scroller">
+	    	<div class="container-fluid page-body-wrapper full-page-wrapper">
+	      		<div class="content-wrapper d-flex align-items-center auth px-0">
+	        		<div class="row w-100 mx-0">
+	          			<div class="col-lg-4 mx-auto">
+	            			<div class="auth-form-light text-left py-5 px-4 px-sm-5">
+	              				<div class="brand-logo">
+									<h4>XAUTH</h4>
+	              				</div>            				
+	              				<form id="dataForm" name='login' class="pt-3">
+	                				<div class="form-group">	                  					
+	                  					<input type="text" class="form-control form-control-lg" id="idenId" name="idenId" placeholder="識別碼" >
+	                				</div>
+	                				<div class="form-group">	                  						                  					
+	                  					<input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="使用者帳號" >
+	                				</div>
+	                				<div class="form-group">	                  					
+	                  					<input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="使用者密碼" >
+	                				</div>
+	                				<div class="mt-3">	                  					
+	                  					<button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="button">登入</button>
+	                				</div>
+	              				</form>
+	            			</div>
+	          			</div>
+	        		</div>
+	      		</div>
+	    	</div>
+	  	</div>
+	</body>
+	
+</html>

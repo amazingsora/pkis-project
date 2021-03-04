@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.FlowstepMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Flowstep">
+        <id column="SERNO" property="serno" />
+        <result column="CREATEAGENTID" property="createagentid" />
+        <result column="CREATETIME" property="createtime" />
+        <result column="CREATEUSERID" property="createuserid" />
+        <result column="DEPTID" property="deptid" />
+        <result column="STEPDESC" property="stepdesc" />
+        <result column="DISPORD" property="dispord" />
+        <result column="EXTENSION" property="extension" />
+        <result column="FLOWID" property="flowid" />
+        <result column="ISPROJROLE" property="isprojrole" />
+        <result column="ISREVIEWDEPTROLE" property="isreviewdeptrole" />
+        <result column="STEPNAME" property="stepname" />
+        <result column="PARALLELPASSCOUNT" property="parallelpasscount" />
+        <result column="ROLEIDS" property="roleids" />
+        <result column="SAMEUSERAS" property="sameuseras" />
+        <result column="STEPID" property="stepid" />
+        <result column="STEPTYPE" property="steptype" />
+        <result column="SUBFLOWID" property="subflowid" />
+        <result column="UPDATEAGENTID" property="updateagentid" />
+        <result column="UPDATETIME" property="updatetime" />
+        <result column="UPDATEUSERID" property="updateuserid" />
+        <result column="USERIDS" property="userids" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, CREATEAGENTID, CREATETIME, CREATEUSERID, DEPTID, STEPDESC, DISPORD, EXTENSION, FLOWID, ISPROJROLE, ISREVIEWDEPTROLE, STEPNAME, PARALLELPASSCOUNT, ROLEIDS, SAMEUSERAS, STEPID, STEPTYPE, SUBFLOWID, UPDATEAGENTID, UPDATETIME, UPDATEUSERID, USERIDS
+    </sql>
+
+</mapper>

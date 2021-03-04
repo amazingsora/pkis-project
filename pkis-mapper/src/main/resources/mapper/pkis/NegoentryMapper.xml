@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.NegoentryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Negoentry">
+        <result column="YEARS" property="years" />
+        <result column="DEPTNO" property="deptno" />
+        <result column="SUPPLIERCODE" property="suppliercode" />
+        <result column="FLOW" property="flow" />
+        <result column="HYPCOST" property="hypcost" />
+        <result column="SUPCOST" property="supcost" />
+        <result column="KMCOST" property="kmcost" />
+        <result column="NATCOST" property="natcost" />
+        <result column="HYPMARGIN" property="hypmargin" />
+        <result column="SUPMARGIN" property="supmargin" />
+        <result column="KMMARGIN" property="kmmargin" />
+        <result column="NATMARGIN" property="natmargin" />
+        <result column="HYPMARGINACTUAL" property="hypmarginactual" />
+        <result column="SUPMARGINACTUAL" property="supmarginactual" />
+        <result column="KMMARGINACTUAL" property="kmmarginactual" />
+        <result column="NATMARGINACTUAL" property="natmarginactual" />
+        <result column="EXTRA" property="extra" />
+        <result column="EXTRAPC" property="extrapc" />
+        <result column="EXTRAACTUAL" property="extraactual" />
+        <result column="TYPE" property="type" />
+        <result column="CREATEUSER" property="createuser" />
+        <result column="CREATEDATE" property="createdate" />
+        <result column="UPDATEUSER" property="updateuser" />
+        <result column="UPDATEDATE" property="updatedate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        YEARS, DEPTNO, SUPPLIERCODE, FLOW, HYPCOST, SUPCOST, KMCOST, NATCOST, HYPMARGIN, SUPMARGIN, KMMARGIN, NATMARGIN, HYPMARGINACTUAL, SUPMARGINACTUAL, KMMARGINACTUAL, NATMARGINACTUAL, EXTRA, EXTRAPC, EXTRAACTUAL, TYPE, CREATEUSER, CREATEDATE, UPDATEUSER, UPDATEDATE
+    </sql>
+
+</mapper>

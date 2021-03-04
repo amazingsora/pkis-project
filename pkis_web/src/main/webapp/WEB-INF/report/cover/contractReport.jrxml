@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="contractReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ec3b01cd-996a-4d14-92e1-7ad1d464353c">
+	<property name="ireport.zoom" value="1.3310000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="61"/>
+	<field name="CH_MODULE_NAME" class="java.lang.String"/>
+	<field name="MODULE_YEAR" class="java.lang.String"/>
+	<field name="LEGAL_REP" class="java.lang.String"/>
+	<field name="EN_ADDRESS" class="java.lang.String"/>
+	<field name="CH_ADDRESS" class="java.lang.String"/>
+	<field name="PHONE_NUM" class="java.lang.String"/>
+	<field name="FAX_NUM" class="java.lang.String"/>
+	<field name="VALID_BGN_DATE" class="java.lang.String"/>
+	<field name="VALID_END_DATE" class="java.lang.String"/>
+	<field name="DIVISION" class="java.lang.String"/>
+	<field name="DEPT_NO" class="java.lang.String"/>
+	<field name="SUPP_NAME" class="java.lang.String"/>
+	<field name="SUPP_CODE" class="java.lang.String"/>
+	<field name="TAX_NUM" class="java.lang.String"/>
+	<field name="EXE_YEAR" class="java.lang.String"/>
+	<field name="EXE_MON" class="java.lang.String"/>
+	<field name="EXE_DAY" class="java.lang.String"/>
+	<field name="EN_MODULE_NAME" class="java.lang.String"/>
+	<detail>
+		<band height="802">
+			<staticText>
+				<reportElement x="0" y="288" width="555" height="461" uuid="a5acbe40-fd92-4f68-a790-ca62a48e1b35"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="202" width="153" height="54" uuid="0a6008bf-ae04-4f46-9994-8f7f49143909"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="202" width="257" height="54" uuid="16c482f8-bdf7-42db-838a-c260c9157ddf"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="64" width="555" height="192" uuid="2f244859-be80-444d-83ba-d759a05ed80c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="64" width="555" height="46" uuid="6bba5c4b-b2bd-4390-b06d-896dd4c48940"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="64" width="392" height="46" uuid="4768d216-b24f-4e18-824b-ef2407372dde"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="21" width="555" height="23" uuid="7d23207d-1865-462e-91b6-0278bc44c29b"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CH_MODULE_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="44" width="555" height="20" uuid="bd01023f-4153-4d8d-9ebf-d013e73039d3"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體"/>
+				</textElement>
+				<textFieldExpression><![CDATA["( " + $F{MODULE_YEAR} + " Version )"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="64" width="392" height="23" uuid="14e33994-877a-4d15-a86a-9e06c2cc26ca"/>
+				<box topPadding="2" leftPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[PresiCarre Corp.家福股份有限公司]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="206" y="87" width="186" height="23" uuid="55581c51-70b1-40cf-9a65-a79b56118d63"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LEGAL_REP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="392" y="64" width="163" height="23" uuid="45d84102-a8a3-4202-8198-f7d243be3d5b"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font fontName="標楷體" size="14"/>
+				</textElement>
+				<text><![CDATA[Valid Term]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="87" width="163" height="23" uuid="2af49a14-5911-42a2-818d-86383794ce10"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font fontName="標楷體" size="14"/>
+				</textElement>
+				<text><![CDATA[有效期間]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="555" height="69" uuid="d9d918e6-0648-42ff-a55e-59df25c0b150"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="392" height="69" uuid="a99c61b2-e055-46fe-bbd4-5969393f0a3e"/>
+				<box>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="110" width="392" height="23" uuid="697be84e-0715-421d-a53e-d25110bd8c88"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EN_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="133" width="392" height="23" uuid="5f897b44-6089-4f94-a860-38cdd8f61617"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CH_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="42" y="156" width="154" height="23" uuid="84ec85de-7362-4b61-a16f-cf9c95db698a"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PHONE_NUM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="233" y="156" width="159" height="23" uuid="2bd4c227-bbec-43bc-b8df-6c84aadb5c2a"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FAX_NUM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="439" y="110" width="116" height="23" uuid="43c6b080-b2bf-4fc6-af8c-c016f8440717"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VALID_BGN_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="439" y="133" width="116" height="23" uuid="e2de7571-1a03-4f9f-973d-43a3abdf55b2"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VALID_END_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="179" width="555" height="23" uuid="47cc2562-2e49-496e-9d8b-a62e894460be"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="122" y="179" width="156" height="23" uuid="0cc88a33-e22c-41b9-be49-b24802400aa6"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DIVISION}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="392" y="179" width="163" height="23" uuid="202da9dc-dc61-417b-a69b-4cf967a11a3f"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEPT_NO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="202" width="555" height="54" uuid="6791223b-9a3a-4be5-8f0e-c907b08df95d"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="202" width="257" height="20" uuid="facfbb36-07fd-41e4-bd55-6b98a1e616bc"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Full Name of Supplier(the “Supplier”) : ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="80" y="222" width="177" height="34" uuid="d6cc1fcb-01aa-463a-ab9b-80785030fa13"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUPP_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="257" y="202" width="153" height="20" uuid="d059731b-568d-49d9-8623-f48e769a6f1d"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Supplier Code]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="336" y="222" width="74" height="34" uuid="854861e6-13b2-47d6-8365-a7cae5dc8520"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUPP_CODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="202" width="145" height="54" uuid="4d19c19f-6676-4712-a2df-f8426746088e"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="202" width="145" height="20" uuid="6ae14d47-5b61-4eb5-92e0-c130ce9d2f23"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Tax Number]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="476" y="222" width="79" height="34" uuid="a55575f4-331d-4d9c-bfd1-2de6b173e214"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TAX_NUM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="87" width="206" height="23" uuid="6cbb6e48-1bcb-4b9d-8868-571de948c337"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Legal Representative法定代理人 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="156" width="42" height="23" uuid="8510f1a2-c366-4207-ad2e-352d219183d3"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Tel : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="196" y="156" width="37" height="23" uuid="fc160d24-79c6-4fd2-bcce-aec0f65801fe"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Fax : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="110" width="47" height="23" uuid="753445fa-e11f-4705-91e5-92c5f4508278"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[From    ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="133" width="47" height="23" uuid="8c9ca843-fdd3-42a5-9b7f-d366a7dd5dc8"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[to]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="179" width="122" height="23" uuid="1065af1c-8fbc-4663-ad9a-67a647ebb853"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Division 處(類)別 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="179" width="114" height="23" uuid="8626c2fc-9417-490f-afde-3c6f63661985"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Department 課別 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="222" width="80" height="34" uuid="4b523f42-c5d1-41af-afd4-2531fe5eb88b"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[供應商全名 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="222" width="79" height="34" uuid="d5ec215e-ba76-4a66-9fc0-3776a257f734"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[供應商編號 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="222" width="66" height="34" uuid="eed09953-d964-484d-a8f0-4d4a028b2b67"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[統一編號 : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="288" width="555" height="41" uuid="dca7b3d8-fedf-401f-bb36-f758c24f027b"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="288" width="90" height="41" uuid="657b40cd-1c0c-4b05-8bce-7126ac0dfc69"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="89" y="288" width="233" height="41" uuid="17e199c2-1c79-4685-9f80-100f13e3bd17"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="89" y="288" width="233" height="21" uuid="4580a885-3c5c-4efe-8fcd-1048df0b6d97"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Representative of PresiCarre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="89" y="308" width="233" height="21" uuid="efeb2784-0eed-4b3b-8614-3e93b400d006"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[家福公司代表]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="288" width="233" height="21" uuid="36b04dcc-c752-495d-b845-995b9dba1bc0"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Representative of Supplier]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="308" width="233" height="21" uuid="7a922b94-9b78-4b88-a733-b4f27952cc46"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[供應商代表]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="329" width="555" height="207" uuid="2150478c-40e7-4aad-8d54-7fcbdc5559f3"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="329" width="89" height="207" uuid="9288337e-0b4d-43fa-b65d-d03d40acb317"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="329" width="90" height="89" uuid="5f709c05-82db-49c9-af65-d7f3adfc551f"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Company
+Chop
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="364" width="90" height="171" uuid="9bc33515-ecc1-48fa-b80f-992d0f195680"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[公司章]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="89" y="536" width="233" height="213" uuid="ec035251-ec42-4a66-844c-461d14ea9b08"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="536" width="89" height="108" uuid="a2e33af4-cca0-45e4-9f34-f094f49af772"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[Representative
+Chop
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="583" width="90" height="166" uuid="83113f2f-11ab-423c-b3fc-fa3f262870c7"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[負責人章]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="536" width="233" height="213" uuid="e3c1b510-a509-47c7-a0fa-443e848be442"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="1" width="554" height="20" uuid="fe18319d-2ce7-4652-8c69-7b18d2d335b6"/>
+				<textElement>
+					<font fontName="標楷體" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EN_MODULE_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="89" y="329" width="233" height="207" uuid="448bffcc-dec8-40da-a23e-a982832c4ca2"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="536" width="90" height="213" uuid="d391baa3-9bf7-44c1-8d9d-77a8f6674fcd"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement>
+					<font fontName="標楷體" size="12"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="329" width="233" height="207" uuid="a65e5373-d266-406a-b2f8-ffa9e5409f76"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

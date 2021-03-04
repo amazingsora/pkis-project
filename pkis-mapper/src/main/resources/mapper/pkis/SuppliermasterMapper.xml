@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.SuppliermasterMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Suppliermaster">
+        <result column="IDENID" property="idenid" />
+        <result column="SUPPLIERID" property="supplierid" />
+        <result column="SUPPLIERCODE" property="suppliercode" />
+        <result column="SUPPLIERGUI" property="suppliergui" />
+        <result column="SUPPLIERTYPE" property="suppliertype" />
+        <result column="SUPPLIERCNAME" property="suppliercname" />
+        <result column="SUPPLIERENAME" property="supplierename" />
+        <result column="SUPPLIERCADDR" property="suppliercaddr" />
+        <result column="SUPPLIEREADDR" property="suppliereaddr" />
+        <result column="PICUSER" property="picuser" />
+        <result column="SUPPLIERETEL" property="supplieretel" />
+        <result column="CONTACRUSER" property="contacruser" />
+        <result column="SUPPLIEREMAIL" property="supplieremail" />
+        <result column="CREATEUSER" property="createuser" />
+        <result column="CREATEDATE" property="createdate" />
+        <result column="UPDATEUSER" property="updateuser" />
+        <result column="UPDATEDATE" property="updatedate" />
+        <result column="ENABLED" property="enabled" />
+        <result column="DEPTNO" property="deptno" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        IDENID, SUPPLIERID, SUPPLIERCODE, SUPPLIERGUI, SUPPLIERTYPE, SUPPLIERCNAME, SUPPLIERENAME, SUPPLIERCADDR, SUPPLIEREADDR, PICUSER, SUPPLIERETEL, CONTACRUSER, SUPPLIEREMAIL, CREATEUSER, CREATEDATE, UPDATEUSER, UPDATEDATE, ENABLED, DEPTNO
+    </sql>
+    
+        <select id="selectSupplierList" parameterType="HashMap" resultType="HashMap">
+		SELECT IDENID,
+			SUPPLIERID,
+			SUPPLIERCODE,
+			SUPPLIERGUI,
+			SUPPLIERTYPE,
+			SUPPLIERCNAME,
+			SUPPLIERENAME,
+			SUPPLIERCADDR,
+			SUPPLIEREADDR,
+			PICUSER,
+			SUPPLIERETEL,
+			CONTACRUSER,
+			SUPPLIEREMAIL, 
+			CREATEUSER, 
+			CREATEDATE, 
+			UPDATEUSER, 
+			UPDATEDATE,
+			ENABLED,
+			DEPTNO
+		FROM <include refid="CommonMapper.schema"/>SUPPLIERMASTER
+		WHERE 1=1
+		<if test="suppliergui != null">
+			AND SUPPLIERGUI = #{suppliergui,jdbcType=VARCHAR}
+		</if>
+		<if test="suppliercname != null">
+			AND SUPPLIERCNAME LIKE '%' || #{suppliercname,jdbcType=VARCHAR} || '%'
+		</if>
+		<if test="suppliercode != null">
+			AND SUPPLIERCODE = #{suppliercode,jdbcType=VARCHAR}
+		</if>
+		
+	<include refid="CommonMapper.orderBy"/> 
+	</select>
+	
+	<select id="selectSuppliercodeList" parameterType="HashMap" resultType="HashMap">
+		SELECT DISTINCT SUPPLIERCODE
+		FROM <include refid="CommonMapper.schema"/>SUPPLIERMASTER
+		WHERE 1=1
+		<if test="suppliergui != null">
+			AND SUPPLIERGUI = #{suppliergui,jdbcType=VARCHAR}
+		</if>
+		<if test="suppliercname != null">
+			AND SUPPLIERCNAME = #{suppliercname,jdbcType=VARCHAR}
+		</if>
+		<if test="suppliercode != null">
+			AND SUPPLIERCODE = #{suppliercode,jdbcType=VARCHAR}
+		</if>
+		
+	<include refid="CommonMapper.orderBy"/> 
+	</select>
+    
+
+</mapper>

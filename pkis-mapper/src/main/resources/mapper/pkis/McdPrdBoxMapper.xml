@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdPrdBoxMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdPrdBox">
+        <id column="BOX_SUBID" property="boxSubid" />
+        <result column="BOX_ID" property="boxId" />
+        <result column="ITEM_CODE" property="itemCode" />
+        <result column="ITEM_TYPE" property="itemType" />
+        <result column="STATUS" property="status" />
+        <result column="SOURCE_ID" property="sourceId" />
+        <result column="SOURCE_TYPE" property="sourceType" />
+        <result column="WEIGHT_NET" property="weightNet" />
+        <result column="WEIGHT_GROSS" property="weightGross" />
+        <result column="WEIGHT_UNIT" property="weightUnit" />
+        <result column="ENTRY_NUM" property="entryNum" />
+        <result column="SALES_STATE" property="salesState" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+        <result column="BASE_UNIT" property="baseUnit" />
+        <result column="INVOICE_UNIT" property="invoiceUnit" />
+        <result column="ORDER_UNIT" property="orderUnit" />
+        <result column="ORDER_QUANTITY_MULTIPLE" property="orderQuantityMultiple" />
+        <result column="REPLACE_GTIN" property="replaceGtin" />
+        <result column="ENTRY_EA_NUM" property="entryEaNum" />
+        <result column="CAPACITY_NET" property="capacityNet" />
+        <result column="CAPACITY_UNIT" property="capacityUnit" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        BOX_SUBID, BOX_ID, ITEM_CODE, ITEM_TYPE, STATUS, SOURCE_ID, SOURCE_TYPE, WEIGHT_NET, WEIGHT_GROSS, WEIGHT_UNIT, ENTRY_NUM, SALES_STATE, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO, BASE_UNIT, INVOICE_UNIT, ORDER_UNIT, ORDER_QUANTITY_MULTIPLE, REPLACE_GTIN, ENTRY_EA_NUM, CAPACITY_NET, CAPACITY_UNIT
+    </sql>
+
+</mapper>

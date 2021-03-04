@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE handyflow SYSTEM "HandyFlow.dtd">
+<handyflow id="FlowA" name="Demo流程A" version="7">
+	<flowEvent id="Begin" type="BEGIN" desc="申請開始">
+	    <flowLink name="建立" to="Task1" />
+	</flowEvent>
+	<flowTask id="Task1" name="申請人" desc="申請人處理">
+		<flowConditions>
+			<flowLink action="Apply" name="送出" to="Task2" />
+			<flowLink action="Cancel" name="作廢" to="Cancel" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task2" name="計畫主持人" desc="計畫主持人處理" roles="pm" isProjRole="true">
+		<flowConditions>
+			<flowLink action="Approve" name="送出" to="Task3" />
+			<flowLink action="Return" name="退回申請人" to="Task1" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task3" name="經辦" desc="經辦處理" users="userO">
+		<flowConditions>
+			<flowLink action="Countersign" name="會簽" to="Task4" />
+	    	<flowLink action="Return" name="退回" to="Task2" />
+	    </flowConditions>
+	</flowTask>
+	<flowParallel id="Task4" name="多人平行會簽" desc="會簽處理">
+		<flowLink name="會簽" to="Sub1" isConcurrent="true" />
+	</flowParallel>
+	<flowTask id="Task5" name="主管" desc="主管審核" users="userN">
+		<flowConditions>
+			<flowLink action="Approve" name="核准" to="Task6" />
+	    	<flowLink action="Return" name="退回經辦" to="Task3" />
+	    </flowConditions>
+	</flowTask>
+	<flowTask id="Task6" name="計畫助理" desc="助理確認" roles="assistant" isProjRole="true">
+		<flowLink action="Approve" name="確認" to="End" />
+	</flowTask>
+	<flowEvent id="End" type="END" desc="申請完成" />
+	<flowEvent id="Cancel" type="CANCEL" desc="申請單作廢" />
+	
+	<subFlow id="Sub1" name="會簽子流程">
+		<flowEvent id="Sub1Begin" type="SUB_BEGIN" desc="會簽">
+	    	<flowLink name="開始" to="Sub1Task1" />
+		</flowEvent>
+		<flowTask id="Sub1Task1" name="指定成員會簽" desc="指定成員會簽" roles="committee">
+			<flowConditions>
+	    		<flowLink action="Approve" name="會簽同意" to="Sub1Finish" />
+	    		<flowLink action="Return" name="退回經辦" to="Sub1Task2" />
+	    	</flowConditions>
+		</flowTask>
+		<flowTask id="Sub1Task2" name="會簽退回經辦" desc="會簽退回經辦" sameUserAs="Task3">
+			<flowConditions>
+	    		<flowLink action="Countersign" name="會簽" to="Sub1Task1" />
+	    	</flowConditions>
+		</flowTask>
+		<flowEvent id="Sub1Finish" type="SUB_FINISH" desc="會簽完成">
+			<flowLink name="完成" to="Task5" />
+		</flowEvent>
+		<flowEvent id="Sub1Return" type="SUB_RETURN" desc="會簽退回">
+			<flowLink name="退回" to="Task3" />
+		</flowEvent>
+	</subFlow>
+</handyflow>

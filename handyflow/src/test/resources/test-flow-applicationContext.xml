@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+	<context:component-scan base-package="com.tradevan.apcommon, com.tradevan.aporg, com.tradevan.handyflow" />
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:spring/apSetting.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- SQL Server -->
+	<!-- bean id=""dataSource"" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=testdb" />
+		<property name="username" value="test" />
+		<property name="password" value="@tradevan" />
+    </bean -->
+    
+    <!-- bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+		<property name="username" value="pcrcmgr" />
+		<property name="password" value="tvpcrcmgr" />
+    </bean -->
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@172.31.70.50:1527:T07B" />
+		<property name="username" value="PCRCMGR" />
+		<property name="password" value="bJeGZPUQrE" />
+    </bean>
+    
+    <!-- Oracle Server 
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@172.31.70.50:1526:T06A" />
+		<property name="username" value="pcrfmgr" />
+		<property name="password" value="TVPCRFMGR" />
+    </bean>-->
+
+	<!-- H2 Database -->
+	<!--  bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+    </bean -->
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="packagesToScan" value="com.tradevan.aporg.model, com.tradevan.handyflow.model.form" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<!-- bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:database="SQL_SERVER" p:showSql="true" / -->
+			<!-- bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:database="H2" p:showSql="true" /-->
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:database="ORACLE" p:showSql="true" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<!-- <prop key="hibernate.jdbc.fetch_size">50</prop> -->
+				<prop key="hibernate.dialect">com.tradevan.apcommon.hibernate.dialect.ApOracleDialect</prop>
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+				<prop key="hibernate.connection.charSet">UTF-8</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop> 
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop>-->
+			</props>
+		</property>
+		
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" p:entityManagerFactory-ref="entityManagerFactory" />
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="25"/>
+		<property name="username" value="changeit@gmail.com"/>
+		<property name="password" value="changeit"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="toDoMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="handyflow@tradevan.com.tw"></property>
+		<property name="subject" value="[handyflow] - 您有一筆  {0} 單號：{1} 待處理"/>
+		<property name="text" value="您有一筆  {0} 單號：{1} 待處理，請確認！"/>
+	</bean>
+
+	<bean id="endMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="handyflow@tradevan.com.tw"></property>
+		<property name="subject" value="[handyflow] - 您有一筆  {0} 單號：{1} 申請完成"/>
+		<property name="text" value="您有一筆  {0} 單號：{1} 申請完成，請確認！"/>
+	</bean>
+</beans>

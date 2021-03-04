@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE handyflow>
+<handyflow id="F2786" name="開發不動產合約" version="1" desc="合約內容含土地及房屋">
+   <flowEvent id="Begin" type="BEGIN" desc="申請開始">
+      <flowLink name="建立" to="Task1" />
+   </flowEvent>
+   <flowTask id="Task1" name="申請人" desc="案件申請">
+      <flowConditions>
+         <flowLink action="Apply" name="送審" to="Task2" />
+         <flowLink action="Cancel" name="作廢" to="Cancel" />
+      </flowConditions>
+   </flowTask>
+   <flowTask id="Task2" name="單位主管" desc="單位主管審核" users="F000022552">
+      <flowConditions>
+         <flowLink action="Approve" name="核准" to="End" />
+         <flowLink action="Return" name="退回" to="Task1" />
+      </flowConditions>
+   </flowTask>
+   <flowEvent id="End" type="END" desc="申請完成" />
+   <flowEvent id="Cancel" type="CANCEL" desc="申請單作廢" />
+</handyflow>

@@ -1,0 +1,35 @@
+{
+	"sections": [
+		{	"id": "1", "title": "一、是非題", "subTitle": "每題10分", "perScore": 20, "random": 2,
+			"questions": [
+				{ "id": 1, "type": "quesRadio", "value": "是非題ㄧ...？", "answer": "1", 
+					"options": [ "是", "否" ]
+				},
+				{ "id": 2, "type": "quesRadio", "value": "是非題二...？", "answer": "2", 
+					"options": [ "是", "否" ]
+				},
+				{ "id": 3, "type": "quesRadio", "value": "是非題三...？", "answer": "1", 
+					"options": [ "是", "否" ]
+				}
+			]
+		},
+		{	"id": "2", "title": "二、選擇題", "subTitle": "每題15分", "perScore": 20, "random": 2,
+			"questions": [
+				{ "id": 1, "type": "quesCombo", "value": "選擇題一...？", "answer": "2", 
+					"options": [ "選項一", "選項二", "選項三" ]
+				},
+				{ "id": 2, "type": "quesCombo", "value": "選擇題二...？", "answer": "3", 
+					"options": [ "選項一", "選項二", "選項三" ]
+				},
+				{ "id": 3, "type": "quesCheck", "value": "選擇題三...？", "answer": "1,2", 
+					"options": [ "選項一", "選項二", "選項三" ]
+				}
+			]
+		},
+		{	"id": "3", "title": "三、問答題", "subTitle": "每題25分", "perScore": 20, "random": 0,
+			"questions": [
+				{ "id": 1, "type": "question", "value": "問答題一...？", "answer": "解答..." }
+			]
+		}
+	]
+}

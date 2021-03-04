@@ -1,0 +1,471 @@
+﻿.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu > a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover > a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+#skhcq_header_left_todo {
+    background: #CCFFFF;
+    height: 80px;
+    overflow-y: scroll;
+    display: none;
+}
+
+.mycontainer {
+    padding-top: 53px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#mycontainer_body {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#jobs_btn {
+}
+
+table thead {
+    background: #ddd;
+    color: #fff;
+}
+
+table#json_query thead {
+    color: #ec7739;
+}
+
+blockquote {
+    margin-bottom: 0;
+    /*padding-top: 0;
+    padding-bottom: 0;*/
+    padding:0px 0px 0px 30px;
+    font-size: inherit;
+}
+
+/* dropdownlist with hints*/
+.select_hints {
+    margin: 3px;
+    background: black;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    -webkit-border-radius: 30px;
+    -webkit-border-top-right-radius: 100px;
+    -webkit-border-bottom-right-radius: 100px;
+    -moz-border-radius: 30px;
+    -moz-border-radius-topright: 100px;
+    -moz-border-radius-bottomright: 100px;
+    border-radius: 30px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    box-shadow: 3px 3px 3px #C3C3C3;
+}
+a.select_hints_close {
+    text-decoration: none;
+    color:white;
+}
+a.select_hints_close:hover {
+    color:red;
+}
+
+a.select_hints_close:after {
+    content: "Ⓧ";
+    color: white;
+}
+a.select_hints_close:hover:after {
+    color:red;
+}
+
+.myAlert-top {
+    position: absolute;
+    width: 100%;
+    text-align:left;
+    padding-left: 40%;
+}
+
+.myAlert-top-middle {
+    position: absolute;
+    width: 100%;
+}
+
+.myAlert-top > strong, .myAlert-top-middle > strong {
+    line-height: 20px;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.btn-back-to-list {
+    position: absolute;
+    right: 40px;
+}
+
+.sys_msg_top_fixed {
+    display: block;
+    position: fixed;
+    width: 75vw;
+    left: calc(100vw - 81%);
+    z-index: 1500;
+}
+
+.custom_msg_top_fixed {
+    display: flex;
+    white-space: nowrap;
+    position: fixed;
+    margin-left: 15px;
+    width: 50%;
+    z-index: 2;
+}
+
+.custom_msg_top_fixed > div {
+    padding: 0 5px;
+}
+
+.bootbox-body {
+    font-size: 1.5rem;
+}
+
+.btn_primary_linkURL_fixed {
+    position: fixed;
+    top: 130px;
+    right: 45px;
+    z-index: 3;
+}
+
+.btn_back_to_list_fixed {
+    position: fixed;
+    top: 90px;
+    right: 45px;
+    z-index: 3;
+}
+
+.btn_group_list_fixed {
+    position: fixed;
+    right: 0px;
+    z-index:100;
+}
+
+.btn_group_list_fixed > div:first-child {
+    padding-top:15px;
+}
+
+.btn_group_list_fixed > div:last-child {
+    float:right;
+    margin-top:-80px;
+}
+
+/* for microsoft css fixed */
+.input-group {
+    width: 60%;
+}
+
+span.input-group-addon.bg-teal-costomer {
+    width: 6%;
+    border: transparent;
+}
+
+.dis-flex {
+    display: flex;
+    flex-wrap: wrap;
+    white-space: nowrap;
+}
+
+div.dis-flex > .dis-flex {
+    padding: 0 5px;
+}
+
+div.clr-style {
+    clear: both;
+    padding: 5px;
+}
+
+div.clr-style .form-control, div.clr-style .col-md-3 {
+    max-width: -moz-fit-content;
+    max-width: -webkit-fit-content;
+    max-width: fit-content;
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: fit-content;
+}
+
+/*div.clr-style .col-md-3 {
+    padding: 0;
+}*/
+/*將checkbox與radio隱藏，只使用label呈現*/
+div.dis-flex > input[type="radio"], div.dis-flex > input[type="checkbox"] {
+    display: none;
+}
+
+div.dis-flex > input[type="radio"] + label, div.dis-flex > input[type="checkbox"] + label {
+    cursor: pointer;
+    padding: 4px 11px;
+}
+
+/* radio */
+div.dis-flex > input[type="radio"] + label::before {
+    border: 1px solid #a9a9a9;
+    display: inline-block;
+    content: "";
+    height: 20px;
+    width: 20px;
+    transition: border 300ms ease-in-out 0s, color 300ms ease-in-out 0s;
+    border-radius: 50%;
+}
+div.dis-flex > input[type="radio"] + label::after {
+    width: 6px;
+    height: 6px;
+    content: " ";
+    background-color: transparent;
+    transition: .1s cubic-bezier(.8, -0.33, .2, 1.33);
+    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0);
+}
+div.dis-flex > input[type="radio"]:checked + label::before {
+    border-color: #3e8ef7;
+    border-width: 7px;
+}
+
+/* checkbox */
+div.dis-flex > input[type="checkbox"] + label::before {
+    border: 1px solid #a9a9a9;
+    display: inline-block;
+    content: "";
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: .215rem;
+    transition: all .3s ease-in-out 0s;
+}
+div.dis-flex > input[type="checkbox"] + label::after {
+    width: 20px;
+    text-align: center;
+}
+div.dis-flex > input[type="checkbox"]:checked + label::before {
+    border-color: #3e8ef7;
+    border-width: 6px;
+    transition: all 300ms ease-in-out 0s;
+}
+
+/* dropdownlist */
+div.dis-flex > .dropdown-list {
+    margin: 5px;
+}
+
+@media (max-width: 767px) {
+    .input-group {
+        width: 98%;
+    }
+}
+
+ul.manual-list > li {
+    margin-left: 3rem;
+}
+
+/* checkbox & radio label 自動斷行 */
+input[type="checkbox"] + label, input[type="radio"] + label {
+    /*word-break: break-all;*/ /*讓單詞會強制從中斷行*/
+    word-wrap:break-word;
+    white-space: pre-wrap;
+}
+
+/* 新收 & 查詢 文字 置右 */
+.col-ta-right { text-align: right; }
+
+/* 未填寫理由 子物件 holder */
+.div_holder_OTHREA {
+    white-space: nowrap;
+    margin: 5px 0px;
+}
+
+.label_auto_line_break {
+    display: block;
+    line-height: 20px;
+    text-overflow: ellipsis;
+/*     min-width: 100%; */
+	min-width: 100%;
+    overflow: hidden;
+    white-space: pre-wrap;
+}
+
+/* 縮排 */
+label.label-0 { display: inline-block; width: 2%; }
+
+div.label-1 {padding-left: 2%;}
+div.text-1 {padding-left: 2%;}
+div.radio-1 {padding-left: 2%;}
+div.checkbox-1 {padding-left: 2%;}
+div.button-1 {padding-left: 2%;}
+div.dropdownlist-1 {padding-left: 2%;}
+div.dropdownlist_with_checkbox-1 {padding-left: 2%;}
+div.file-1 {padding-left: 2%;}
+div.textarray-1 {padding-left: 2%;}
+div.date-1 {padding-left: 2%;}
+
+div.label-2 {padding-left: 6%;}
+div.text-2 {padding-left: 6%;}
+div.radio-2 {padding-left: 6%;}
+div.checkbox-2 {padding-left: 6%;}
+div.button-2 {padding-left: 6%;}
+div.dropdownlist-2 {padding-left: 6%;}
+div.dropdownlist_with_checkbox-2 {padding-left: 6%;}
+div.file-2 {padding-left: 6%;}
+div.textarray-2 {padding-left: 6%;}
+div.date-2 {padding-left: 6%;}
+
+div.label-3 {padding-left: 10%;}
+div.text-3 {padding-left: 10%;}
+div.radio-3 {padding-left: 10%;}
+div.checkbox-3 {padding-left: 10%;}
+div.button-3 {padding-left: 10%;}
+div.dropdownlist-3 {padding-left: 10%;}
+div.dropdownlist_with_checkbox-3 {padding-left: 10%;}
+div.file-3 {padding-left: 10%;}
+div.textarray-3 {padding-left: 10%;}
+div.date-3 {padding-left: 10%;}
+
+div.label-4 {padding-left: 14%;}
+div.text-4 {padding-left: 14%;}
+div.radio-4 {padding-left: 14%;}
+div.checkbox-4 {padding-left: 14%;}
+div.button-4 {padding-left: 14%;}
+div.dropdownlist-4 {padding-left: 14%;}
+div.dropdownlist_with_checkbox-4 {padding-left: 14%;}
+div.file-4 {padding-left: 14%;}
+div.textarray-4 {padding-left: 14%;}
+div.date-4 {padding-left: 14%;}
+
+div.label-5 {padding-left: 16%;}
+div.text-5 {padding-left: 16%;}
+div.radio-5 {padding-left: 16%;}
+div.checkbox-5 {padding-left: 16%;}
+div.button-5 {padding-left: 16%;}
+div.dropdownlist-5 {padding-left: 16%;}
+div.dropdownlist_with_checkbox-5 {padding-left: 16%;}
+div.file-5 {padding-left: 16%;}
+div.textarray-5 {padding-left: 16%;}
+div.date-5 {padding-left: 16%;}
+
+div.label-6 {padding-left: 18%;}
+div.text-6 {padding-left: 14;}
+div.radio-6 {padding-left: 18%;}
+div.checkbox-6 {padding-left: 18%;}
+div.button-6 {padding-left: 18%;}
+div.dropdownlist-6 {padding-left: 18%;}
+div.dropdownlist_with_checkbox-6 {padding-left: 18%;}
+div.file-6 {padding-left: 18%;}
+div.textarray-6 {padding-left: 18%;}
+div.date-6 {padding-left: 18%;}
+
+div.label-7 {padding-left: 20%;}
+div.text-7 {padding-left: 20%;}
+div.radio-7 {padding-left: 20%;}
+div.checkbox-7 {padding-left: 20%;}
+div.button-7 {padding-left: 20%;}
+div.dropdownlist_with_checkbox-7 {padding-left: 20%;}
+div.file-7 {padding-left: 20%;}
+div.textarray-7 {padding-left: 20%;}
+div.date-7 {padding-left: 20%;}
+
+div.label-8 {padding-left: 22%;}
+div.text-8 {padding-left: 22%;}
+div.radio-8 {padding-left: 22%;}
+div.checkbox-8 {padding-left: 22%;}
+div.button-8 {padding-left: 22%;}
+div.dropdownlist-8 {padding-left: 22%;}
+div.dropdownlist_with_checkbox-8 {padding-left: 22%;}
+div.file-8 {padding-left: 22%;}
+div.textarray-8 {padding-left: 22%;}
+div.date-8 {padding-left: 22%;}
+
+div.label-9 {padding-left: 24%;}
+div.text-9 {padding-left: 24%;}
+div.radio-9 {padding-left: 24%;}
+div.checkbox-9 {padding-left: 24%;}
+div.button-9 {padding-left: 24%;}
+div.dropdownlist-9 {padding-left: 24%;}
+div.dropdownlist_with_checkbox-9 {padding-left: 24%;}
+div.file-9 {padding-left: 24%;}
+div.textarray-9 {padding-left: 24%;}
+div.date-9 {padding-left: 24%;}
+
+div.label-10 {width: 83.33%;}
+div.text-10 {width: 83.33%;}
+div.radio-10 {width: 83.33%;}
+div.checkbox-10 {width: 83.33%;}
+div.button-10 {width: 83.33%;}
+div.dropdownlist-10 {width: 83.33%;}
+div.dropdownlist_with_checkbox-10 {width: 83.33%;}
+div.file-10 {width: 83.33%;}
+div.textarray-10 {width: 83.33%;}
+div.date-10 {width: 83.33%;}
+
+div.label-11 {width: 91.66%;}
+div.text-11 {width: 91.66%;}
+div.radio-11 {width: 91.66%;}
+div.checkbox-11 {width: 91.66%;}
+div.button-11 {width: 91.66%;}
+div.dropdownlist-11 {width: 91.66%;}
+div.dropdownlist_with_checkbox-11 {width: 91.66%;}
+div.file-11 {width: 91.66%;}
+div.textarray-11 {width: 91.66%;}
+div.date-11 {width: 91.66%;}
+
+div.label-12 {width: 100%;}
+div.text-12 {width: 100%;}
+div.radio-12 {width: 100%;}
+div.checkbox-12 {width: 100%;}
+div.button-12 {width: 100%;}
+div.dropdownlist-12 {width: 100%;}
+div.dropdownlist_with_checkbox-12 {width: 100%;}
+div.file-12 {width: 100%;}
+div.textarray-12 {width: 100%;}
+div.date-12 {width: 100%;}
+
+.FixedLabelWidth {display:block; width: 80px;}
+
+
+/* 設計書內使用的CSS樣式列表 */
+.TITLE {
+    font-size: 1.8rem;
+    font-weight: bold;
+}

@@ -1,0 +1,10 @@
+{
+	"voteNum": 2,
+	"secVotes": [
+		{ "id": 1, "value": "心臟內科－李一", "reply": "0" },
+		{ "id": 2, "value": "心臟內科－張二", "reply": "1" },
+		{ "id": 3, "value": "心臟內科－王三", "reply": "0" },
+		{ "id": 4, "value": "胃腸肝膽科－陳四", "reply": "1" },
+		{ "id": 5, "value": "胃腸肝膽科－林六", "reply": "0" }
+	]
+}

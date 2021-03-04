@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdPrdPalletMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdPrdPallet">
+        <id column="PALLET_SUBID" property="palletSubid" />
+        <result column="PALLET_ID" property="palletId" />
+        <result column="ITEM_CODE" property="itemCode" />
+        <result column="ITEM_TYPE" property="itemType" />
+        <result column="STATUS" property="status" />
+        <result column="BOX_ID" property="boxId" />
+        <result column="LAYER_NUM" property="layerNum" />
+        <result column="BOARD_LAYER" property="boardLayer" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        PALLET_SUBID, PALLET_ID, ITEM_CODE, ITEM_TYPE, STATUS, BOX_ID, LAYER_NUM, BOARD_LAYER, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO
+    </sql>
+
+</mapper>

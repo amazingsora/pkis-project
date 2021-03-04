@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.DocstateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Docstate">
+        <id column="SERNO" property="serno" />
+        <result column="APP_ID" property="appId" />
+        <result column="APPLICANTAGENTID" property="applicantagentid" />
+        <result column="APPLYNO" property="applyno" />
+        <result column="BYFLOWADMINID" property="byflowadminid" />
+        <result column="CANBATCHREVIEW" property="canbatchreview" />
+        <result column="CREATETIME" property="createtime" />
+        <result column="IDEN_ID" property="idenId" />
+        <result column="FLOWADMINID" property="flowadminid" />
+        <result column="FLOWID" property="flowid" />
+        <result column="FLOWSTATUS" property="flowstatus" />
+        <result column="FLOWVERSION" property="flowversion" />
+        <result column="FORMID" property="formid" />
+        <result column="ISPROJROLE" property="isprojrole" />
+        <result column="ISREVIEWDEPTROLE" property="isreviewdeptrole" />
+        <result column="LASTREVIEWDEPTID" property="lastreviewdeptid" />
+        <result column="LINKDESC" property="linkdesc" />
+        <result column="LINKNAME" property="linkname" />
+        <result column="MAINFORMSERNO" property="mainformserno" />
+        <result column="MAINFORMTABLE" property="mainformtable" />
+        <result column="NOWTASKID" property="nowtaskid" />
+        <result column="NOWUSERID" property="nowuserid" />
+        <result column="PARALLELPASSCOUNT" property="parallelpasscount" />
+        <result column="PREVIOUSTASKID" property="previoustaskid" />
+        <result column="PREVIOUSUSERID" property="previoususerid" />
+        <result column="PROJID" property="projid" />
+        <result column="SERIALNO" property="serialno" />
+        <result column="SUBFLOWDEPTID" property="subflowdeptid" />
+        <result column="SUBJECT" property="subject" />
+        <result column="SYSID" property="sysid" />
+        <result column="TASKDEPTID" property="taskdeptid" />
+        <result column="TASKDESC" property="taskdesc" />
+        <result column="TASKEXT" property="taskext" />
+        <result column="TASKNAME" property="taskname" />
+        <result column="TASKROLEIDS" property="taskroleids" />
+        <result column="TASKUSERIDS" property="taskuserids" />
+        <result column="UPDOCSTATEID" property="updocstateid" />
+        <result column="UPDATETIME" property="updatetime" />
+        <result column="APPLICANTID" property="applicantid" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, APP_ID, APPLICANTAGENTID, APPLYNO, BYFLOWADMINID, CANBATCHREVIEW, CREATETIME, IDEN_ID, FLOWADMINID, FLOWID, FLOWSTATUS, FLOWVERSION, FORMID, ISPROJROLE, ISREVIEWDEPTROLE, LASTREVIEWDEPTID, LINKDESC, LINKNAME, MAINFORMSERNO, MAINFORMTABLE, NOWTASKID, NOWUSERID, PARALLELPASSCOUNT, PREVIOUSTASKID, PREVIOUSUSERID, PROJID, SERIALNO, SUBFLOWDEPTID, SUBJECT, SYSID, TASKDEPTID, TASKDESC, TASKEXT, TASKNAME, TASKROLEIDS, TASKUSERIDS, UPDOCSTATEID, UPDATETIME, APPLICANTID
+    </sql>
+
+</mapper>

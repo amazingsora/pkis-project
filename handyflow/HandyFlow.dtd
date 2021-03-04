@@ -1,0 +1,42 @@
+<!ELEMENT handyflow (flowEvent,flowTask+,(flowParallel|flowTask)*,flowEvent+,subFlow*)>
+<!ELEMENT flowEvent ((flowConditions|flowLink)?)>
+<!ELEMENT flowTask ((flowConditions|flowParallel|flowLink))>
+<!ELEMENT flowParallel (flowLink+)>
+<!ELEMENT subFlow (flowEvent,flowTask+,flowEvent+)>
+<!ELEMENT flowConditions (flowLink+)>
+<!ELEMENT flowLink (#PCDATA)>
+<!ATTLIST handyflow id CDATA #REQUIRED>
+<!ATTLIST handyflow name CDATA #REQUIRED>
+<!ATTLIST handyflow desc CDATA #IMPLIED>
+<!ATTLIST handyflow version CDATA #REQUIRED>
+<!ATTLIST flowEvent id CDATA #REQUIRED>
+<!ATTLIST flowEvent type (BEGIN|END|CANCEL|SUB_BEGIN|SUB_FINISH|SUB_RETURN) #REQUIRED>
+<!ATTLIST flowEvent name CDATA #IMPLIED>
+<!ATTLIST flowEvent desc CDATA #IMPLIED>
+<!ATTLIST flowTask id CDATA #REQUIRED>
+<!ATTLIST flowTask name CDATA #REQUIRED>
+<!ATTLIST flowTask desc CDATA #IMPLIED>
+<!ATTLIST flowTask roles CDATA #IMPLIED>
+<!ATTLIST flowTask dept CDATA #IMPLIED>
+<!ATTLIST flowTask users CDATA #IMPLIED>
+<!ATTLIST flowTask sameUserAs CDATA #IMPLIED>
+<!ATTLIST flowTask isReviewDeptRole (true|false) #IMPLIED>
+<!ATTLIST flowTask isProjRole (true|false) #IMPLIED>
+<!ATTLIST flowTask isSameRolePass (true|false) #IMPLIED>
+<!ATTLIST flowTask isHighLevelPass (true|false) #IMPLIED>
+<!ATTLIST flowParallel id CDATA #IMPLIED>
+<!ATTLIST flowParallel name CDATA #IMPLIED>
+<!ATTLIST flowParallel desc CDATA #IMPLIED>
+<!ATTLIST flowParallel parallelPassCount (0|1|2|3|4|5|6|7|8|9) #IMPLIED>
+<!ATTLIST flowConditions id CDATA #IMPLIED>
+<!ATTLIST flowConditions name CDATA #IMPLIED>
+<!ATTLIST flowConditions desc CDATA #IMPLIED>
+<!ATTLIST flowLink action CDATA #IMPLIED>
+<!ATTLIST flowLink id CDATA #IMPLIED>
+<!ATTLIST flowLink name CDATA #REQUIRED>
+<!ATTLIST flowLink desc CDATA #IMPLIED>
+<!ATTLIST flowLink to CDATA #REQUIRED>
+<!ATTLIST flowLink isConcurrent (true|false) #IMPLIED>
+<!ATTLIST subFlow id CDATA #REQUIRED>
+<!ATTLIST subFlow name CDATA #REQUIRED>
+<!ATTLIST subFlow desc CDATA #IMPLIED>

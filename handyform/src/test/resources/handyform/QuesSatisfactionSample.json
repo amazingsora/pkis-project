@@ -1,0 +1,23 @@
+{
+	"secScoring": [
+		{ "id": 1, "type": "caption", "value": "內科部" },
+		{ "id": 2, "type": "ques5Point", "value": "心臟內科" },
+		{ "id": 3, "type": "ques5Point", "value": "胸腔內科" },
+		{ "id": 4, "type": "ques5Point", "value": "胃腸肝膽科" },
+		{ "id": 5, "type": "caption", "value": "外科部" },
+		{ "id": 6, "type": "ques5Point", "value": "心臟外科" },
+		{ "id": 7, "type": "ques5Point", "value": "胸腔外科" }
+	],
+	"secNonScoring": [
+		{ "id": 1, "type": "question", "value": "教學活動中你最喜歡的活動為何？原因為何？", "required": true },
+		{ "id": 2, "type": "quesRadio", "value": "本科整體教學活動是否要改善？", "required": true,
+			"options": [ "是", "否" ]
+		},
+		{ "id": 3, "type": "quesCombo", "value": "您是否了解實驗室安全衛生的要求是為了保護病串與工作人員的安全？", "required": true,
+			"options": [ "清楚", "不是很確定", "有聽過" ]
+		},
+		{ "id": 4, "type": "quesCheck", "value": "其他建議", "required": false,
+			"options": [ "增加實際操作", "增加課堂說明" ]
+		}
+	]
+}

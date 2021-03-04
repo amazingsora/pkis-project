@@ -1,0 +1,30 @@
+package com.tradevan.apcommon.ssl;
+
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.X509TrustManager;
+
+/**
+ * Title: DefaultTrustManager<br>
+ * Description: <br>
+ * Company: Tradevan Co.<br>
+ * 
+ * @author Neil Chen
+ * @version 1.0
+ */
+public class DefaultTrustManager implements X509TrustManager {
+
+	@Override
+    public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+	}
+	
+    @Override
+    public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+    }
+    
+    @Override
+    public X509Certificate[] getAcceptedIssuers() {
+        return new X509Certificate[] {};
+    }
+}

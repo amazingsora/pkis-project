@@ -1,0 +1,14 @@
+{
+	"phase": { "id": 1, "type": "phases", "value": "評估時機", "phase1": "學生訓練後自評(結束前一週)", "phase2": "臨床教師評估_訓練後(訓練結束前一週)" },
+	"secEvalItems": [
+		{ "id": 1, "type": "caption", "value": "1.病例記載" },
+		{ "id": 2, "type": "ques5Point2", "value": " 資料完整性", "required": true },
+		{ "id": 3, "type": "ques5Point2", "value": " 內容一致性", "required": true },
+		{ "id": 4, "type": "ques5Point2", "value": "2.實證醫學應用", "required": true },
+		{ "id": 5, "type": "ques5Point2", "value": "3.追蹤及未來治療", "required": true },
+		{ "id": 6, "type": "caption", "value": "4.專業性討論" },
+		{ "id": 7, "type": "ques5Point2", "value": " 人性化照顧能力", "required": true }
+	],
+	"commentOnOff": true,
+	"comment": { "id": 3, "type": "question2", "value": "填寫備註", "required": false }
+}

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.xauth.dao.XauthTransferMapper">
+
+  <select id="selectallContract" parameterType="HashMap" resultType="HashMap"> 
+		SELECT DISTINCT DATAID
+			  ,NOWUSERID
+			  ,NOWROLES
+			  ,NOWDEPTID
+		      ,YEAR
+		      ,CONTRACTMODEL
+		      ,CONTRACTMODELNAME
+		      ,FLOWNAME
+		      ,DEPTNAME
+		      ,DEPTCODE
+		      ,SUPPLIERGUI
+		   	  ,SUPPLIERCODE
+		      ,SUPPLIERCNAME
+		 	  ,FLOWUSERIDS
+		      ,FLOWDEPTID
+		      ,DISPORD
+		      ,INDEXNAME
+		      ,FLOWSTATUS
+		      
+		  FROM(
+		    SELECT C.DATAID
+		          ,C.FLOWID
+		          ,C.CONTRACTMODEL
+		          ,C.INDEXNAME
+		          ,SUBSTR(C.INDEXNAME, 1, INSTR(C.INDEXNAME, '_') - 1) AS YEAR
+		          ,FC.FLOWNAME
+		          ,FS.USERIDS
+		          ,S.DEPTNO
+		          ,S.SUPPLIERGUI
+		          ,S.SUPPLIERCODE
+		          ,S.SUPPLIERCNAME
+		          ,DEPT.CODE ||'-'|| DEPT.CNAME AS DEPTNAME
+		          ,DEPT.CODE as DEPTCODE
+		          ,CONMODE.CNAME AS CONTRACTMODELNAME
+		          ,FSS.USERIDS AS FLOWUSERIDS
+		          ,FSS.ROLEIDS AS FLOWROLEIDS
+		          ,FSS.DEPTID AS FLOWDEPTID
+		          ,CF.UNDERTAKEDEPTID
+		      	  ,CF.UNDERTAKEROLEID
+		     	  ,CF.UNDERTAKEUSERID
+		     	  ,FSS.DISPORD
+		     	  ,CASE WHEN doc.FLOWSTATUS is null THEN 'DRAFT' ELSE doc.FLOWSTATUS End AS FLOWSTATUS
+		     	  ,CASE WHEN UNDERTAKEUSERID is null THEN FSS.USERIDS ELSE UNDERTAKEUSERID End AS NOWUSERID
+ 				  ,CASE WHEN UNDERTAKEROLEID is null THEN FSS.ROLEIDS ELSE UNDERTAKEROLEID End AS NOWROLES
+                  ,CASE WHEN UNDERTAKEDEPTID is null THEN FSS.DEPTID ELSE UNDERTAKEDEPTID End AS NOWDEPTID
+		      FROM CONTRACTMASTER C
+		      LEFT JOIN <include refid="CommonMapper.schema"/> FLOWSTEP FSS ON FSS.FLOWID = C.FLOWID
+			  LEFT JOIN (SELECT * FROM(
+				SELECT CONTRACTTRANSFER.* ,ROW_NUMBER() OVER(PARTITION BY DATAID ,DISPORD ORDER BY CRATEDATE desc) sn
+				FROM <include refid="CommonMapper.schema"/>CONTRACTTRANSFER) CR
+				where CR.sn=1) CF ON CF.DATAID = C.DATAID and CF.DISPORD = FSS.DISPORD 	      
+			  LEFT JOIN <include refid="CommonMapper.schema"/>FLOWCONF FC ON FC.FLOWID = C.FLOWID 
+		      LEFT JOIN <include refid="CommonMapper.schema"/>FLOWSTEP FS ON FS.FLOWID = C.FLOWID AND FS.DEPTID = '999999999'
+		      LEFT JOIN <include refid="CommonMapper.schema"/>FLOWSTEP FSS ON FSS.FLOWID = C.FLOWID
+		      LEFT JOIN <include refid="CommonMapper.schema"/>SUPPLIERMASTER S ON S.SUPPLIERID = FS.USERIDS
+		      LEFT JOIN <include refid="CommonMapper.schema"/>XAUTH_SYS_CODE DEPT ON DEPT.GP = 'DEPT_CODE' AND DEPT.CODE = S.DEPTNO
+		      LEFT JOIN <include refid="CommonMapper.schema"/>XAUTH_SYS_CODE CONMODE ON CONMODE.GP = 'CONTRACT_MODE_CODE' AND CONMODE.CODE = C.CONTRACTMODEL 
+		  	  LEFT JOIN <include refid="CommonMapper.schema"/>DOCSTATE doc ON doc.APPLYNO = C.DATAID 
+		  
+		  )
+		 WHERE 1=1
+		 AND FLOWSTATUS != 'CANCEL'
+		<if test="userid != null">
+		 AND (
+		 (NOWUSERID LIKE '%'|| #{userid,jdbcType=VARCHAR} ||'%'  AND LENGTH(#{userid,jdbcType=VARCHAR})>9
+			<if test="idenid != null">
+		 	AND NOWDEPTID = #{idenid,jdbcType=VARCHAR}
+			 </if>
+		 	) 
+			 <if test="roleid != null">
+			 OR (NOWDEPTID = #{idenid,jdbcType=VARCHAR} AND NOWROLES LIKE '%'|| #{roleid,jdbcType=VARCHAR} ||'%')
+			</if>
+		 	)
+		</if>
+	 	<if test="contractmodel != null">
+		AND CONTRACTMODEL = #{contractmodel,jdbcType=VARCHAR} 
+		</if>
+		<if test="suppliergui != null">
+		AND SUPPLIERGUI = #{suppliergui,jdbcType=VARCHAR}
+		</if>
+		<if test="suppliercode != null">
+		AND SUPPLIERCODE = #{suppliercode,jdbcType=VARCHAR} 
+		</if>		
+  </select>
+  
+  
+  
+  <select id="searchtransferUserId" parameterType="HashMap" resultType="HashMap"> 
+	 	 SELECT CR.*,
+	 	 		XRAU.AGENT_USER_ID 
+	 	 FROM( 
+	  		SELECT CONTRACTTRANSFER.* ,ROW_NUMBER() OVER(PARTITION BY DATAID ,DISPORD ORDER BY CRATEDATE desc) sn FROM <include refid="CommonMapper.schema"/>CONTRACTTRANSFER
+	  		
+	  	) CR 
+	  	LEFT JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_AGENT_USER XRAU ON XRAU.USER_ID = CR.UNDERTAKEUSERID 
+	  	WHERE CR.sn=1  
+	  	AND (UNDERTAKEUSERID = #{userid,jdbcType=VARCHAR} OR AGENT_USER_ID=#{userid,jdbcType=VARCHAR} )
+
+  </select>
+  
+  <select id="selectlastTransfer" parameterType="HashMap" resultType="HashMap"> 
+		  SELECT CR.*,
+		  		 XRAU.AGENT_USER_ID 
+		  FROM( 
+		  	SELECT CONTRACTTRANSFER.* ,
+		  	ROW_NUMBER() OVER(PARTITION BY DATAID ,DISPORD ORDER BY CRATEDATE desc) sn 
+		  	FROM <include refid="CommonMapper.schema"/>CONTRACTTRANSFER
+		  	) CR 
+		  	LEFT JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_AGENT_USER XRAU ON XRAU.USER_ID = CR.UNDERTAKEUSERID 
+		  	WHERE CR.sn=1 
+		  	
+		  	AND DATAID=#{dataid,jdbcType=VARCHAR} 
+		  	<if test="userid != null">
+		  		AND USERID = #{userid,jdbcType=VARCHAR}
+		  	</if>
+		  	<if test="roleid != null">
+		  		AND ROLEID = #{roleid,jdbcType=VARCHAR}
+		  	</if>
+		  	<if test="undertakeuserid != null">
+		  		AND (UNDERTAKEUSERID = #{undertakeuserid,jdbcType=VARCHAR} OR AGENT_USER_ID = #{undertakeuserid,jdbcType=VARCHAR} )
+		  	</if>
+		  	<if test="dispord != null">
+		  		AND DISPORD = #{dispord,jdbcType=VARCHAR}
+		  	</if>
+  </select>
+
+</mapper>

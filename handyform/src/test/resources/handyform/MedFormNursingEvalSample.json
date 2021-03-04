@@ -1,0 +1,23 @@
+{
+	"trainingType": { "id": 3000, "type": "quesRadioVal", "value": "護理人員訓練類別",
+		"options": [ "新進", "代訓", "加護護理訓練", "交叉訓練" ]
+	},
+	"nurseStatus": { "id": 3001, "type": "quesRadioOther", "value": "護理人員狀態",
+		"options": [ "新進", "調入" ]
+	},
+	"teacher": { "id": 3002, "type": "question", "value": "主要臨床教師" },
+	"masterList":[
+		{ "id":1, "title":"一、行政組織系統結構及單位環境及人事規畫", "subTitle":"", "detailList":[
+			{ "id":1, "topic":"1.能說出護理部、單位組織系統及業務功能分配重點", "type":"nursingEval" },
+			{ "id":2, "topic":"2.能說出醫院宗旨理念", "type":"nursingEval" },
+			{ "id":3, "topic":"3.能說出本部宗旨理念及護理方式", "type":"nursingEval" },
+			{ "id":4, "topic":"4.能說出單位之科別特性", "type":"nursingEval" }
+		]},
+		{ "id":2, "title":"二、單位工作常規", "subTitle":"", "detailList":[
+			{ "id":1, "topic":"1.能說出單位各班別工作常規及業務重點", "type":"nursingEval" },
+			{ "id":2, "topic":"2.能說出病房各項常規治療時間", "type":"nursingEval" },
+			{ "id":3, "topic":"3.能正確執行單位計價作業", "type":"nursingEval" },
+			{ "id":4, "topic":"4.能說出或正確執行單位物口借出入方法", "type":"nursingEval" }
+		]}
+	]
+}

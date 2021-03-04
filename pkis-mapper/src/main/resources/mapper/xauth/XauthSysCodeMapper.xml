@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.xauth.dao.XauthSysCodeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.xauth.model.XauthSysCode">
+        <id column="APP_ID" property="appId" />
+        <result column="IDEN_ID" property="idenId" />
+        <result column="GP" property="gp" />
+        <result column="CODE" property="code" />
+        <result column="CNAME" property="cname" />
+        <result column="ENAME" property="ename" />
+        <result column="ORDER_SEQ" property="orderSeq" />
+        <result column="ENABLED" property="enabled" />
+        <result column="BGN_DATE" property="bgnDate" />
+        <result column="END_DATE" property="endDate" />
+        <result column="MEMO" property="memo" />
+        <result column="C01" property="c01" />
+        <result column="C02" property="c02" />
+        <result column="C03" property="c03" />
+        <result column="C04" property="c04" />
+        <result column="C05" property="c05" />
+        <result column="CRE_USER" property="creUser" />
+        <result column="CRE_DATE" property="creDate" />
+        <result column="UPD_USER" property="updUser" />
+        <result column="UPD_DATE" property="updDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        APP_ID, IDEN_ID, GP, CODE, CNAME, ENAME, ORDER_SEQ, ENABLED, BGN_DATE, END_DATE, MEMO, C01, C02, C03, C04, C05, CRE_USER, CRE_DATE, UPD_USER, UPD_DATE
+    </sql>
+
+</mapper>

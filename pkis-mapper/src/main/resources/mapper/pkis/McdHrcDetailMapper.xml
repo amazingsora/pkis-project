@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdHrcDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdHrcDetail">
+        <id column="DETAIL_ID" property="detailId" />
+        <result column="MASTER_ID" property="masterId" />
+        <result column="PACK_MATERIAL" property="packMaterial" />
+        <result column="PACK_UNIT" property="packUnit" />
+        <result column="DIMENSION_DEEP" property="dimensionDeep" />
+        <result column="DIMENSION_WIDTH" property="dimensionWidth" />
+        <result column="DIMENSION_HEIGHT" property="dimensionHeight" />
+        <result column="DIMENSION_UNIT" property="dimensionUnit" />
+        <result column="WEIGHT_NET" property="weightNet" />
+        <result column="WEIGHT_GROSS" property="weightGross" />
+        <result column="WEIGHT_UNIT" property="weightUnit" />
+        <result column="CAPACITY_NET" property="capacityNet" />
+        <result column="CAPACITY_GROSS" property="capacityGross" />
+        <result column="CAPACITY_UNIT" property="capacityUnit" />
+        <result column="SALES_STATE" property="salesState" />
+        <result column="BASE_UNIT" property="baseUnit" />
+        <result column="INVOICE_UNIT" property="invoiceUnit" />
+        <result column="ORDER_UNIT" property="orderUnit" />
+        <result column="ORDER_QUANTITY_MULTIPLE" property="orderQuantityMultiple" />
+        <result column="PURCHASE_PRICE_START_DATE" property="purchasePriceStartDate" />
+        <result column="PROMOTION_PRICE" property="promotionPrice" />
+        <result column="PROMOTION_PRICE_START_DATE" property="promotionPriceStartDate" />
+        <result column="PROMOTION_PRICE_END_DATE" property="promotionPriceEndDate" />
+        <result column="ENTRY_EA_NUM" property="entryEaNum" />
+        <result column="ENTRY_NUM" property="entryNum" />
+        <result column="SOURCE_ID" property="sourceId" />
+        <result column="SOURCE_TYPE" property="sourceType" />
+        <result column="SOURCE_LAYER" property="sourceLayer" />
+        <result column="ITEM_SPECIFICATION_TW" property="itemSpecificationTw" />
+        <result column="BARCODE" property="barcode" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+        <result column="ITEM_CODE" property="itemCode" />
+        <result column="SOURCE_TYPE_NAME" property="sourceTypeName" />
+        <result column="PURCHASE_PRICE" property="purchasePrice" />
+        <result column="LAYER_NUM" property="layerNum" />
+        <result column="BOARD_LAYER" property="boardLayer" />
+        <result column="BARCODE_TYPE" property="barcodeType" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        DETAIL_ID, MASTER_ID, PACK_MATERIAL, PACK_UNIT, DIMENSION_DEEP, DIMENSION_WIDTH, DIMENSION_HEIGHT, DIMENSION_UNIT, WEIGHT_NET, WEIGHT_GROSS, WEIGHT_UNIT, CAPACITY_NET, CAPACITY_GROSS, CAPACITY_UNIT, SALES_STATE, BASE_UNIT, INVOICE_UNIT, ORDER_UNIT, ORDER_QUANTITY_MULTIPLE, PURCHASE_PRICE_START_DATE, PROMOTION_PRICE, PROMOTION_PRICE_START_DATE, PROMOTION_PRICE_END_DATE, ENTRY_EA_NUM, ENTRY_NUM, SOURCE_ID, SOURCE_TYPE, SOURCE_LAYER, ITEM_SPECIFICATION_TW, BARCODE, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO, ITEM_CODE, SOURCE_TYPE_NAME, PURCHASE_PRICE, LAYER_NUM, BOARD_LAYER, BARCODE_TYPE
+    </sql>
+
+</mapper>

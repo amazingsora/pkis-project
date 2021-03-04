@@ -1,0 +1,49 @@
+{
+	"place": { "id": 1, "type": "quesRadioOther", "value": "地點", "required": true,
+		"options": [ "開刀房", "一般病房", "加護病房", "急診", "臨床技能中心", "其它" ]
+	},
+	"patient": [
+		{ "id": 1, "type": "quesRadioVal", "value": "病人資訊", "required": true,
+			"options": [ "男", "女" ]
+		},
+		{ "id": 2, "type": "quesNumber", "value": "年齡", "required": true },
+		{ "id": 3, "type": "quesCaseNo", "value": "病歷號碼", "required": true }
+	],
+	"techInfo": [
+		{ "id": 1, "type": "question", "value": "技術名稱", "required": false },
+		{ "id": 2, "type": "quesRadioVal", "value": "技術複雜程度", "required": false,
+			"options": [ "低", "中", "高" ]
+		}
+	],
+	"operInfo": [
+		{ "id": 1, "type": "quesRadioVal", "value": "擔任角色", "required": false,
+			"options": [ "擔任助手", "獨立操作" ]
+		},
+		{ "id": 2, "type": "quesNumber", "value": "第 X次", "required": false },
+		{ "id": 3, "type": "quesCheckVal", "value": ">5次", "required": false,
+			"options": [ ">5次" ]
+		}
+	],
+	"secEvalItems": [
+		{ "id": 1, "type": "ques06Point", "value": "熟知適應症、解剖結構及步驟", "required": true },
+		{ "id": 2, "type": "ques06Point", "value": "詳細告知病人並取得同意書", "required": true },
+		{ "id": 3, "type": "ques06Point", "value": "操作技能", "required": true },
+		{ "id": 4, "type": "ques06Point", "value": "諮商衛教", "required": true },
+		{ "id": 5, "type": "ques06Point", "value": "臨床判斷", "required": true },
+		{ "id": 6, "type": "ques06Point", "value": "組織效能", "required": true },
+		{ "id": 7, "type": "ques06Point", "value": "人道專業", "required": true }
+	],
+	"secTimingOnOff": true,
+	"secTiming": [
+		{ "id": 1, "type": "quesNumber", "value": "直接觀察時間", "required": true },
+		{ "id": 2, "type": "quesNumber", "value": "回饋時間", "required": true }
+	],
+	"secCommentOnOff": true,
+	"secComment": [
+		{ "id": 1, "type": "question", "value": "表現優良項目", "required": true },
+		{ "id": 2, "type": "question", "value": "建議加強項目", "required": true }
+	],
+	"satisfactionOnOff": true,
+	"satisfaction": { "id": 1999, "type": "ques10Point", "value": "受評者對此次評量滿意度", "required": false },
+	"satisfaction2": { "id": 2000, "type": "ques10Point", "value": "評量者對此次評量滿意度", "required": false }
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdPrfColorMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdPrfColor">
+        <id column="COLOR_ID" property="colorId" />
+        <result column="COLOR_NO" property="colorNo" />
+        <result column="COMP_BAN" property="compBan" />
+        <result column="LANG_ID" property="langId" />
+        <result column="COLOR_NAME" property="colorName" />
+        <result column="SORT_INDEX" property="sortIndex" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+        <result column="CONTENT_TYPE" property="contentType" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        COLOR_ID, COLOR_NO, COMP_BAN, LANG_ID, COLOR_NAME, SORT_INDEX, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO, CONTENT_TYPE
+    </sql>
+
+</mapper>

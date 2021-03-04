@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdRefAttachMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdRefAttach">
+        <id column="ATTACH_ID" property="attachId" />
+        <result column="ITEM_CODE" property="itemCode" />
+        <result column="ITEM_TYPE" property="itemType" />
+        <result column="SOURCE_ID" property="sourceId" />
+        <result column="SOURCE_TYPE" property="sourceType" />
+        <result column="ORIGINAL_FILE_NAME" property="originalFileName" />
+        <result column="WEB_PATH" property="webPath" />
+        <result column="ATTACH_ROOT" property="attachRoot" />
+        <result column="ATTACH_NAME" property="attachName" />
+        <result column="ATTACH_TYPE" property="attachType" />
+        <result column="SORT_INDEX" property="sortIndex" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ATTACH_ID, ITEM_CODE, ITEM_TYPE, SOURCE_ID, SOURCE_TYPE, ORIGINAL_FILE_NAME, WEB_PATH, ATTACH_ROOT, ATTACH_NAME, ATTACH_TYPE, SORT_INDEX, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO
+    </sql>
+
+</mapper>

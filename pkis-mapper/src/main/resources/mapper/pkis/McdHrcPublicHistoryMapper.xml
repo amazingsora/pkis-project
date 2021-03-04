@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdHrcPublicHistoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdHrcPublicHistory">
+        <id column="HISTORY_ID" property="historyId" />
+        <result column="MASTER_ID" property="masterId" />
+        <result column="ITEM_CODE" property="itemCode" />
+        <result column="RETAILER_DEPARTMENT" property="retailerDepartment" />
+        <result column="SUPPLIER_CODE" property="supplierCode" />
+        <result column="BRAND" property="brand" />
+        <result column="ORGN_COUNTRY" property="orgnCountry" />
+        <result column="PRD_STATUS" property="prdStatus" />
+        <result column="START_AVAILABILITY_DATE" property="startAvailabilityDate" />
+        <result column="END_AVAILABILITY_DATE" property="endAvailabilityDate" />
+        <result column="STOP_SUPPLIER_DESC_TW" property="stopSupplierDescTw" />
+        <result column="MAIN_SHIP_METHODS" property="mainShipMethods" />
+        <result column="ITEM_TYPE" property="itemType" />
+        <result column="SINGLE_ID" property="singleId" />
+        <result column="SINGLE_SUBID" property="singleSubid" />
+        <result column="HIERARCHY_LAYERNUM" property="hierarchyLayernum" />
+        <result column="HIERARCHY_LAYER" property="hierarchyLayer" />
+        <result column="HIERARCHY_EA_NUM" property="hierarchyEaNum" />
+        <result column="PUBLIC_GTIN" property="publicGtin" />
+        <result column="PUBLIC_PRD_GTIN_NAME_TW" property="publicPrdGtinNameTw" />
+        <result column="PUBLIC_PRD_GTIN_NAME_EN" property="publicPrdGtinNameEn" />
+        <result column="PUBLIC_STATUS" property="publicStatus" />
+        <result column="PUBLIC_TIME" property="publicTime" />
+        <result column="REJECT_REASON" property="rejectReason" />
+        <result column="REPLACE_GTIN" property="replaceGtin" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+        <result column="ITEM_SPECIFICATION_TW" property="itemSpecificationTw" />
+        <result column="ITEM_SPECIFICATION_EN" property="itemSpecificationEn" />
+        <result column="DETAIL_ID" property="detailId" />
+        <result column="PACK_MATERIAL" property="packMaterial" />
+        <result column="PACK_UNIT" property="packUnit" />
+        <result column="DIMENSION_DEEP" property="dimensionDeep" />
+        <result column="DIMENSION_WIDTH" property="dimensionWidth" />
+        <result column="DIMENSION_HEIGHT" property="dimensionHeight" />
+        <result column="DIMENSION_UNIT" property="dimensionUnit" />
+        <result column="WEIGHT_NET" property="weightNet" />
+        <result column="WEIGHT_GROSS" property="weightGross" />
+        <result column="WEIGHT_UNIT" property="weightUnit" />
+        <result column="CAPACITY_NET" property="capacityNet" />
+        <result column="CAPACITY_GROSS" property="capacityGross" />
+        <result column="CAPACITY_UNIT" property="capacityUnit" />
+        <result column="SALES_STATE" property="salesState" />
+        <result column="BASE_UNIT" property="baseUnit" />
+        <result column="INVOICE_UNIT" property="invoiceUnit" />
+        <result column="ORDER_UNIT" property="orderUnit" />
+        <result column="ORDER_QUANTITY_MULTIPLE" property="orderQuantityMultiple" />
+        <result column="PURCHASE_PRICE_START_DATE" property="purchasePriceStartDate" />
+        <result column="PROMOTION_PRICE" property="promotionPrice" />
+        <result column="PROMOTION_PRICE_START_DATE" property="promotionPriceStartDate" />
+        <result column="PROMOTION_PRICE_END_DATE" property="promotionPriceEndDate" />
+        <result column="ENTRY_EA_NUM" property="entryEaNum" />
+        <result column="ENTRY_NUM" property="entryNum" />
+        <result column="SOURCE_ID" property="sourceId" />
+        <result column="SOURCE_TYPE" property="sourceType" />
+        <result column="SOURCE_LAYER" property="sourceLayer" />
+        <result column="BARCODE" property="barcode" />
+        <result column="BARCODE_TYPE" property="barcodeType" />
+        <result column="PURCHASE_PRICE" property="purchasePrice" />
+        <result column="BOARD_LAYER" property="boardLayer" />
+        <result column="LAYER_NUM" property="layerNum" />
+        <result column="CATE_4" property="cate4" />
+        <result column="UNIQUE_IDENTIFICATION_CIN" property="uniqueIdentificationCin" />
+        <result column="FILE_PATH_CIN" property="filePathCin" />
+        <result column="CREATE_USER_CIN" property="createUserCin" />
+        <result column="CREATE_TIME_CIN" property="createTimeCin" />
+        <result column="UNIQUE_IDENTIFICATION_CINR" property="uniqueIdentificationCinr" />
+        <result column="IDENTIFIER_DOCUMENT_CINR" property="identifierDocumentCinr" />
+        <result column="IDENTIFIER_BUSINESSSCOPE_CINR" property="identifierBusinessscopeCinr" />
+        <result column="FILE_PATH_CINR" property="filePathCinr" />
+        <result column="CREATE_USER_CINR" property="createUserCinr" />
+        <result column="CREATE_TIME_CINR" property="createTimeCinr" />
+        <result column="UNIQUE_IDENTIFICATION_CIC" property="uniqueIdentificationCic" />
+        <result column="FILE_PATH_CIC" property="filePathCic" />
+        <result column="CREATE_USER_CIC" property="createUserCic" />
+        <result column="CREATE_TIME_CIC" property="createTimeCic" />
+        <result column="UNIQUE_IDENTIFICATION_CICR" property="uniqueIdentificationCicr" />
+        <result column="FILE_PATH_CICR" property="filePathCicr" />
+        <result column="CREATE_USER_CICR" property="createUserCicr" />
+        <result column="CREATE_TIME_CICR" property="createTimeCicr" />
+        <result column="PUBLIC_ITEM_SPECIFICATION_TW" property="publicItemSpecificationTw" />
+        <result column="CASE_ENTRY_NUM" property="caseEntryNum" />
+        <result column="PUBLIC_ITEM_SPECIFICATION_EN" property="publicItemSpecificationEn" />
+        <result column="IS_VARIABLE" property="isVariable" />
+        <result column="IS_DANGER" property="isDanger" />
+        <result column="RATE" property="rate" />
+        <result column="PRD_DESCRIPTION_TW" property="prdDescriptionTw" />
+        <result column="PRD_DESCRIPTION_EN" property="prdDescriptionEn" />
+        <result column="SUPPLIER_GLN" property="supplierGln" />
+        <result column="COMPANY_NAME" property="companyName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        MASTER_ID, ITEM_CODE, RETAILER_DEPARTMENT, SUPPLIER_CODE, BRAND, ORGN_COUNTRY, PRD_STATUS, START_AVAILABILITY_DATE, END_AVAILABILITY_DATE, STOP_SUPPLIER_DESC_TW, MAIN_SHIP_METHODS, ITEM_TYPE, SINGLE_ID, SINGLE_SUBID, HIERARCHY_LAYERNUM, HIERARCHY_LAYER, HIERARCHY_EA_NUM, PUBLIC_GTIN, PUBLIC_PRD_GTIN_NAME_TW, PUBLIC_PRD_GTIN_NAME_EN, PUBLIC_STATUS, PUBLIC_TIME, REJECT_REASON, REPLACE_GTIN, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO, ITEM_SPECIFICATION_TW, ITEM_SPECIFICATION_EN, DETAIL_ID, PACK_MATERIAL, PACK_UNIT, DIMENSION_DEEP, DIMENSION_WIDTH, DIMENSION_HEIGHT, DIMENSION_UNIT, WEIGHT_NET, WEIGHT_GROSS, WEIGHT_UNIT, CAPACITY_NET, CAPACITY_GROSS, CAPACITY_UNIT, SALES_STATE, BASE_UNIT, INVOICE_UNIT, ORDER_UNIT, ORDER_QUANTITY_MULTIPLE, PURCHASE_PRICE_START_DATE, PROMOTION_PRICE, PROMOTION_PRICE_START_DATE, PROMOTION_PRICE_END_DATE, ENTRY_EA_NUM, ENTRY_NUM, SOURCE_ID, SOURCE_TYPE, SOURCE_LAYER, BARCODE, BARCODE_TYPE, HISTORY_ID, PURCHASE_PRICE, BOARD_LAYER, LAYER_NUM, CATE_4, UNIQUE_IDENTIFICATION_CIN, FILE_PATH_CIN, CREATE_USER_CIN, CREATE_TIME_CIN, UNIQUE_IDENTIFICATION_CINR, IDENTIFIER_DOCUMENT_CINR, IDENTIFIER_BUSINESSSCOPE_CINR, FILE_PATH_CINR, CREATE_USER_CINR, CREATE_TIME_CINR, UNIQUE_IDENTIFICATION_CIC, FILE_PATH_CIC, CREATE_USER_CIC, CREATE_TIME_CIC, UNIQUE_IDENTIFICATION_CICR, FILE_PATH_CICR, CREATE_USER_CICR, CREATE_TIME_CICR, PUBLIC_ITEM_SPECIFICATION_TW, CASE_ENTRY_NUM, PUBLIC_ITEM_SPECIFICATION_EN, IS_VARIABLE, IS_DANGER, RATE, PRD_DESCRIPTION_TW, PRD_DESCRIPTION_EN, SUPPLIER_GLN, COMPANY_NAME
+    </sql>
+
+</mapper>

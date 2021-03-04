@@ -1,0 +1,2009 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.contract.dao.ContractMapper">
+
+  <select id="selectContractList" parameterType="HashMap" resultType="HashMap">
+		select 	MASTER_ID ,
+				CONTRACT_MODE_CODE ,
+				CONTRACT_TYPE_CODE ,
+				FLOW_ID ,
+				CONTRACT_STATUS_CODE ,
+				SUPPLIER_CODE ,
+				ORG_LEVEL_1_CODE ,
+				ORG_LEVEL_2_CODE ,
+				ORG_LEVEL_3_CODE ,
+				ORG_LEVEL_4_CODE ,
+				ORG_LEVEL_5_CODE ,
+				ORG_LEVEL_6_CODE ,
+				ORG_LEVEL_1_NAME_C ,
+				ORG_LEVEL_2_NAME_C ,
+				ORG_LEVEL_3_NAME_C ,
+				ORG_LEVEL_4_NAME_C ,
+				ORG_LEVEL_5_NAME_C ,
+				ORG_LEVEL_6_NAME_C ,
+				ORG_LEVEL_1_NAME_E ,
+				ORG_LEVEL_2_NAME_E ,
+				ORG_LEVEL_3_NAME_E ,
+				ORG_LEVEL_4_NAME_E ,
+				ORG_LEVEL_5_NAME_E ,
+				ORG_LEVEL_6_NAME_E ,
+				DIVISION_CODE ,
+				CONTRACT_ID ,
+				CONTRACT_NAME ,
+				VALIDTERM_FROM ,
+				VALIDTERM_TO ,
+				EXECUTION_DATE ,
+				GIVEN_YEAR ,
+				CONTRACT_VERSION ,
+				TOTAL_AMOUNT ,
+				CURRENCY ,
+				DEPARTMENT_ID ,
+				PARTY_A_BAN ,
+				PARTY_A_NAME_C ,
+				PARTY_A_NAME_E ,
+				PARTY_B_BAN ,
+				PARTY_B_NAME_C ,
+				PARTY_B_NAME_E ,
+				CONTRACT_REMARK ,
+				CREATOR ,
+				CREATE_TIME ,
+				UPDATER ,
+				UPDATE_TIME 
+		from contract_master
+  </select>
+  
+  <select id="searchApplication" parameterType="HashMap" resultType="HashMap">
+    SELECT   A.APP_ID
+			,A.APP_NAME
+			,A.ENABLED
+			,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+			,A.PUBLIC_KEY
+			,A.PRIVATE_KEY			
+			,A.CRE_USER
+			,A.CRE_DATE
+			,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+			,A.UPD_USER
+			,A.UPD_DATE
+			,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+	  FROM   <include refid="CommonMapper.schema"/>XAUTH_APPLICATION A
+	 WHERE   1=1
+	  <if test="appId != null">
+        AND A.APP_ID = #{appId,jdbcType=VARCHAR}
+      </if>
+      <if test="appName != null">
+        AND A.APP_NAME LIKE '%' || #{appName,jdbcType=VARCHAR} || '%'
+      </if> 
+      <if test="enabled != null">
+        AND A.ENABLED = #{enabled,jdbcType=VARCHAR}
+      </if>      
+    <include refid="CommonMapper.orderBy"/>
+  </select>
+
+  <select id="selectContractList" parameterType="HashMap" resultType="HashMap">
+    SELECT   LEVEL AS LV
+			,A.APP_ID
+			,A.MENU_ID
+			,A.PARENT_ID
+			,A.MENU_URL
+			,A.MENU_CNAME
+			,A.SEQ_NO
+			,A.PARENT_SEQ
+			,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+			,DECODE(A.MENU_ID, 'ROOT', A.MENU_CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || A.MENU_CNAME)  AS STRUCT
+			,A.MENU_ID || '#' || A.SEQ_NO AS SEL_DDL
+			,B.MENU_ID || '#' || B.SEQ_NO AS SEL_PARENT_DDL
+	  FROM   <include refid="CommonMapper.schema"/>XAUTH_MENU A
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.MENU_ID
+	 START   WITH A.APP_ID=#{appId,jdbcType=VARCHAR} AND A.PARENT_ID = '#'
+   CONNECT   BY PRIOR A.MENU_ID = A.PARENT_ID AND A.APP_ID=#{appId,jdbcType=VARCHAR}
+	 ORDER   SIBLINGS BY A.SEQ_NO
+  </select>
+  
+  <select id="selectMenuTree" parameterType="java.lang.String" resultType="HashMap">
+    SELECT   LEVEL AS LV
+			,A.APP_ID
+	        ,A.MENU_ID AS ID
+	        ,A.PARENT_ID AS PARENT
+	        ,A.MENU_URL AS URL
+	        ,A.MENU_CNAME AS TEXT
+	        ,A.SEQ_NO AS SEQ
+	        ,A.PARENT_SEQ
+	        ,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+	        ,DECODE(A.MENU_ID, 'ROOT', A.MENU_CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || A.MENU_CNAME)  AS STRUCT
+	  FROM   <include refid="CommonMapper.schema"/>XAUTH_MENU A
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.MENU_ID
+	 START   WITH A.APP_ID=#{appId,jdbcType=VARCHAR} AND A.PARENT_ID = '#'
+   CONNECT   BY PRIOR A.MENU_ID = A.PARENT_ID AND A.APP_ID=#{appId,jdbcType=VARCHAR}
+	 ORDER   SIBLINGS BY A.SEQ_NO
+  </select>
+  
+  <select id="selectMenuTreeDescByUrl" parameterType="HashMap" resultType="HashMap">
+    SELECT   LEVEL AS LV
+			,A.APP_ID
+	        ,A.MENU_ID AS ID
+	        ,A.PARENT_ID AS PARENT
+	        ,A.MENU_URL AS URL
+	        ,A.MENU_CNAME AS TEXT
+	        ,A.SEQ_NO AS SEQ
+	        ,A.PARENT_SEQ
+	        ,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+	        ,DECODE(A.MENU_ID, 'ROOT', A.MENU_CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—-') || A.MENU_CNAME)  AS STRUCT
+	  FROM   <include refid="CommonMapper.schema"/>XAUTH_MENU A
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.MENU_ID
+	 START   WITH A.APP_ID=#{appId,jdbcType=VARCHAR} AND A.MENU_URL = #{menuUrl,jdbcType=VARCHAR}
+   CONNECT   BY PRIOR A.PARENT_ID = A.MENU_ID AND A.APP_ID=#{appId,jdbcType=VARCHAR}
+	 ORDER   SIBLINGS BY A.SEQ_NO
+  </select>
+  
+  <select id="initMenuByUser" parameterType="HashMap" resultType="HashMap">
+  	SELECT   DISTINCT
+	         APP_ID
+	        ,MENU_ID
+	        ,MENU_URL
+	        ,MENU_CNAME
+	        ,SEQ_NO
+	  FROM  (
+	    SELECT   DISTINCT
+	             APP_ID
+	            ,MENU_ID
+	            ,MENU_URL
+	            ,MENU_CNAME
+	            ,SEQ_NO
+	      FROM (
+	            SELECT 	 D.APP_ID
+	                    ,B.MENU_ID
+	                    ,D.MENU_URL
+	                    ,D.MENU_CNAME
+	                    ,D.SEQ_NO
+	              FROM 	 <include refid="CommonMapper.schema"/>XAUTH_ROLE_USER A
+	              LEFT 	 JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_MENU B ON A.APP_ID=B.APP_ID AND A.IDEN_ID=B.IDEN_ID AND A.ROLE_ID=B.ROLE_ID
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_IDEN_MENU C ON B.APP_ID=C.APP_ID AND B.IDEN_ID=C.IDEN_ID AND B.MENU_ID=C.MENU_ID  
+				  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU D ON C.APP_ID=D.APP_ID AND C.MENU_ID=D.MENU_ID
+	             WHERE 	 A.APP_ID    = #{appId,jdbcType=VARCHAR}
+	               AND   A.IDEN_ID   = #{idenId,jdbcType=VARCHAR}
+	               AND   A.USER_ID   = #{userId,jdbcType=VARCHAR}	 
+	               AND   D.PARENT_ID = #{parentId,jdbcType=VARCHAR} 
+	             UNION   ALL
+	            SELECT 	 E.APP_ID
+	                    ,C.MENU_ID
+	                    ,E.MENU_URL
+	                    ,E.MENU_CNAME
+	                    ,E.SEQ_NO
+	              FROM 	 <include refid="CommonMapper.schema"/>XAUTH_ROLE_USER A
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_AGENT_USER B ON B.APP_ID=B.AGENT_APP_ID AND A.APP_ID=B.AGENT_APP_ID AND A.IDEN_ID=B.AGENT_IDEN_ID AND A.USER_ID=B.AGENT_USER_ID 
+				  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_MENU C ON B.APP_ID=C.APP_ID AND B.IDEN_ID=C.IDEN_ID AND B.ROLE_ID=C.ROLE_ID
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_IDEN_MENU D ON C.APP_ID=D.APP_ID AND C.IDEN_ID=D.IDEN_ID AND C.MENU_ID=D.MENU_ID  
+				  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU E ON D.APP_ID=E.APP_ID AND D.MENU_ID=E.MENU_ID 
+	             WHERE 	 A.APP_ID    = #{appId,jdbcType=VARCHAR}
+	               AND   A.IDEN_ID   = #{idenId,jdbcType=VARCHAR}
+	               AND   A.USER_ID   = #{userId,jdbcType=VARCHAR}	 
+	               AND   E.PARENT_ID = #{parentId,jdbcType=VARCHAR} 
+	               AND   B.ENABLED = '1'
+	      )
+	      WHERE APP_ID = #{appId,jdbcType=VARCHAR}
+	  )		
+	ORDER BY SEQ_NO	
+  </select>
+  
+  <select id="initUserRole" parameterType="HashMap" resultType="HashMap">
+  	SELECT   DISTINCT 
+	         APP_ID
+	        ,IDEN_ID
+	        ,ROLE_ID
+	        ,MENU_ID
+	        ,MENU_URL
+	        ,SEQ_NO
+	  FROM   (
+	            SELECT   A.APP_ID
+	                    ,A.IDEN_ID
+	                    ,A.ROLE_ID
+	                    ,C.MENU_ID
+	                    ,D.MENU_URL
+	                    ,D.SEQ_NO
+	              FROM 	 <include refid="CommonMapper.schema"/>XAUTH_ROLE_USER A
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_MENU B ON A.APP_ID=B.APP_ID AND A.IDEN_ID=B.IDEN_ID AND A.ROLE_ID=B.ROLE_ID
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_IDEN_MENU C ON B.APP_ID=C.APP_ID AND B.IDEN_ID=C.IDEN_ID AND B.MENU_ID=C.MENU_ID  
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU D ON C.APP_ID=D.APP_ID AND C.MENU_ID=D.MENU_ID
+	             WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+	               AND   A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+	               AND   A.USER_ID = #{userId,jdbcType=VARCHAR}
+	               AND   D.MENU_URL IS NOT NULL
+	             UNION   ALL
+	            SELECT   A.APP_ID
+	                    ,A.IDEN_ID
+	                    ,A.ROLE_ID
+	                    ,D.MENU_ID
+	                    ,E.MENU_URL
+	                    ,E.SEQ_NO
+	              FROM   <include refid="CommonMapper.schema"/>XAUTH_ROLE_USER A
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_AGENT_USER B ON B.APP_ID=B.AGENT_APP_ID AND A.APP_ID=B.AGENT_APP_ID AND A.IDEN_ID=B.AGENT_IDEN_ID AND A.USER_ID=B.AGENT_USER_ID 
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_MENU C ON B.APP_ID=C.APP_ID AND B.IDEN_ID=C.IDEN_ID AND B.ROLE_ID=C.ROLE_ID
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_IDEN_MENU D ON C.APP_ID=D.APP_ID AND C.IDEN_ID=D.IDEN_ID AND C.MENU_ID=D.MENU_ID  
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU E ON D.APP_ID=E.APP_ID AND D.MENU_ID=E.MENU_ID  
+	             WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+	               AND   A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+	               AND   A.USER_ID = #{userId,jdbcType=VARCHAR}
+	               AND   E.MENU_URL IS NOT NULL
+	               AND   B.ENABLED = '1'
+	             ORDER   BY SEQ_NO 
+	  )          
+  </select>
+  
+  <select id="selectRoleUser" parameterType="com.tradevan.mapper.xauth.model.XauthRoleUser" resultMap="com.tradevan.mapper.xauth.dao.XauthRoleUserMapper.BaseResultMap">
+    SELECT   APP_ID
+    		,IDEN_ID
+    		,ROLE_ID
+    		,USER_ID
+    		,CRE_USER
+    		,CRE_DATE
+    		,UPD_USER
+    		,UPD_DATE
+      FROM   <include refid="CommonMapper.schema"/>XAUTH_ROLE_USER
+     WHERE   APP_ID = #{appId,jdbcType=VARCHAR}
+      <if test="idenId != null">
+        AND IDEN_ID = #{idenId,jdbcType=VARCHAR}
+      </if>
+      <if test="roleId != null">
+        AND ROLE_ID = #{roleId,jdbcType=VARCHAR}
+      </if>
+      <if test="userId != null">
+        AND USER_ID = #{userId,jdbcType=VARCHAR}
+      </if>
+  </select>
+  
+  <select id="selectMenuMain" parameterType="HashMap" resultType="HashMap">
+    SELECT   LV
+			,APP_ID
+			,MENU_ID
+			,MENU_URL
+			,MENU_CNAME
+			,PARENT_ID
+			,SEQ_NO
+			,PARENT_SEQ
+			,MEMO
+			,CRE_USER
+			,CRE_DATE
+			,CRE_DATE_DESC
+			,UPD_USER
+			,UPD_DATE
+			,UPD_DATE_DESC
+			,SEL_DDL
+			,SEL_PARENT_DDL
+	  FROM	(	
+			SELECT   LEVEL AS LV
+					,A.APP_ID
+					,A.MENU_ID
+					,A.MENU_URL
+					,A.MENU_CNAME
+					,A.PARENT_ID
+					,A.SEQ_NO
+					,A.PARENT_SEQ
+					,A.MEMO
+					,A.CRE_USER
+					,A.CRE_DATE
+					,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+					,A.UPD_USER
+					,A.UPD_DATE
+					,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+					,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+					,A.MENU_ID || '#' || A.SEQ_NO AS SEL_DDL
+	        		,B.MENU_ID || '#' || B.SEQ_NO AS SEL_PARENT_DDL
+			  FROM   <include refid="CommonMapper.schema"/>XAUTH_MENU A
+			  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.MENU_ID
+			 START   WITH A.APP_ID=#{appId,jdbcType=VARCHAR} AND A.PARENT_ID = '#'
+		   CONNECT   BY PRIOR A.MENU_ID = A.PARENT_ID AND A.APP_ID=#{appId,jdbcType=VARCHAR}
+			 ORDER   SIBLINGS BY A.SEQ_NO
+	)
+	WHERE APP_ID = #{appId,jdbcType=VARCHAR}
+	  <if test="menuId != null">
+        AND MENU_ID = #{menuId,jdbcType=VARCHAR}
+      </if> 
+      <if test="menuCname != null">
+        AND MENU_CNAME LIKE '%' || #{menuCname,jdbcType=VARCHAR} || '%'
+      </if> 
+      <if test="parentId != null">
+        AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+      </if> 
+    <include refid="CommonMapper.orderBy"/>	
+  </select>
+  
+  <select id="searchMenuMain" parameterType="HashMap" resultType="HashMap">
+    SELECT   LV
+			,APP_ID
+			,MENU_ID
+			,MENU_URL
+			,MENU_CNAME
+			,PARENT_ID
+			,SEQ_NO
+			,PARENT_SEQ
+			,MEMO
+			,CRE_USER
+			,CRE_DATE
+			,CRE_DATE_DESC
+			,UPD_USER
+			,UPD_DATE
+			,UPD_DATE_DESC
+			,SEL_DDL
+			,SEL_PARENT_DDL
+	  FROM	(	
+			SELECT   LEVEL AS LV
+					,A.APP_ID
+					,A.MENU_ID
+					,A.MENU_URL
+					,A.MENU_CNAME
+					,A.PARENT_ID
+					,A.SEQ_NO
+					,A.PARENT_SEQ
+					,A.MEMO
+					,A.CRE_USER
+					,A.CRE_DATE
+					,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+					,A.UPD_USER
+					,A.UPD_DATE
+					,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+					,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+					,A.MENU_ID || '#' || A.SEQ_NO AS SEL_DDL
+	        		,B.MENU_ID || '#' || B.SEQ_NO AS SEL_PARENT_DDL
+			  FROM   <include refid="CommonMapper.schema"/>XAUTH_MENU A
+			  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.MENU_ID
+			 START   WITH A.APP_ID=#{appId,jdbcType=VARCHAR} AND A.PARENT_ID = '#'
+		   CONNECT   BY PRIOR A.MENU_ID = A.PARENT_ID AND A.APP_ID=#{appId,jdbcType=VARCHAR}
+			 ORDER   SIBLINGS BY A.SEQ_NO
+	)
+	WHERE APP_ID = #{appId,jdbcType=VARCHAR}
+	  <if test="menuId != null">
+        AND MENU_ID LIKE '%' || #{menuId,jdbcType=VARCHAR} || '%'
+      </if> 
+      <if test="menuUrl != null">
+        AND MENU_URL LIKE '%' || #{menuUrl,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="menuCname != null">
+        AND MENU_CNAME LIKE '%' || #{menuCname,jdbcType=VARCHAR} || '%'
+      </if> 
+      <if test="parentId != null">
+        AND PARENT_ID LIKE '%' || #{parentId,jdbcType=VARCHAR} || '%'
+      </if> 
+      <if test="seqNo != null">
+        AND SEQ_NO LIKE '%' || #{seqNo,jdbcType=VARCHAR} || '%'
+      </if> 
+      <if test="parentSeq != null">
+        AND PARENT_SEQ LIKE '%' || #{parentSeq,jdbcType=VARCHAR} || '%'
+      </if> 
+      <if test="memo != null">
+        AND MEMO LIKE '%' || #{memo,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="creUser != null">
+        AND CRE_USER LIKE '%' || #{creUser,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="creDateDesc != null">
+        AND CRE_DATE_DESC LIKE '%' || #{creDateDesc,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="updUser != null">
+        AND UPD_USER LIKE '%' || #{updUser,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="updDateDesc != null">
+        AND UPD_DATE_DESC LIKE '%' || #{updDateDesc,jdbcType=VARCHAR} || '%'
+      </if>
+    <include refid="CommonMapper.orderBy"/>	
+  </select>
+  
+  <insert id="insertMenu" parameterType="HashMap">
+  	INSERT INTO <include refid="CommonMapper.schema"/>XAUTH_MENU (APP_ID, MENU_ID, MENU_URL, MENU_CNAME, PARENT_ID, SEQ_NO, PARENT_SEQ, MEMO, CRE_USER, CRE_DATE)
+  	SELECT   #{appId}
+  			,#{menuId}
+  			,#{menuUrl}
+  			,#{menuCname}
+  			,#{parentId}
+  			,CASE WHEN EXISTS (
+  				SELECT   SEQ_NO
+	              FROM   (
+	                    SELECT   SEQ_NO
+	                      FROM   <include refid="CommonMapper.schema"/>XAUTH_MENU
+	                     WHERE   APP_ID = #{appId}
+	                       AND   PARENT_SEQ = #{seqNo}
+	                     ORDER   BY SEQ_NO DESC
+	            )
+	            WHERE ROWNUM=1
+  			 )
+  			 THEN (
+  			 	SELECT   SEQ
+	              FROM   (
+	                    SELECT   SEQ_NO+1 AS SEQ
+	                      FROM   <include refid="CommonMapper.schema"/>XAUTH_MENU
+	                     WHERE   APP_ID = #{appId}
+	                       AND   PARENT_SEQ = #{seqNo}
+	                     ORDER   BY SEQ_NO DESC
+	            )
+	            WHERE ROWNUM=1
+  			 )
+  			 ELSE (
+  			 	1
+  			 ) END AS SEQ_NO
+  			,#{seqNo}
+  			,#{memo}
+  			,#{creUser}
+  			,#{creDate}
+	  FROM   DUAL
+  </insert>
+  
+  <update id="updateMenu" parameterType="HashMap">
+    UPDATE <include refid="CommonMapper.schema"/>XAUTH_MENU
+    <set>
+      <if test="menuUrl != null">
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCname != null">
+        MENU_CNAME = #{menuCname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="seqNo != null">
+        SEQ_NO = #{seqNo,jdbcType=DECIMAL},
+      </if>
+      <if test="parentSeq != null">
+        PARENT_SEQ = #{parentSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="creUser != null">
+        CRE_USER = #{creUser,jdbcType=VARCHAR},
+      </if>
+      <if test="creDate != null">
+        CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updUser != null">
+        UPD_USER = #{updUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updDate != null">
+        UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    WHERE APP_ID = #{appId,jdbcType=VARCHAR}
+      AND MENU_ID = #{menuId,jdbcType=VARCHAR}
+  </update> 
+  
+  <select id="selectUser" parameterType="HashMap" resultType="HashMap">
+    SELECT   A.APP_ID
+    		,A.IDEN_ID
+			,A.USER_ID
+			,A.USER_PW
+			,A.USER_CNAME
+			,A.USER_TYPE
+			,A.ENABLED
+			,A.ENABLED_NAME
+			,A.EMAIL
+			,A.EMAIL_TOKEN
+			,A.EMAIL_EXPIRE
+			,A.IS_FIRST
+			,A.IS_FIRST_NAME
+			,A.CRE_USER
+			,A.CRE_DATE
+			,A.CRE_DATE_DESC
+			,A.UPD_USER
+			,A.UPD_DATE
+			,A.UPD_DATE_DESC
+			,A.CNAME
+	  FROM (
+				SELECT   A.APP_ID
+						,A.IDEN_ID
+						,A.USER_ID
+						,A.USER_PW
+						,A.USER_CNAME
+						,A.USER_TYPE
+						,A.ENABLED
+						,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+						,A.EMAIL
+						,A.EMAIL_TOKEN
+						,A.EMAIL_EXPIRE
+						,A.IS_FIRST
+						,DECODE(A.IS_FIRST, '1', '是', '否') AS IS_FIRST_NAME
+						,A.CRE_USER
+						,A.CRE_DATE
+						,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+						,A.UPD_USER
+						,A.UPD_DATE
+						,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+						,B.CNAME
+				  FROM   <include refid="CommonMapper.schema"/>XAUTH_USERS A	
+				  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID=B.APP_ID AND A.IDEN_ID=B.IDEN_ID 
+				 WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+				  <if test="idenId != null">
+			        AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+			      </if>	
+			      <if test="userId != null">
+			        AND A.USER_ID = #{userId,jdbcType=VARCHAR}
+			      </if>		 
+	  ) A
+	 WHERE 1=1      
+      <if test="userPw != null">
+        AND A.USER_PW = #{userPw,jdbcType=VARCHAR}
+      </if>
+      <if test="userCname != null">
+        AND A.USER_CNAME LIKE '%' || #{userCname,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="enabled != null">
+        AND A.ENABLED = #{enabled,jdbcType=VARCHAR}
+      </if>
+      <if test="isFirst != null">
+        AND A.IS_FIRST = #{isFirst,jdbcType=VARCHAR}
+      </if> 
+      <if test="emailToken != null">
+        AND A.EMAIL_TOKEN = #{emailToken,jdbcType=VARCHAR}
+      </if>
+      <if test="idenId == null and ids != null">
+      	AND A.IDEN_ID IN
+      	<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+      		#{item}
+      	</foreach>
+      </if> 
+    <include refid="CommonMapper.orderBy"/> 
+  </select>
+  
+  <select id="searchUser" parameterType="HashMap" resultType="HashMap">
+    SELECT   A.APP_ID
+    		,A.IDEN_ID
+			,A.USER_ID
+			,A.USER_PW
+			,A.USER_CNAME
+			,A.USER_TYPE
+			,A.ENABLED
+			,A.ENABLED_NAME
+			,A.EMAIL
+			,A.EMAIL_TOKEN
+			,A.EMAIL_EXPIRE
+			,A.IS_FIRST
+			,A.IS_FIRST_NAME
+			,A.CRE_USER
+			,A.CRE_DATE
+			,A.CRE_DATE_DESC
+			,A.UPD_USER
+			,A.UPD_DATE
+			,A.UPD_DATE_DESC
+			,A.CNAME
+			,B.BGN_DATE
+			,TO_CHAR(B.BGN_DATE, 'YYYY/MM/DD') AS BGN_DATE_DESC
+			,B.END_DATE
+			,TO_CHAR(B.END_DATE, 'YYYY/MM/DD') AS END_DATE_DESC
+	  FROM (
+				SELECT   A.APP_ID
+						,A.IDEN_ID
+						,A.USER_ID
+						,A.USER_PW
+						,A.USER_CNAME
+						,A.USER_TYPE
+						,A.ENABLED
+						,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+						,A.EMAIL
+						,A.EMAIL_TOKEN
+						,A.EMAIL_EXPIRE
+						,A.IS_FIRST
+						,DECODE(A.IS_FIRST, '1', '是', '否') AS IS_FIRST_NAME
+						,A.CRE_USER
+						,A.CRE_DATE
+						,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+						,A.UPD_USER
+						,A.UPD_DATE
+						,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+						,B.CNAME
+				  FROM   <include refid="CommonMapper.schema"/>XAUTH_USERS A	
+				  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID=B.APP_ID AND A.IDEN_ID=B.IDEN_ID 		
+				 WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}	 
+				  <if test="idenId != null">
+			        AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+			      </if>
+			      <if test="userId != null">
+			        AND A.USER_ID LIKE '%' || #{userId,jdbcType=VARCHAR} || '%'
+			      </if>
+	  ) A
+	  LEFT  JOIN USER_INFO_EXT B ON A.APP_ID = B.APP_ID AND A.IDEN_ID = B.IDEN_ID AND A.USER_ID = B.USER_ID
+	 WHERE  1=1      
+      <if test="userPw != null">
+        AND A.USER_PW = #{userPw,jdbcType=VARCHAR}
+      </if>
+      <if test="userCname != null">
+        AND A.USER_CNAME LIKE '%' || #{userCname,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="enabled != null">
+        AND A.ENABLED = #{enabled,jdbcType=VARCHAR}
+      </if>
+      <if test="enabledName != null">
+        AND A.ENABLED_NAME LIKE '%' || #{enabledName,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="isFirst != null">
+        AND A.IS_FIRST = #{isFirst,jdbcType=VARCHAR}
+      </if> 
+      <if test="emailToken != null">
+        AND A.EMAIL_TOKEN = #{emailToken,jdbcType=VARCHAR}
+      </if>      
+      <if test="creUser != null">
+        AND A.CRE_USER LIKE '%' || #{creUser,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="creDateDesc != null">
+        AND A.CRE_DATE_DESC LIKE '%' || #{creDateDesc,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="updUser != null">
+        AND A.UPD_USER LIKE '%' || #{updUser,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="updDateDesc != null">
+        AND A.UPD_DATE_DESC LIKE '%' || #{updDateDesc,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="idenId == null and ids != null">
+      	AND A.IDEN_ID IN
+      	<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+      		#{item}
+      	</foreach>
+      </if> 
+    <include refid="CommonMapper.orderBy"/> 
+  </select>
+  
+  <select id="selectUserRole" parameterType="com.tradevan.mapper.xauth.model.XauthUsers" resultType="HashMap">
+    SELECT   A.APP_ID
+    		,A.IDEN_ID
+	        ,A.USER_ID
+	        ,A.USER_PW
+	        ,A.USER_CNAME
+	        ,A.USER_TYPE
+	        ,A.ENABLED
+	        ,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+	        ,SUBSTR(C.ROLE_ID, INSTR(C.ROLE_ID, '_' ) + 1) AS ROLE_ID
+	    	,C.ROLE_CNAME
+	    	,'0' AS SELECTED
+	        ,A.CRE_USER
+	        ,A.CRE_DATE
+	        ,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+	        ,A.UPD_USER
+	        ,A.UPD_DATE
+	        ,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+	  FROM   <include refid="CommonMapper.schema"/>XAUTH_USERS A
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_USER B ON A.APP_ID=B.APP_ID AND A.IDEN_ID=B.IDEN_ID AND A.USER_ID=B.USER_ID
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE C ON B.APP_ID=C.APP_ID AND B.IDEN_ID=C.IDEN_ID AND B.ROLE_ID=C.ROLE_ID
+      WHERE  A.APP_ID = #{appId,jdbcType=VARCHAR}
+      <if test="idenId != null">
+        AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+      </if>
+      <if test="userId != null">
+        AND A.USER_ID = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="userPw != null">
+        AND A.USER_PW = #{userPw,jdbcType=VARCHAR}
+      </if>
+      <if test="userCname != null">
+        AND A.USER_CNAME LIKE '%' || #{userCname,jdbcType=VARCHAR} || '%'
+      </if>       
+  </select>
+  
+  <select id="selectUserRoleAdmin" parameterType="com.tradevan.mapper.xauth.model.XauthUsers" resultType="HashMap">
+    SELECT   A.APP_ID
+	        ,A.IDEN_ID
+	        ,SUBSTR(A.ROLE_ID, INSTR(A.ROLE_ID, '_' ) + 1) AS ROLE_ID
+	        ,A.ROLE_CNAME
+	        ,DECODE(B.USER_ID, NULL, '0', '1') AS SELECTED
+	  FROM   <include refid="CommonMapper.schema"/>XAUTH_ROLE A
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_USER B ON A.APP_ID=B.APP_ID AND A.IDEN_ID=B.IDEN_ID AND A.ROLE_ID=B.ROLE_ID AND B.USER_ID=#{userId,jdbcType=VARCHAR}	  
+      WHERE  A.APP_ID = #{appId,jdbcType=VARCHAR}
+        AND  A.IDEN_ID = #{idenId,jdbcType=VARCHAR}    
+  </select>    
+   
+  <select id="selectDeptTree" parameterType="HashMap" resultType="HashMap">
+    SELECT   LV
+	        ,APP_ID
+	        ,IDEN_ID
+	        ,BAN
+	        ,CNAME
+	        ,PARENT_ID
+	        ,SEQ_NO
+	        ,PARENT_SEQ
+	        ,OD
+	        ,STRUCT
+	        ,SEL_DDL
+	        ,SEL_PARENT_DDL
+	        ,ENABLED
+	        ,ENABLED_NAME
+	        ,CRE_USER
+	        ,CRE_DATE
+	        ,CRE_DATE_DESC
+	        ,UPD_USER
+	        ,UPD_DATE
+	        ,UPD_DATE_DESC
+	  FROM (
+				SELECT   LV
+						,APP_ID
+						,IDEN_ID
+						,BAN
+						,CNAME
+						,PARENT_ID
+						,SEQ_NO
+						,PARENT_SEQ
+						,OD
+						,STRUCT
+						,SEL_DDL
+						,SEL_PARENT_DDL
+						,ENABLED
+						,ENABLED_NAME
+						,CRE_USER
+						,CRE_DATE
+						,CRE_DATE_DESC
+						,UPD_USER
+						,UPD_DATE
+						,UPD_DATE_DESC
+				  FROM (		
+						SELECT   LEVEL AS LV
+								,A.APP_ID
+								,A.IDEN_ID
+								,A.BAN
+								,A.CNAME
+								,A.PARENT_ID
+								,A.SEQ_NO
+								,A.PARENT_SEQ
+								,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+								,DECODE(A.SEQ_NO, '0', A.CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || A.CNAME) || ' — ' || A.IDEN_ID AS STRUCT
+								,A.IDEN_ID || '#' || A.SEQ_NO AS SEL_DDL
+								,B.IDEN_ID || '#' || B.SEQ_NO AS SEL_PARENT_DDL
+								,A.ENABLED
+								,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+								,A.CRE_USER
+								,A.CRE_DATE
+								,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+								,A.UPD_USER
+								,A.UPD_DATE
+								,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+						  FROM   <include refid="CommonMapper.schema"/>XAUTH_DEPT A
+						  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.IDEN_ID
+						  <if test="idenId != null">
+						  	 START  WITH A.APP_ID=#{appId,jdbcType=VARCHAR} AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+						  </if>
+						  <if test="idenId == null">
+						  	 START  WITH A.APP_ID=#{appId,jdbcType=VARCHAR} AND A.PARENT_ID || A.IDEN_ID LIKE '#%'
+						  </if>			  
+					   CONNECT   BY PRIOR A.IDEN_ID = A.PARENT_ID AND A.APP_ID = #{appId,jdbcType=VARCHAR}
+						 ORDER   SIBLINGS BY A.SEQ_NO
+				  )  	
+				 WHERE  APP_ID = #{appId,jdbcType=VARCHAR}
+				 <if test="idenId != null">
+				 	UNION  ALL
+					SELECT   LV
+							,APP_ID
+							,IDEN_ID
+							,BAN
+							,CNAME
+							,PARENT_ID
+							,SEQ_NO
+							,PARENT_SEQ
+							,OD
+							,STRUCT
+							,SEL_DDL
+							,SEL_PARENT_DDL
+							,ENABLED
+							,ENABLED_NAME
+							,CRE_USER
+							,CRE_DATE
+							,CRE_DATE_DESC
+							,UPD_USER
+							,UPD_DATE
+							,UPD_DATE_DESC
+					  FROM (		
+							SELECT   LEVEL AS LV
+									,A.APP_ID
+									,A.IDEN_ID
+									,A.BAN
+									,A.CNAME
+									,A.PARENT_ID
+									,A.SEQ_NO
+									,A.PARENT_SEQ
+									,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+									,DECODE(A.SEQ_NO, '0', A.CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || A.CNAME) || ' — ' || A.IDEN_ID AS STRUCT
+									,A.IDEN_ID || '#' || A.SEQ_NO AS SEL_DDL
+									,B.IDEN_ID || '#' || B.SEQ_NO AS SEL_PARENT_DDL
+									,A.ENABLED
+									,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+									,A.CRE_USER
+									,A.CRE_DATE
+									,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+									,A.UPD_USER
+									,A.UPD_DATE
+									,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+							  FROM   <include refid="CommonMapper.schema"/>XAUTH_DEPT A
+							  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.IDEN_ID
+							  START  WITH A.APP_ID = #{appId,jdbcType=VARCHAR} AND A.IDEN_ID IN (
+									SELECT   A.IDEN_ID
+							          FROM   <include refid="CommonMapper.schema"/>XAUTH_ROLE_AGENT_USER A
+							          LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID = B.APP_ID AND A.IDEN_ID = B.IDEN_ID         
+							         WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+							           AND   A.AGENT_APP_ID = #{appId,jdbcType=VARCHAR}
+							           AND   A.AGENT_IDEN_ID = #{idenId,jdbcType=VARCHAR}
+							           AND   A.AGENT_USER_ID = #{userId,jdbcType=VARCHAR}
+							           AND   A.ENABLED = '1'
+							           AND   B.PARENT_ID NOT IN (
+							                SELECT   A.IDEN_ID
+							                  FROM   <include refid="CommonMapper.schema"/>XAUTH_ROLE_AGENT_USER A      
+							                 WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+							                   AND   A.AGENT_APP_ID = #{appId,jdbcType=VARCHAR}
+							                   AND   A.AGENT_IDEN_ID = #{idenId,jdbcType=VARCHAR}
+							                   AND   A.AGENT_USER_ID = #{userId,jdbcType=VARCHAR}
+							           )									   
+							  )	  
+						   CONNECT   BY PRIOR A.IDEN_ID = A.PARENT_ID AND A.APP_ID = #{appId,jdbcType=VARCHAR}
+							 ORDER   SIBLINGS BY A.SEQ_NO
+					  )  	
+					 WHERE  APP_ID = #{appId,jdbcType=VARCHAR}
+				 </if>				 
+	  )
+	 WHERE  1=1
+	 <if test="ban != null">
+        AND BAN = #{ban,jdbcType=VARCHAR}
+      </if>
+      <if test="cname != null">
+        AND CNAME LIKE '%' || #{cname,jdbcType=VARCHAR} || '%'
+      </if>
+  </select>
+  
+  <select id="selectDeptTreeDesc" parameterType="com.tradevan.mapper.xauth.model.XauthDept" resultType="HashMap">
+    SELECT   LV
+			,APP_ID
+			,IDEN_ID
+			,BAN
+			,CNAME
+			,PARENT_ID
+			,SEQ_NO
+			,PARENT_SEQ
+			,OD
+			,STRUCT
+			,SEL_DDL
+			,SEL_PARENT_DDL
+			,ENABLED
+			,ENABLED_NAME
+			,CRE_USER
+			,CRE_DATE
+			,CRE_DATE_DESC
+			,UPD_USER
+			,UPD_DATE
+			,UPD_DATE_DESC
+	  FROM (		
+			SELECT   LEVEL AS LV
+					,A.APP_ID
+					,A.IDEN_ID
+					,A.BAN
+					,A.CNAME
+					,A.PARENT_ID
+					,A.SEQ_NO
+					,A.PARENT_SEQ
+					,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+					,DECODE(A.SEQ_NO, '0', A.CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || A.CNAME)  AS STRUCT
+					,A.IDEN_ID || '#' || A.SEQ_NO AS SEL_DDL
+					,B.IDEN_ID || '#' || B.SEQ_NO AS SEL_PARENT_DDL
+					,A.ENABLED
+					,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+					,A.CRE_USER
+					,A.CRE_DATE
+					,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+					,A.UPD_USER
+					,A.UPD_DATE
+					,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+			  FROM   <include refid="CommonMapper.schema"/>XAUTH_DEPT A
+			  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.IDEN_ID
+			 START   WITH A.APP_ID=#{appId,jdbcType=VARCHAR} A.IDEN_ID = #{idenId,jdbcType=VARCHAR}	  
+		   CONNECT   BY PRIOR A.PARENT_ID = A.IDEN_ID AND A.APP_ID = #{appId,jdbcType=VARCHAR}			
+			 ORDER   SIBLINGS BY A.SEQ_NO  
+	)  	
+    WHERE  APP_ID = #{appId,jdbcType=VARCHAR}
+      <if test="ban != null">
+        AND BAN = #{ban,jdbcType=VARCHAR}
+      </if>
+      <if test="cname != null">
+        AND CNAME LIKE '%' || #{cname,jdbcType=VARCHAR} || '%'
+      </if>     
+  </select>
+  
+  <select id="selectDeptTreeRoot" parameterType="com.tradevan.mapper.xauth.model.XauthDept" resultType="HashMap">
+    SELECT   LV
+			,APP_ID
+			,IDEN_ID
+			,BAN
+			,CNAME
+			,PARENT_ID
+			,SEQ_NO
+			,PARENT_SEQ
+			,OD
+			,STRUCT
+			,SEL_DDL
+			,SEL_PARENT_DDL
+			,ENABLED
+			,ENABLED_NAME
+			,CRE_USER
+			,CRE_DATE
+			,CRE_DATE_DESC
+			,UPD_USER
+			,UPD_DATE
+			,UPD_DATE_DESC
+	  FROM (		
+			SELECT   LEVEL AS LV
+					,A.APP_ID
+					,A.IDEN_ID
+					,A.BAN
+					,A.CNAME
+					,A.PARENT_ID
+					,A.SEQ_NO
+					,A.PARENT_SEQ
+					,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+					,DECODE(A.SEQ_NO, '0', A.CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || A.CNAME) || ' — ' || A.IDEN_ID  AS STRUCT
+					,A.IDEN_ID || '#' || A.SEQ_NO AS SEL_DDL
+					,B.IDEN_ID || '#' || B.SEQ_NO AS SEL_PARENT_DDL
+					,A.ENABLED
+					,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+					,A.CRE_USER
+					,A.CRE_DATE
+					,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+					,A.UPD_USER
+					,A.UPD_DATE
+					,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+			  FROM   <include refid="CommonMapper.schema"/>XAUTH_DEPT A
+			  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.IDEN_ID
+			  <if test="idenId != null">
+			  	START  WITH A.APP_ID = #{appId,jdbcType=VARCHAR} AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+			  </if>
+			  <if test="idenId == null">
+			  	START  WITH A.APP_ID = #{appId,jdbcType=VARCHAR} AND A.PARENT_ID || A.IDEN_ID LIKE '#%'
+			  </if>			  
+		   CONNECT   BY PRIOR A.IDEN_ID = A.PARENT_ID AND A.APP_ID = #{appId,jdbcType=VARCHAR}			
+			 ORDER   SIBLINGS BY A.SEQ_NO  
+	)  	
+    WHERE  APP_ID = #{appId,jdbcType=VARCHAR}
+      AND  PARENT_ID = '#'
+      <if test="ban != null">
+        AND BAN = #{ban,jdbcType=VARCHAR}
+      </if>
+      <if test="cname != null">
+        AND CNAME LIKE '%' || #{cname,jdbcType=VARCHAR} || '%'
+      </if>            
+  </select>
+  
+  <select id="selectDept" parameterType="HashMap" resultType="HashMap">
+    SELECT   LV
+			,APP_ID
+			,IDEN_ID
+			,BAN
+			,CNAME
+			,PARENT_ID
+			,SEQ_NO
+			,PARENT_SEQ
+			,OD
+			,STRUCT
+			,SEL_DDL
+			,SEL_PARENT_DDL
+			,ENABLED
+			,ENABLED_NAME
+			,CRE_USER
+			,CRE_DATE
+			,CRE_DATE_DESC
+			,UPD_USER
+			,UPD_DATE
+			,UPD_DATE_DESC
+	  FROM (		
+			SELECT   LEVEL AS LV
+					,A.APP_ID
+					,A.IDEN_ID
+					,A.BAN
+					,A.CNAME
+					,A.PARENT_ID
+					,A.SEQ_NO
+					,A.PARENT_SEQ
+					,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+					,DECODE(A.SEQ_NO, '0', A.CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || A.CNAME) || ' — ' || A.IDEN_ID AS STRUCT
+					,A.IDEN_ID || '#' || A.SEQ_NO AS SEL_DDL
+					,B.IDEN_ID || '#' || B.SEQ_NO AS SEL_PARENT_DDL
+					,A.ENABLED
+					,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+					,A.CRE_USER
+					,A.CRE_DATE
+					,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+					,A.UPD_USER
+					,A.UPD_DATE
+					,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+			  FROM   <include refid="CommonMapper.schema"/>XAUTH_DEPT A
+			  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.IDEN_ID
+			 START   WITH A.APP_ID = #{appId,jdbcType=VARCHAR} AND A.PARENT_ID LIKE '#%'			    
+		   CONNECT   BY PRIOR A.IDEN_ID = A.PARENT_ID AND A.APP_ID = #{appId,jdbcType=VARCHAR}
+			 ORDER   SIBLINGS BY A.SEQ_NO		  
+	)  	
+    WHERE  APP_ID = #{appId,jdbcType=VARCHAR}   
+      <if test="idenId != null">
+        AND IDEN_ID = #{idenId,jdbcType=VARCHAR}
+      </if>
+      <if test="ban != null">
+        AND BAN = #{ban,jdbcType=VARCHAR}
+      </if>
+      <if test="cname != null">
+        AND CNAME LIKE '%' || #{cname,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="parentId != null">
+        AND PARENT_ID = #{parentId,jdbcType=VARCHAR}
+      </if>  
+      <if test="idenId == null and ids != null">
+      	AND IDEN_ID IN
+      	<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+      		#{item}
+      	</foreach>
+      </if>    
+    <include refid="CommonMapper.orderBy"/> 
+  </select>
+  
+  <select id="searchDept" parameterType="HashMap" resultType="HashMap">
+    SELECT   A.LV
+			,A.APP_ID
+			,A.IDEN_ID
+			,A.BAN
+			,A.CNAME
+			,A.PARENT_ID
+			,A.SEQ_NO
+			,A.PARENT_SEQ
+			,A.OD
+			,A.STRUCT
+			,A.SEL_DDL
+			,A.SEL_PARENT_DDL
+			,A.ENABLED
+			,A.ENABLED_NAME
+			,A.CRE_USER
+			,A.CRE_DATE
+			,A.CRE_DATE_DESC
+			,A.UPD_USER
+			,A.UPD_DATE
+			,A.UPD_DATE_DESC
+			,B.IDEN_TYPE
+			,DECODE(B.IDEN_TYPE, '00', '系統', '01', '通路', '02', '供應商') AS IDEN_TYPE_NAME
+	  FROM (		
+			SELECT   LEVEL AS LV
+					,A.APP_ID
+					,A.IDEN_ID
+					,A.BAN
+					,A.CNAME
+					,A.PARENT_ID
+					,A.SEQ_NO
+					,A.PARENT_SEQ
+					,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+					,DECODE(A.SEQ_NO, '0', A.CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || A.CNAME) || ' — ' || A.IDEN_ID AS STRUCT
+					,A.IDEN_ID || '#' || A.SEQ_NO AS SEL_DDL
+					,B.IDEN_ID || '#' || B.SEQ_NO AS SEL_PARENT_DDL
+					,A.ENABLED
+					,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+					,A.CRE_USER
+					,A.CRE_DATE
+					,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+					,A.UPD_USER
+					,A.UPD_DATE
+					,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+			  FROM   <include refid="CommonMapper.schema"/>XAUTH_DEPT A
+			  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID=B.APP_ID AND A.PARENT_ID=B.IDEN_ID			  
+			 START   WITH A.APP_ID = #{appId,jdbcType=VARCHAR} AND A.PARENT_ID LIKE '#%'			    
+		   CONNECT   BY PRIOR A.IDEN_ID = A.PARENT_ID AND A.APP_ID = #{appId,jdbcType=VARCHAR}
+			 ORDER   SIBLINGS BY A.SEQ_NO		  
+	  ) A  	
+	  LEFT  JOIN <include refid="CommonMapper.schema"/>DEPT_INFO_EXT B ON A.APP_ID=B.APP_ID AND A.IDEN_ID=B.IDEN_ID
+     WHERE  A.APP_ID = #{appId,jdbcType=VARCHAR}       
+      <if test="idenId != null">
+        AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+      </if>
+      <if test="ban != null">
+        AND A.BAN LIKE '%' || #{ban,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="cname != null">
+        AND A.CNAME LIKE '%' || #{cname,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="enabledName != null">
+        AND A.ENABLED_NAME LIKE '%' || #{enabledName,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="creUser != null">
+        AND A.CRE_USER LIKE '%' || #{creUser,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="creDateDesc != null">
+        AND A.CRE_DATE_DESC LIKE '%' || #{creDateDesc,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="updUser != null">
+        AND A.UPD_USER LIKE '%' || #{updUser,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="updDateDesc != null">
+        AND A.UPD_DATE_DESC LIKE '%' || #{updDateDesc,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="parentId != null">
+        AND A.PARENT_ID = #{parentId,jdbcType=VARCHAR}
+      </if>  
+      <if test="idenId == null and ids != null">
+      	AND A.IDEN_ID IN
+      	<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+      		#{item}
+      	</foreach>
+      </if>    
+      <if test="idenType != null">
+        AND B.IDEN_TYPE = #{idenType,jdbcType=VARCHAR}
+      </if>
+    <include refid="CommonMapper.orderBy"/> 
+  </select>
+  
+  <insert id="insertDept" parameterType="com.tradevan.mapper.xauth.model.XauthDept">
+  	INSERT INTO <include refid="CommonMapper.schema"/>XAUTH_DEPT (APP_ID, IDEN_ID, BAN, CNAME, PARENT_ID, SEQ_NO, PARENT_SEQ, ENABLED, CRE_USER, CRE_DATE)
+  	SELECT   #{appId}
+  			,#{idenId}
+  			,#{ban}
+  			,#{cname}
+  			,#{parentId}
+  			,CASE WHEN EXISTS (
+  				SELECT   SEQ_NO
+	              FROM   (
+	                    SELECT   SEQ_NO
+	                      FROM   <include refid="CommonMapper.schema"/>XAUTH_DEPT
+	                     WHERE   APP_ID = #{appId}
+	                       AND   PARENT_SEQ = #{seqNo}
+	                       AND   PARENT_ID = #{parentId}
+	                     ORDER   BY SEQ_NO DESC
+	            )
+	            WHERE ROWNUM=1
+  			 )
+  			 THEN (
+  			 	SELECT   SEQ
+	              FROM   (
+	                    SELECT   SEQ_NO+1 AS SEQ
+	                      FROM   <include refid="CommonMapper.schema"/>XAUTH_DEPT
+	                     WHERE   APP_ID = #{appId}
+	                       AND   PARENT_SEQ = #{seqNo}
+	                       AND   PARENT_ID = #{parentId}
+	                     ORDER   BY SEQ_NO DESC
+	            )
+	            WHERE ROWNUM=1
+  			 )
+  			 ELSE (
+  			 	1
+  			 ) END AS SEQ_NO
+  			,#{seqNo}
+  			,#{enabled}
+  			,#{creUser}
+  			,#{creDate}
+	  FROM   DUAL
+  </insert>
+  
+  <update id="updateDept" parameterType="HashMap">
+    UPDATE <include refid="CommonMapper.schema"/>XAUTH_DEPT
+    <set>
+      <if test="ban != null">
+        BAN = #{ban,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null">
+        CNAME = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="seqNo != null">
+        SEQ_NO = #{seqNo,jdbcType=DECIMAL},
+      </if>
+      <if test="parentSeq != null">
+        PARENT_SEQ = #{parentSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="enabled != null">
+        ENABLED = #{enabled,jdbcType=VARCHAR},
+      </if>
+      <if test="creUser != null">
+        CRE_USER = #{creUser,jdbcType=VARCHAR},
+      </if>
+      <if test="creDate != null">
+        CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updUser != null">
+        UPD_USER = #{updUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updDate != null">
+        UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    WHERE APP_ID = #{appId,jdbcType=VARCHAR}
+      AND IDEN_ID = #{idenId,jdbcType=VARCHAR}
+  </update>  
+  
+  <select id="selectRole" parameterType="HashMap" resultType="HashMap">
+    SELECT   A.APP_ID
+    		,A.IDEN_ID
+			,A.ROLE_ID
+			,A.ROLE_CNAME
+			,A.CRE_USER
+			,A.CRE_DATE
+			,A.CRE_DATE_DESC
+			,A.UPD_USER
+			,A.UPD_DATE
+			,A.UPD_DATE_DESC
+	  FROM (
+				SELECT   APP_ID
+						,IDEN_ID
+						,SUBSTR(ROLE_ID, INSTR(ROLE_ID, '_' ) + 1) AS ROLE_ID
+						,ROLE_CNAME
+						,CRE_USER
+						,CRE_DATE
+						,TO_CHAR(CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+						,UPD_USER
+						,UPD_DATE
+						,TO_CHAR(UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+				  FROM   <include refid="CommonMapper.schema"/>XAUTH_ROLE	   
+				 WHERE   APP_ID = #{appId,jdbcType=VARCHAR}
+				  <if test="idenId != null">
+			        AND IDEN_ID = #{idenId,jdbcType=VARCHAR}
+			      </if>
+			      <if test="roleId != null">
+			        AND ROLE_ID = #{roleId,jdbcType=VARCHAR}
+			      </if>
+			      <if test="roleCname != null">
+			        AND ROLE_CNAME LIKE '%' || #{roleCname,jdbcType=VARCHAR} || '%'
+			      </if>	   
+			      <if test="idenId == null and ids != null">
+			      	AND A.IDEN_ID IN
+			      	<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+			      		#{item}
+			      	</foreach>
+			      </if>
+	  )	A
+	 WHERE 1=1    
+    <include refid="CommonMapper.orderBy"/>
+  </select>
+  
+  <select id="searchRole" parameterType="HashMap" resultType="HashMap">
+    SELECT   A.APP_ID
+    		,A.IDEN_ID
+			,A.ROLE_ID
+			,A.ROLE_CNAME
+			,A.CRE_USER
+			,A.CRE_DATE
+			,A.CRE_DATE_DESC
+			,A.UPD_USER
+			,A.UPD_DATE
+			,A.UPD_DATE_DESC
+	  FROM (
+				SELECT   APP_ID
+						,IDEN_ID
+						,SUBSTR(ROLE_ID, INSTR(ROLE_ID, '_' ) + 1) AS ROLE_ID
+						,ROLE_CNAME
+						,CRE_USER
+						,CRE_DATE
+						,TO_CHAR(CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+						,UPD_USER
+						,UPD_DATE
+						,TO_CHAR(UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+				  FROM   <include refid="CommonMapper.schema"/>XAUTH_ROLE	   
+				 WHERE   APP_ID = #{appId,jdbcType=VARCHAR}
+				  <if test="idenId != null">
+			        AND IDEN_ID = #{idenId,jdbcType=VARCHAR}
+			      </if>
+			      <if test="roleId != null">
+			        AND ROLE_ID LIKE '%' || #{roleId,jdbcType=VARCHAR} || '%'
+			      </if>
+			      <if test="roleCname != null">
+			        AND ROLE_CNAME LIKE '%' || #{roleCname,jdbcType=VARCHAR} || '%'
+			      </if>	
+				  <if test="creUser != null">
+			        AND CRE_USER LIKE '%' || #{creUser,jdbcType=VARCHAR} || '%'
+			      </if>  
+			      <if test="updUser != null">
+			        AND UPD_USER LIKE '%' || #{updUser,jdbcType=VARCHAR} || '%'
+			      </if>     
+			      <if test="idenId == null and ids != null">
+			      	AND IDEN_ID IN
+			      	<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+			      		#{item}
+			      	</foreach>
+			      </if>
+	  )	A
+	 WHERE 1=1
+      <if test="creDateDesc != null">
+        AND A.CRE_DATE_DESC LIKE '%' || #{creDateDesc,jdbcType=VARCHAR} || '%'
+      </if>    
+      <if test="updDateDesc != null">
+        AND A.UPD_DATE_DESC LIKE '%' || #{updDateDesc,jdbcType=VARCHAR} || '%'
+      </if>     
+    <include refid="CommonMapper.orderBy"/>
+  </select>
+  
+  <select id="selectIdenMenuTree" parameterType="com.tradevan.mapper.xauth.model.XauthIdenMenu" resultType="HashMap">  
+	SELECT   DISTINCT 
+	         LEVEL AS LV
+			,APP_ID
+	        ,MENU_ID AS ID
+	        ,PARENT_ID AS PARENT
+	        ,MENU_URL AS URL
+	        ,MENU_CNAME AS TEXT
+	        ,SEQ_NO AS SEQ
+	        ,PARENT_SEQ
+	        ,DECODE(LEVEL, '1', '0', '2', LPAD(SEQ_NO, 2, 0) || '-0', LPAD(PARENT_SEQ, 2, 0) || '-' || SEQ_NO) AS OD
+	        ,DECODE(MENU_ID, 'ROOT', MENU_CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || MENU_CNAME)  AS STRUCT
+	  FROM   (
+	           SELECT    A.APP_ID
+						,A.MENU_ID
+	                    ,B.PARENT_ID
+	                    ,B.MENU_URL
+	                    ,B.MENU_CNAME
+	                    ,B.SEQ_NO
+	                    ,B.PARENT_SEQ
+	              FROM   <include refid="CommonMapper.schema"/>XAUTH_IDEN_MENU A
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU B ON A.APP_ID = B.APP_ID AND A.MENU_ID = B.MENU_ID
+	             WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+				   AND   A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+	  ) A
+	  WHERE  1=1
+	    AND  LEVEL > 2
+	  START  WITH PARENT_ID = '#'
+	CONNECT  BY PRIOR MENU_ID = PARENT_ID
+	  ORDER  SIBLINGS BY SEQ_NO
+  </select> 
+  
+  <select id="selectIdenTree" parameterType="com.tradevan.mapper.xauth.model.XauthIdenMenu" resultType="HashMap">
+    SELECT   LEVEL AS LV
+			,A.APP_ID
+	        ,A.MENU_ID AS ID
+	        ,A.PARENT_ID AS PARENT
+	        ,A.MENU_URL AS URL
+	        ,A.MENU_CNAME AS TEXT
+	        ,A.SEQ_NO AS SEQ
+	        ,A.PARENT_SEQ
+	        ,DECODE(LEVEL, '1', '0', '2', LPAD(A.SEQ_NO, 2, 0) || '-0', LPAD(A.PARENT_SEQ, 2, 0) || '-' || A.SEQ_NO) AS OD
+	        ,DECODE(A.MENU_ID, 'ROOT', A.MENU_CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || A.MENU_CNAME)  AS STRUCT
+	  FROM   (
+				SELECT   A.APP_ID
+						,A.MENU_ID
+						,B.PARENT_ID
+						,B.MENU_URL
+						,B.MENU_CNAME
+						,B.SEQ_NO
+						,B.PARENT_SEQ
+				  FROM   <include refid="CommonMapper.schema"/>XAUTH_IDEN_MENU A
+				  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU B ON A.APP_ID = B.APP_ID AND A.MENU_ID = B.MENU_ID
+				 WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+				   AND   A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+	  ) A
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU B ON A.APP_ID = B.APP_ID AND A.PARENT_ID = B.MENU_ID
+	 START   WITH A.APP_ID = #{appId,jdbcType=VARCHAR} AND A.PARENT_ID = '#'
+   CONNECT   BY PRIOR A.MENU_ID = A.PARENT_ID AND A.APP_ID = #{appId,jdbcType=VARCHAR}
+	 ORDER   SIBLINGS BY A.SEQ_NO
+  </select> 
+  
+  <select id="selectRoleMenuTree" parameterType="com.tradevan.mapper.xauth.model.XauthRoleMenu" resultType="HashMap">  
+	SELECT   DISTINCT
+	         LEVEL AS LV
+			,APP_ID
+	        ,MENU_ID AS ID
+	        ,PARENT_ID AS PARENT
+	        ,MENU_URL AS URL
+	        ,MENU_CNAME AS TEXT
+	        ,SEQ_NO AS SEQ
+	        ,PARENT_SEQ
+	        ,DECODE(LEVEL, '1', '0', '2', LPAD(SEQ_NO, 2, 0) || '-0', LPAD(PARENT_SEQ, 2, 0) || '-' || SEQ_NO) AS OD
+	        ,DECODE(MENU_ID, 'ROOT', MENU_CNAME, '｜' || LPAD( ' ', (LEVEL - 1) * 2, '—') || MENU_CNAME)  AS STRUCT
+	  FROM   (
+	            SELECT   A.APP_ID
+						,A.MENU_ID
+	                    ,B.PARENT_ID
+	                    ,B.MENU_URL
+	                    ,B.MENU_CNAME
+	                    ,B.SEQ_NO
+	                    ,B.PARENT_SEQ
+	              FROM   <include refid="CommonMapper.schema"/>XAUTH_ROLE_MENU A
+	              LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_MENU B ON A.APP_ID = B.APP_ID AND A.MENU_ID = B.MENU_ID
+	             WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+				   AND   A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+	               AND   A.ROLE_ID = #{roleId,jdbcType=VARCHAR}
+	  )
+	  WHERE  1=1
+	    AND  LEVEL > 2
+	  START  WITH PARENT_ID = '#'
+	CONNECT  BY PRIOR MENU_ID = PARENT_ID
+  </select>    
+
+  <select id="selectIpGrantValid" parameterType="com.tradevan.mapper.xauth.model.XauthIpGrant" resultMap="com.tradevan.mapper.xauth.dao.XauthIpGrantMapper.BaseResultMap">
+	SELECT  <include refid="com.tradevan.mapper.xauth.dao.XauthIpGrantMapper.Base_Column_List" />
+	  FROM  <include refid="CommonMapper.schema"/>XAUTH_IP_GRANT A
+	 WHERE  APP_ID = #{appId,jdbcType=VARCHAR}
+	   AND  (
+	 			A.IDEN_ID = (
+		                     SELECT  IDEN_ID
+		                       FROM  <include refid="CommonMapper.schema"/>XAUTH_DEPT
+		                      WHERE  APP_ID = #{appId,jdbcType=VARCHAR}
+							    AND  PARENT_ID = '#'
+		                      START  WITH IDEN_ID = #{idenId,jdbcType=VARCHAR}
+		                    CONNECT  BY PRIOR PARENT_ID = IDEN_ID
+                          )
+                OR A.IDEN_ID = '*'
+            )
+	   AND  (#{ipAddr,jdbcType=VARCHAR} LIKE REPLACE(A.IP_ADDR , '*' , '%') OR A.IP_ADDR = '*')
+	   AND  A.SYS_TYPE = #{sysType,jdbcType=VARCHAR}
+	   AND  A.ENABLED = '1'
+  </select>
+  
+  <select id="selectIpGrant" parameterType="HashMap" resultType="HashMap">
+    SELECT   A.APP_ID
+    		,A.IDEN_ID
+    		,C.CNAME AS IDEN_NAME
+    		,A.IP_ADDR
+    		,A.SYS_TYPE
+    		,B.CNAME AS SYS_TYPE_NAME
+    		,A.ENABLED
+    		,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+			,A.MEMO
+			,A.CRE_USER
+			,A.CRE_DATE
+			,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+			,A.UPD_USER
+			,A.UPD_DATE
+			,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+	  FROM	 <include refid="CommonMapper.schema"/>XAUTH_IP_GRANT A
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_SYS_CODE B ON A.APP_ID = B.APP_ID AND A.SYS_TYPE = B.CODE AND B.IDEN_ID = '00000000' AND B.GP='SYS_TYPE'
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT C ON A.APP_ID = C.APP_ID AND A.IDEN_ID = C.IDEN_ID
+	 WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+	  <if test="idenId != null">
+        AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+      </if> 
+      <if test="ipAddr != null">
+        AND A.IP_ADDR = #{ipAddr,jdbcType=VARCHAR}
+      </if>
+      <if test="enabled != null">
+        AND A.ENABLED = #{enabled,jdbcType=VARCHAR}
+      </if>
+    <include refid="CommonMapper.orderBy"/>	
+  </select>
+  
+  <select id="searchIpGrant" parameterType="HashMap" resultType="HashMap">
+    SELECT   APP_ID
+    		,IDEN_ID
+    		,IDEN_NAME
+    		,IP_ADDR
+    		,SYS_TYPE
+    		,SYS_TYPE_NAME
+    		,ENABLED
+    		,ENABLED_NAME
+    		,MEMO
+    		,CRE_USER
+    		,CRE_DATE
+    		,CRE_DATE_DESC
+    		,UPD_USER
+    		,UPD_DATE
+    		,UPD_DATE_DESC
+      FROM   (
+      			SELECT   A.APP_ID
+      					,A.IDEN_ID
+      					,C.CNAME AS IDEN_NAME
+			    		,A.IP_ADDR
+			    		,A.SYS_TYPE
+    					,B.CNAME AS SYS_TYPE_NAME
+			    		,A.ENABLED
+			    		,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+						,A.MEMO
+						,A.CRE_USER
+						,A.CRE_DATE
+						,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+						,A.UPD_USER
+						,A.UPD_DATE
+						,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+				  FROM	 <include refid="CommonMapper.schema"/>XAUTH_IP_GRANT A
+				  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_SYS_CODE B ON A.APP_ID = B.APP_ID AND A.SYS_TYPE = B.CODE AND B.IDEN_ID = '00000000' AND B.GP='SYS_TYPE'
+				  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT C ON A.APP_ID = C.APP_ID AND A.IDEN_ID = C.IDEN_ID
+				 WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+				  <if test="idenId != null">
+			        AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+			      </if> 
+			      <if test="ipAddr != null">
+			        AND A.IP_ADDR LIKE '%' || #{ipAddr,jdbcType=VARCHAR} || '%'
+			      </if>
+			      <if test="sysType != null">
+			        AND A.SYS_TYPE = #{sysType,jdbcType=VARCHAR}
+			      </if>
+			      <if test="enabled != null">
+			        AND A.ENABLED = #{enabled,jdbcType=VARCHAR}
+			      </if>
+			      <if test="memo != null">
+			        AND A.MEMO LIKE '%' || #{memo,jdbcType=VARCHAR} || '%'
+			      </if>
+			      <if test="creUser != null">
+			        AND A.CRE_USER LIKE '%' || #{creUser,jdbcType=VARCHAR} || '%'
+			      </if>
+			      <if test="updUser != null">
+			        AND A.UPD_USER LIKE '%' || #{updUser,jdbcType=VARCHAR} || '%'
+			      </if>
+      )
+     WHERE   1=1
+      <if test="creDateDesc != null">
+        AND CRE_DATE_DESC LIKE '%' || #{creDateDesc,jdbcType=VARCHAR} || '%'
+      </if>      
+      <if test="updDateDesc != null">
+        AND UPD_DATE_DESC LIKE '%' || #{updDateDesc,jdbcType=VARCHAR} || '%'
+      </if>
+    <include refid="CommonMapper.orderBy"/>	
+  </select>    
+  
+  <select id="searchSysCode" parameterType="HashMap" resultType="HashMap">
+    SELECT   APP_ID
+    		,IDEN_ID
+    		,IDEN_NAME
+	        ,GP
+	        ,CODE
+	        ,CNAME
+	        ,ENAME
+	        ,ORDER_SEQ
+	        ,ENABLED
+			,ENABLED_NAME
+	        ,BGN_DATE
+			,BGN_DATE_DESC
+			,END_DATE
+			,END_DATE_DESC
+	        ,MEMO
+	        ,C01
+	        ,C02
+	        ,C03
+	        ,C04
+	        ,C05
+	        ,CRE_USER
+	        ,CRE_DATE
+			,CRE_DATE_DESC
+	        ,UPD_USER
+	        ,UPD_DATE
+			,UPD_DATE_DESC
+	  FROM (
+				SELECT   A.APP_ID
+						,A.IDEN_ID
+						,B.CNAME AS IDEN_NAME
+						,A.GP
+						,A.CODE
+						,A.CNAME
+						,A.ENAME
+						,A.ORDER_SEQ
+						,A.ENABLED
+						,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+						,A.BGN_DATE
+						,TO_CHAR(A.BGN_DATE, 'YYYY/MM/DD') AS BGN_DATE_DESC
+						,A.END_DATE
+						,TO_CHAR(A.END_DATE, 'YYYY/MM/DD') AS END_DATE_DESC
+						,A.MEMO
+						,A.C01
+						,A.C02
+						,A.C03
+						,A.C04
+						,A.C05
+						,A.CRE_USER
+						,A.CRE_DATE
+						,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+						,A.UPD_USER
+						,A.UPD_DATE
+						,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+				  FROM   <include refid="CommonMapper.schema"/>XAUTH_SYS_CODE A
+				  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID = B.APP_ID AND A.IDEN_ID = B.IDEN_ID  
+	  )
+	  WHERE APP_ID = #{appId,jdbcType=VARCHAR}
+      <if test="idenId != null">
+        AND IDEN_ID = #{idenId,jdbcType=VARCHAR}
+      </if>
+      <if test="gp != null">
+        AND GP LIKE '%' || #{gp,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="code != null">
+        AND CODE LIKE '%' || #{code,jdbcType=VARCHAR} || '%'
+      </if> 
+      <if test="cname != null">
+        AND CNAME LIKE '%' || #{cname,jdbcType=VARCHAR} || '%'
+      </if>    
+      <if test="ename != null">
+        AND ENAME LIKE '%' || #{ename,jdbcType=VARCHAR} || '%'
+      </if>   
+      <if test="enabled != null">
+        AND ENABLED LIKE '%' || #{enabled,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="enabledName != null">
+        AND ENABLED_NAME LIKE '%' || #{enabledName,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="creUser != null">
+        AND CRE_USER LIKE '%' || #{creUser,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="creDateDesc != null">
+        AND CRE_DATE_DESC LIKE '%' || #{creDateDesc,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="updUser != null">
+        AND UPD_USER LIKE '%' || #{updUser,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="updDateDesc != null">
+        AND UPD_DATE_DESC LIKE '%' || #{updDateDesc,jdbcType=VARCHAR} || '%'
+      </if>      
+    <include refid="CommonMapper.orderBy"/>  
+  </select>
+  
+  <select id="selectSysCode" parameterType="HashMap" resultType="HashMap">
+    SELECT   A.APP_ID
+    		,A.IDEN_ID
+    		,B.CNAME AS IDEN_NAME
+			,A.GP
+			,A.CODE
+			,A.CNAME
+			,A.ENAME
+			,A.ORDER_SEQ
+			,A.ENABLED
+			,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME
+			,A.BGN_DATE
+			,TO_CHAR(A.BGN_DATE, 'YYYY/MM/DD') AS BGN_DATE_DESC
+			,A.END_DATE
+			,TO_CHAR(A.END_DATE, 'YYYY/MM/DD') AS END_DATE_DESC
+			,A.MEMO
+			,A.C01
+			,A.C02
+			,A.C03
+			,A.C04
+			,A.C05
+			,A.CRE_USER
+			,A.CRE_DATE
+			,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+			,A.UPD_USER
+			,A.UPD_DATE
+			,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+      FROM   <include refid="CommonMapper.schema"/>XAUTH_SYS_CODE A
+      LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID = B.APP_ID AND A.IDEN_ID = B.IDEN_ID
+     WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+      <if test="idenId != null">
+        AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+      </if>
+      <if test="gp != null">
+        AND A.GP = #{gp,jdbcType=VARCHAR}
+      </if>
+      <if test="code != null">
+        AND A.CODE = #{code,jdbcType=VARCHAR}
+      </if>      
+      <if test="enabled != null">
+        AND A.ENABLED = #{enabled,jdbcType=VARCHAR}
+      </if>
+      <if test="c01 != null">
+        AND A.C01 = #{c01,jdbcType=VARCHAR}
+      </if>
+      <if test="c02 != null">
+        AND A.C02 = #{c02,jdbcType=VARCHAR}
+      </if>
+      <if test="c03 != null">
+        AND A.C03 = #{c03,jdbcType=VARCHAR}
+      </if>
+      <if test="c04 != null">
+        AND A.C04 = #{c04,jdbcType=VARCHAR}
+      </if>
+      <if test="c05 != null">
+        AND A.C05 = #{c05,jdbcType=VARCHAR}
+      </if>
+    <include refid="CommonMapper.orderBy"/>  
+  </select>    
+  
+  <select id="selectUersToken" parameterType="com.tradevan.mapper.xauth.model.XauthUsersToken" resultMap="com.tradevan.mapper.xauth.dao.XauthUsersTokenMapper.BaseResultMap">
+	SELECT   A.APP_ID
+			,A.IDEN_ID
+			,A.USER_ID
+			,A.TOKEN
+			,A.ACTIVE_DATE
+			,TO_CHAR(A.ACTIVE_DATE, 'YYYY/MM/DD') AS ACTIVE_DATE_DESC
+			,A.CRE_USER
+			,A.CRE_DATE
+			,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+			,A.UPD_USER
+			,A.UPD_DATE
+			,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+	  FROM   <include refid="CommonMapper.schema"/>XAUTH_USERS_TOKEN A			  
+	 WHERE   A.APP_ID = #{appId,jdbcType=VARCHAR}
+	  <if test="idenId != null">
+        AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+      </if>
+      <if test="userId != null">
+        AND A.USER_ID = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="token != null">
+        AND A.TOKEN = #{token,jdbcType=VARCHAR}
+      </if>
+  </select>  
+
+  <select id="searchRoleAgentUser" parameterType="HashMap" resultType="HashMap">
+    SELECT   A.APP_ID
+			,A.IDEN_ID
+			,B.CNAME AS IDEN_NAME
+			,SUBSTR(A.ROLE_ID, INSTR(A.ROLE_ID, '_' ) + 1) AS ROLE_ID
+			,D.ROLE_CNAME
+			,A.AGENT_APP_ID
+			,A.AGENT_IDEN_ID
+			,C.CNAME AS AGENT_IDEN_NAME
+			,A.AGENT_USER_ID
+			,E.USER_CNAME AS AGENT_USER_CNAME
+			,A.ENABLED
+			,DECODE(A.ENABLED, '1', '啟用', '停用') AS ENABLED_NAME			
+			,A.CRE_USER
+			,A.CRE_DATE
+			,TO_CHAR(A.CRE_DATE, 'YYYY/MM/DD') AS CRE_DATE_DESC
+			,A.UPD_USER
+			,A.UPD_DATE
+			,TO_CHAR(A.UPD_DATE, 'YYYY/MM/DD') AS UPD_DATE_DESC
+	  FROM   <include refid="CommonMapper.schema"/>XAUTH_ROLE_AGENT_USER A
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT B ON A.APP_ID = B.APP_ID AND A.IDEN_ID = B.IDEN_ID
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_DEPT C ON A.AGENT_APP_ID = C.APP_ID AND A.AGENT_IDEN_ID = C.IDEN_ID
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE D ON A.APP_ID = D.APP_ID AND A.IDEN_ID = D.IDEN_ID AND A.ROLE_ID = D.ROLE_ID
+	  LEFT   JOIN <include refid="CommonMapper.schema"/>XAUTH_USERS E ON A.AGENT_APP_ID = E.APP_ID AND A.AGENT_USER_ID = E.USER_ID
+	 WHERE   1=1
+	  <if test="appId != null">
+        AND A.APP_ID = #{appId,jdbcType=VARCHAR}
+      </if>
+      <if test="idenId != null">
+        AND A.IDEN_ID = #{idenId,jdbcType=VARCHAR}
+      </if> 
+      <if test="roleId != null">
+        AND A.ROLE_ID = #{roleId,jdbcType=VARCHAR}
+      </if> 
+      <if test="agentAppId != null">
+        AND A.AGENT_APP_ID = #{agentAppId,jdbcType=VARCHAR}
+      </if>
+      <if test="agentIdenId != null">
+        AND A.AGENT_IDEN_ID = #{agentIdenId,jdbcType=VARCHAR}
+      </if>
+      <if test="agentUserId != null">
+        AND A.AGENT_USER_ID = #{agentUserId,jdbcType=VARCHAR}
+      </if>
+      <if test="enabled != null">
+        AND A.ENABLED = #{enabled,jdbcType=VARCHAR}
+      </if>      
+    <include refid="CommonMapper.orderBy"/>
+  </select>
+  
+     
+   <select id="selectContracts" parameterType="HashMap" resultType="HashMap"> 
+	SELECT DATAID
+      ,FLOWID 
+      ,CONTRACTMODEL 
+      ,INDEXNAME
+      ,SENDDATE 
+      ,NOWROLEIDS AS ROLEIDS 
+      ,NOWUSERIDS AS USERIDS
+      ,FLOWSTATUS 
+      ,TASKNAME 
+      ,TASKUSERIDS 
+      ,TASKROLEIDS
+      ,NOWDEPTID 
+      ,DEPTID 
+      ,DISPORD
+	FROM(
+	SELECT   C.DATAID 
+	        ,C.FLOWID 
+	        ,C.CONTRACTMODEL 
+	        ,C.INDEXNAME 
+	        ,F.ROLEIDS 
+	        ,F.USERIDS 
+	        ,D.FLOWSTATUS 
+	        ,D.TASKNAME 
+	        ,D.TASKUSERIDS 
+	        ,D.TASKROLEIDS
+	        ,CASE WHEN D.NOWTASKID = 'End' THEN D.PREVIOUSTASKID when D.NOWTASKID = 'Cancel' THEN D.PREVIOUSTASKID ELSE D.NOWTASKID END NOWTASKID
+<!-- 	        ,CASE WHEN C.SENDDATE IS NOT NULL THEN C.SENDDATE ELSE C.CREATEDATE END SENDDATE -->
+	        ,C.SENDDATE
+          	,F.STEPID
+          	,F.DEPTID
+          	,F.DISPORD 
+          	,CASE WHEN CF.UNDERTAKEUSERID is null THEN F.USERIDS ELSE CF.UNDERTAKEUSERID End AS NOWUSERIDS
+			,CASE WHEN CF.UNDERTAKEROLEID is null THEN F.ROLEIDS ELSE CF.UNDERTAKEROLEID End AS NOWROLEIDS 
+			,CASE WHEN CF.UNDERTAKEDEPTID is null THEN F.DEPTID ELSE CF.UNDERTAKEDEPTID End AS NOWDEPTID 
+			,CASE WHEN CF.UNDERTAKEUSERID is null THEN D.TASKUSERIDS ELSE CF.UNDERTAKEUSERID End AS NOWTASKROLEIDS
+	  FROM   <include refid="CommonMapper.schema"/>CONTRACTMASTER C 
+	  LEFT  JOIN<include refid="CommonMapper.schema"/>DOCSTATE D ON D.APPLYNO = C.DATAID AND D.FLOWID = C.FLOWID 
+	  LEFT  JOIN<include refid="CommonMapper.schema"/>FLOWSTEP F ON F.FLOWID = C.FLOWID
+	  LEFT JOIN (SELECT * FROM( SELECT CONTRACTTRANSFER.* ,ROW_NUMBER() OVER(PARTITION BY DATAID ,DISPORD ORDER BY CRATEDATE desc) sn FROM CONTRACTTRANSFER) CR where CR.sn=1) CF ON CF.DATAID = C.DATAID and CF.DISPORD = F.DISPORD 
+	 WHERE   1 = 1 
+	   AND C.CONTRACTMODEL = #{contractmodel,jdbcType=VARCHAR} 
+	   AND TRUNC(C.SENDDATE) BETWEEN TO_DATE(#{contractBgnDate,jdbcType=VARCHAR}, 'yyyy/mm/dd') AND TO_DATE(#{contractEndDate,jdbcType=VARCHAR}, 'yyyy/mm/dd')
+ 	   AND C.SENDDATE IS NOT NULL
+	    )
+   WHERE TO_NUMBER(REPLACE(NOWTASKID, 'Task' , '')) >= TO_NUMBER(REPLACE(STEPID, 'Task' , '')) or (FLOWSTATUS is null and TASKNAME is null)
+  </select> 
+  
+  <select id="selectPerConTeplate" parameterType="HashMap" resultType="HashMap">
+  	SELECT P.DATAID AS TEMPLATE_DATA_ID
+  		  ,P.TEMPLATENAME
+  		  ,TO_CHAR(P.CREATEDATE, 'YYYY/MM/DD') AS CREATEDATE
+  		  ,TO_CHAR(P.UPDATEDATE, 'YYYY/MM/DD') AS UPDATEDATE
+  		  ,TO_CHAR(P.DROPTIME, 'YYYY/MM/DD') AS DROPTIME
+  		  ,TO_CHAR(P.PRDTIME, 'YYYY/MM/DD') AS PRDTIME
+  		  ,R.FLOWNAME
+  		  ,XSC.CNAME AS MODELNAME
+  		  ,'0.前言' AS DATA_TYPE
+  	  FROM <include refid="CommonMapper.schema"/>PERCONTRACTTEMPLATE P
+  	  LEFT JOIN <include refid="CommonMapper.schema"/>REVIEWCONF R ON R.FLOWID = P.FLOWID AND R.CONTRACTMODEL = P.MODULE
+  	  LEFT JOIN <include refid="CommonMapper.schema"/>XAUTH_SYS_CODE XSC ON XSC.GP = 'CONTRACT_MODE_CODE' AND XSC.CODE = P.MODULE
+  	 WHERE 1 = 1
+  	 <if test="module != null">
+  	 	AND P.MODULE = #{module,jdbcType=VARCHAR}
+  	 </if>
+  	 <if test="flowid != null">
+  	 	AND P.FLOWID = #{flowid,jdbcType=VARCHAR}
+  	 </if>
+  	 <if test="createuser != null">
+  	 	AND P.CREATEUSER = #{createuser,jdbcType=VARCHAR}
+  	 </if>
+  </select>
+      <select id="selectRoleAndName" parameterType="HashMap" resultType="HashMap">
+  SELECT  P.USER_ID 
+         ,P.USER_CNAME 
+         ,R.ROLE_CNAME 
+  		  FROM <include refid="CommonMapper.schema"/>XAUTH_USERS P
+  		   LEFT JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_USER Q ON Q.USER_ID = P.USER_ID
+  		  LEFT JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE R ON R.ROLE_ID = Q.ROLE_ID
+  		  WHERE 1=1 
+  		  <if test="user_id != null">
+  		  AND P.USER_ID=#{user_id,jdbcType=VARCHAR} AND  P.IDEN_ID =R.IDEN_ID and R.IDEN_ID = Q.IDEN_ID
+  		  </if>
+    </select>
+    <!-- 報表查詢 -->
+    <select id="selectflowid" parameterType="HashMap" resultType="HashMap">
+		SELECT 	
+		DATAID, 
+		FLOWID, 
+		JSON, 
+		CREATEUSER, 
+		CREATEDATE, 
+		UPDATEUSER, 
+		UPDATEDATE, 
+		INDEXNAME, 
+		CONTRACTMODEL
+		FROM <include refid="CommonMapper.schema"/>CONTRACTMASTER
+		<if test="contractmodel != null">
+		WHERE (CONTRACTMODEL = #{contractmodel,jdbcType=VARCHAR}
+		 </if>
+		AND TRUNC(CREATEDATE) BETWEEN TO_DATE(#{starttime,jdbcType=VARCHAR},'yyyy-mm-dd') AND TO_DATE(#{endtime,jdbcType=VARCHAR},'yyyy-mm-dd'))
+<!-- 		AND TRUNC(CASE WHEN SENDDATE IS NOT NULL THEN SENDDATE ELSE CREATEDATE END) BETWEEN TO_DATE(#{starttime,jdbcType=VARCHAR},'yyyy-mm-dd') AND TO_DATE(#{endtime,jdbcType=VARCHAR},'yyyy-mm-dd')) -->
+    </select>
+    
+    <select id="selectContractReport" parameterType="HashMap" resultType="HashMap"> 
+		SELECT DISTINCT DATAID
+	      ,FLOWID 
+	      ,CONTRACTMODEL 
+	      ,INDEXNAME
+	      ,TO_CHAR(SENDDATE , 'YYYY/MM/DD') AS SENDDATE 
+<!-- 	      ,ROLEIDS  -->
+<!-- 	      ,USERIDS  -->
+	      ,FLOWSTATUS 
+	      ,TASKNAME 
+	      ,TASKUSERIDS 
+	      ,TASKROLEIDS
+	      ,NOWTASKID
+<!-- 	      ,STEPID -->
+	      ,TASKDESC
+	      ,UPDATETIME
+	      ,FLOWSTATUS
+	      ,CASE WHEN UNDERTAKEUSERID IS NULL THEN APPLICANTID ELSE UNDERTAKEUSERID END APPLICANTID 
+	      ,CREATEUSER
+	      ,NOWTASKID
+		FROM(
+		SELECT   C.DATAID 
+		        ,C.FLOWID 
+		        ,C.CONTRACTMODEL 
+		        ,C.INDEXNAME 
+		        ,F.ROLEIDS 
+		        ,F.USERIDS 
+		        ,D.FLOWSTATUS 
+		        ,D.TASKNAME 
+		        ,D.TASKUSERIDS 
+		        ,D.TASKROLEIDS
+		        ,D.UPDATETIME
+		        ,D.APPLICANTID
+		        ,C.CREATEUSER
+		        ,CASE WHEN D.NOWTASKID = 'End' THEN D.PREVIOUSTASKID when D.NOWTASKID = 'Cancel' THEN D.PREVIOUSTASKID ELSE D.NOWTASKID END NOWTASKID
+	<!-- 	        ,CASE WHEN C.SENDDATE IS NOT NULL THEN C.SENDDATE ELSE C.CREATEDATE END SENDDATE -->
+		        ,CASE WHEN C.SENDDATE is null then C.CREATEDATE ELSE C.SENDDATE END SENDDATE
+	          	,F.STEPID
+	          	,D.TASKDESC
+	          	,CF.UNDERTAKEUSERID
+		  FROM   <include refid="CommonMapper.schema"/>CONTRACTMASTER C 
+		  LEFT  JOIN<include refid="CommonMapper.schema"/>DOCSTATE D ON D.APPLYNO = C.DATAID AND D.FLOWID = C.FLOWID 
+		  LEFT  JOIN<include refid="CommonMapper.schema"/>FLOWSTEP F ON F.FLOWID = C.FLOWID
+		  LEFT JOIN (SELECT * FROM( SELECT CONTRACTTRANSFER.* ,ROW_NUMBER() OVER(PARTITION BY DATAID ,DISPORD ORDER BY CRATEDATE desc) sn FROM <include refid="CommonMapper.schema"/> CONTRACTTRANSFER) CR where CR.sn=1 AND DISPORD ='1') CF ON  CF.DATAID = C.DATAID
+		 WHERE   1 = 1 
+		   AND C.CONTRACTMODEL = #{contractmodel,jdbcType=VARCHAR} 
+		   <if test="contractBgnDate != null and contractEndDate != null">
+		   		AND TRUNC(CASE WHEN C.SENDDATE is null THEN C.CREATEDATE ELSE C.SENDDATE END) BETWEEN TO_DATE(#{contractBgnDate,jdbcType=VARCHAR}, 'yyyy/mm/dd') AND TO_DATE(#{contractEndDate,jdbcType=VARCHAR}, 'yyyy/mm/dd')
+		   </if>
+		   <if test="indexname != null">		
+		   		AND C.INDEXNAME = #{indexname,jdbcType=VARCHAR}
+		   </if>
+		    )
+	   WHERE TO_NUMBER(REPLACE(NOWTASKID, 'Task' , '')) >= TO_NUMBER(REPLACE(STEPID, 'Task' , '')) or (FLOWSTATUS is null and TASKNAME is null)
+  </select> 
+ 
+  
+  <select id="selectContractMaster" parameterType="HashMap" resultType="HashMap"> 
+  		SELECT	C.*,
+				CASE WHEN F.USERIDS is null THEN CF.USERID ELSE F.USERIDS End AS ORIUSERID , 
+				CASE WHEN F.ROLEIDS is null THEN CF.ROLEID ELSE F.ROLEIDS End AS ORIROLEIDS ,
+				CASE WHEN F.DEPTID is null THEN CF.DEPTID ELSE F.DEPTID End AS ORIDEPTID ,
+				CASE WHEN CF.UNDERTAKEUSERID is null THEN F.USERIDS ELSE CF.UNDERTAKEUSERID End AS NOWUSERIDS ,
+				CASE WHEN CF.UNDERTAKEROLEID is null THEN F.ROLEIDS ELSE CF.UNDERTAKEROLEID End AS NOWROLEIDS , 
+				CASE WHEN CF.UNDERTAKEDEPTID is null THEN F.DEPTID ELSE CF.UNDERTAKEDEPTID End AS NOWDEPTID , 
+				XRAU.AGENT_USER_ID AS AGENTUSERID 
+	   FROM (
+	   		SELECT C.*,
+			 	   CASE WHEN NOWTASKID is null THEN 'Task1' ELSE NOWTASKID END AS NOWTASKID 
+			 FROM <include refid="CommonMapper.schema"/>CONTRACTMASTER C
+			 LEFT JOIN <include refid="CommonMapper.schema"/>DOCSTATE doc ON doc.APPLYNO = C.DATAID
+		) C
+		LEFT JOIN <include refid="CommonMapper.schema"/>FLOWSTEP F ON F.FLOWID = C.FLOWID AND F.STEPID = C.NOWTASKID
+		LEFT JOIN (SELECT * FROM( SELECT CONTRACTTRANSFER.* ,ROW_NUMBER() OVER(PARTITION BY DATAID ,DISPORD ORDER BY CRATEDATE desc) sn 
+		FROM <include refid="CommonMapper.schema"/>CONTRACTTRANSFER) CR where CR.sn=1) CF ON CF.DATAID = C.DATAID and CF.DISPORD = TO_NUMBER(REPLACE(C.NOWTASKID, 'Task' , ''))
+		LEFT JOIN <include refid="CommonMapper.schema"/>XAUTH_ROLE_AGENT_USER XRAU ON XRAU.USER_ID = CASE WHEN CF.UNDERTAKEUSERID is null THEN F.USERIDS ELSE CF.UNDERTAKEUSERID End 
+		WHERE C.DATAID = #{dataid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectDraftConList" parameterType="HashMap" resultType="HashMap"> 
+		   SELECT C.* 
+		   FROM (
+		   SELECT C.*,
+		  		  F.USERIDS AS ORIUSERIDS,
+				  F.ROLEIDS AS ORIROLEIDS, 
+				  F.DEPTID  AS ORIDEPTID,
+		 		  CASE WHEN CF.UNDERTAKEUSERID is null THEN F.USERIDS ELSE CF.UNDERTAKEUSERID End AS NOWUSERID
+		   FROM Contractmaster C
+		   LEFT JOIN (SELECT * FROM FLOWSTEP WHERE STEPID='Task1') F ON C.FLOWID = F.FLOWID
+		   LEFT JOIN (SELECT * FROM( SELECT CONTRACTTRANSFER.* ,ROW_NUMBER() OVER(PARTITION BY DATAID ,DISPORD ORDER BY CRATEDATE desc) sn FROM CONTRACTTRANSFER) CR where CR.sn=1) CF ON CF.DATAID = C.DATAID and CF.DISPORD = F.DISPORD 
+		   )  C
+		   WHERE 1=1
+		   <if test="userid != null">
+		   		AND C.NOWUSERID = #{userid,jdbcType=VARCHAR}
+		   </if>
+		    AND C.CONTRACTMODEL = #{contractmodel,jdbcType=VARCHAR} 
+		    AND C.SENDDATE is null
+			AND TRUNC(C.CREATEDATE) BETWEEN TO_DATE(#{contractBgnDate,jdbcType=VARCHAR}, 'yyyy/mm/dd') AND TO_DATE(#{contractEndDate,jdbcType=VARCHAR}, 'yyyy/mm/dd')
+			AND SENDDATE IS NULL
+  </select>
+  <select id="selectContractMasterByTask1" parameterType="HashMap" resultType="HashMap"> 
+		   SELECT C.* 
+		   FROM (
+		   SELECT C.*,
+		  		  F.USERIDS AS ORIUSERIDS,
+				  F.ROLEIDS AS ORIROLEIDS, 
+				  F.DEPTID  AS ORIDEPTID,
+		 		  CASE WHEN CF.UNDERTAKEUSERID is null THEN F.USERIDS ELSE CF.UNDERTAKEUSERID End AS NOWUSERID
+		   FROM Contractmaster C
+		   LEFT JOIN (SELECT * FROM FLOWSTEP WHERE STEPID='Task1') F ON C.FLOWID = F.FLOWID
+		   LEFT JOIN (SELECT * FROM( SELECT CONTRACTTRANSFER.* ,ROW_NUMBER() OVER(PARTITION BY DATAID ,DISPORD ORDER BY CRATEDATE desc) sn FROM CONTRACTTRANSFER) CR where CR.sn=1) CF ON CF.DATAID = C.DATAID and CF.DISPORD = F.DISPORD 
+		   )  C
+		   WHERE 1=1
+		   <if test="dataid != null">
+		   		AND C.DATAID = #{dataid,jdbcType=VARCHAR}
+		   </if>
+  </select>
+  
+  
+  <select id="selectDocstate" parameterType="HashMap" resultType="HashMap"> 
+  		  SELECT * 
+  		  FROM(
+  		  SELECT D.*,
+  		  			  CF.DISPORD,
+  		  			  CASE WHEN CF.UNDERTAKEUSERID IS NULL THEN D.APPLICANTID ELSE CF.UNDERTAKEUSERID END  AS NOWAPPLICANTID
+  		  			  from DOCSTATE D
+						LEFT JOIN (SELECT * FROM( SELECT CONTRACTTRANSFER.* ,ROW_NUMBER() OVER(PARTITION BY DATAID ,DISPORD ORDER BY CRATEDATE desc) sn FROM CONTRACTTRANSFER) CR where CR.sn=1) CF ON CF.DATAID = D.APPLYNO  and CF.DISPORD = '1' AND CF.USERID = D.APPLICANTID
+		  )
+		  WHERE APPLYNO = #{dataid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectACD" parameterType="HashMap" resultType="HashMap"> 
+  		 SELECT C.DATAID
+  		 		,C.STEPID
+  		 		,C.REVIEWNOTE
+  		 		,C.CREATEUSER
+  		 		,C.CREATEDATE
+<!--   		 		,TO_CHAR(C.CREATEDATE, 'yyyy-MM-dd HH:mm:ss') AS CREATEDATE -->
+				,C.CREATEDATE
+  		 		,C.UPDATEUSER
+  		 		,C.UPDATEDATE
+  		 		,C.REVIEWRLT
+  		 		,C.REVIEWUSER
+  		 		,C.STEPNAME
+  		 		,C.USERIDS 
+  		 		,CM.CONTRACTMODEL
+  		 FROM <include refid="CommonMapper.schema"/>CONTRACTREVIEW C
+  		 LEFT JOIN <include refid="CommonMapper.schema"/>CONTRACTMASTER CM ON CM.DATAID = C.DATAID
+  		 WHERE 1=1
+  		 		<if test="userid != null">
+  		 		AND C.REVIEWUSER  LIKE '%' || #{userid,jdbcType=VARCHAR} || '%'
+  		 		</if>
+  		 		AND C.USERIDS IS NOT NULL 
+  		 		AND TRUNC(C.CREATEDATE) BETWEEN TO_DATE(#{contractBgnDate,jdbcType=VARCHAR}, 'yyyy/mm/dd') AND TO_DATE(#{contractEndDate,jdbcType=VARCHAR}, 'yyyy/mm/dd')
+  		 		AND CM.CONTRACTMODEL = #{module,jdbcType=VARCHAR}
+  		 		
+  </select>
+  
+
+</mapper>

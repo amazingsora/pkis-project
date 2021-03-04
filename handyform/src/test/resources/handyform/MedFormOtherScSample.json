@@ -1,0 +1,37 @@
+{
+	"secScoring": [
+		{ "id": 1, "type": "caption", "value": "一、醫學倫理概要" },
+		{ "id": 2, "type": "question", "value": "xxxxxxx", "answer": "XY", "max": 2, "percent": 20 },
+		{ "id": 3, "type": "quesRadioVal", "value": "xxxxxx", "answer": "是", "percent": 10, 
+			"options": [ "是", "否" ]
+		},
+		{ "id": 4, "type": "quesCheckVal", "value": "xxxxx", "answer": "100,200", "percent": 30, 
+			"options": [ "100", "200", "300", "400", "500" ]
+		},
+		{ "id": 5, "type": "caption", "value": "二、xxxxxx" },
+		{ "id": 6, "type": "subCaption", "value": "以下xxxxxxxxxx" },
+		{ "id": 7, "type": "quesComboVal", "value": "xxxxx", "answer": "50", "percent": 20, 
+			"options": [ "50", "100", "150", "200" ]
+		},
+		{ "id": 8, "type": "quesRadioVal", "value": "xxxxxx", "answer": "否", "percent": 20, 
+			"options": [ "是", "否" ]
+		}
+	],
+	"secNonScoring": [
+		{ "id": 1, "type": "caption", "value": "三、xxxxxx" },
+		{ "id": 2, "type": "subCaption", "value": "以下xxxxxxxxxx" },
+		{ "id": 3, "type": "question", "value": "教學活動中你最喜歡的活動為何？原因為何？", "required": true },
+		{ "id": 4, "type": "quesRadioVal", "value": "本科整體教學活動是否要改善？", "required": true,
+			"options": [ "是", "否" ]
+		},
+		{ "id": 5, "type": "quesComboVal", "value": "您是否了解實驗室安全衛生的要求是為了保護病串與工作人員的安全？", "required": true,
+			"options": [ "清楚", "不是很確定", "有聽過" ]
+		},
+		{ "id": 6, "type": "quesCheckVal", "value": "其他建議", "required": false,
+			"options": [ "增加實際操作", "增加課堂說明" ]
+		}
+	],
+	"satisfactionOnOff": true,
+	"satisfaction": { "id": 1999, "type": "ques10Point", "value": "受評者對此次評量滿意度", "required": false },
+	"satisfaction2": { "id": 2000, "type": "ques10Point", "value": "評量者對此次評量滿意度", "required": false }
+}

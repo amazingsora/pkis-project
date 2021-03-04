@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.ReviewconfMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Reviewconf">
+        <result column="FLOWID" property="flowid" />
+        <result column="FLOWNAME" property="flowname" />
+        <result column="CONTRACTMODEL" property="contractmodel" />
+        <result column="CONDITION" property="condition" />
+        <result column="ISPREREVIEW" property="isprereview" />
+        <result column="ISDEPTREVIEW" property="isdeptreview" />
+        <result column="ISORGREVIEW" property="isorgreview" />
+        <result column="FLOWVERSION" property="flowversion" />
+        <result column="STATUS" property="status" />
+        <result column="CREATEUSER" property="createuser" />
+        <result column="CREATEDATE" property="createdate" />
+        <result column="UPDATEUSER" property="updateuser" />
+        <result column="UPDATEDATE" property="updatedate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        FLOWID, FLOWNAME, CONTRACTMODEL, CONDITION, ISPREREVIEW, ISDEPTREVIEW, ISORGREVIEW, FLOWVERSION, STATUS, CREATEUSER, CREATEDATE, UPDATEUSER, UPDATEDATE
+    </sql>
+    
+    <select id="selectContractReviewList" parameterType="HashMap" resultType="HashMap">
+    SELECT    R.FLOWID
+			, R.FLOWNAME
+			, C.CNAME AS CONTRACTMODEL
+			, R.CONDITION
+			, R.ISPREREVIEW
+			, R.ISDEPTREVIEW
+			, R.ISORGREVIEW
+			, R.FLOWVERSION
+			, R.STATUS
+			, R.CREATEUSER
+			, R.CREATEDATE
+			, R.UPDATEUSER
+			, R.UPDATEDATE
+			, R.FLOWID ||'-'|| R.FLOWNAME AS FLOW_ID_NAME
+	  FROM   <include refid="CommonMapper.schema"/>REVIEWCONF R
+	  	 	LEFT JOIN <include refid="CommonMapper.schema"/>XAUTH_SYS_CODE C ON R.CONTRACTMODEL = C.CODE AND C.GP = 'CONTRACT_MODE_CODE'
+	  WHERE 1=1
+		<if test="flowid != null">
+			AND FLOWID = #{flowid,jdbcType=VARCHAR}
+		</if>
+		<if test="flowversion != null">
+			AND FLOWVERSION = #{flowversion,jdbcType=VARCHAR}
+		</if>
+		<if test="flowname != null">
+			AND FLOWNAME LIKE '%' || #{flowname,jdbcType=VARCHAR} || '%'
+		</if>
+		<if test="contractmodel != null">
+			AND CONTRACTMODEL = #{contractmodel,jdbcType=VARCHAR}
+		</if>
+		
+	<include refid="CommonMapper.orderBy"/> 
+  </select>
+
+</mapper>

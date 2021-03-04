@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdItmSingleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdItmSingle">
+        <id column="SINGLE_ID" property="singleId" />
+        <result column="ITEM_CODE" property="itemCode" />
+        <result column="ITEM_TYPE" property="itemType" />
+        <result column="PACK_TYPE" property="packType" />
+        <result column="STATUS" property="status" />
+        <result column="PACK_MATERIAL" property="packMaterial" />
+        <result column="PACK_UNIT" property="packUnit" />
+        <result column="SALES_STATE" property="salesState" />
+        <result column="DIMENSION_ID" property="dimensionId" />
+        <result column="DIMENSION_DEEP" property="dimensionDeep" />
+        <result column="DIMENSION_WIDTH" property="dimensionWidth" />
+        <result column="DIMENSION_HEIGHT" property="dimensionHeight" />
+        <result column="DIMENSION_UNIT" property="dimensionUnit" />
+        <result column="WEIGHT_NET" property="weightNet" />
+        <result column="WEIGHT_GROSS" property="weightGross" />
+        <result column="WEIGHT_UNIT" property="weightUnit" />
+        <result column="CAPACITY_NET" property="capacityNet" />
+        <result column="CAPACITY_GROSS" property="capacityGross" />
+        <result column="CAPACITY_UNIT" property="capacityUnit" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+        <result column="BASE_UNIT" property="baseUnit" />
+        <result column="INVOICE_UNIT" property="invoiceUnit" />
+        <result column="ORDER_UNIT" property="orderUnit" />
+        <result column="ORDER_QUANTITY_MULTIPLE" property="orderQuantityMultiple" />
+        <result column="PURCHASE_PRICE_START_DATE" property="purchasePriceStartDate" />
+        <result column="PROMOTION_PRICE" property="promotionPrice" />
+        <result column="PROMOTION_PRICE_START_DATE" property="promotionPriceStartDate" />
+        <result column="PROMOTION_PRICE_END_DATE" property="promotionPriceEndDate" />
+        <result column="COLOR_OR_TASTE" property="colorOrTaste" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SINGLE_ID, ITEM_CODE, ITEM_TYPE, PACK_TYPE, STATUS, PACK_MATERIAL, PACK_UNIT, SALES_STATE, DIMENSION_ID, DIMENSION_DEEP, DIMENSION_WIDTH, DIMENSION_HEIGHT, DIMENSION_UNIT, WEIGHT_NET, WEIGHT_GROSS, WEIGHT_UNIT, CAPACITY_NET, CAPACITY_GROSS, CAPACITY_UNIT, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO, BASE_UNIT, INVOICE_UNIT, ORDER_UNIT, ORDER_QUANTITY_MULTIPLE, PURCHASE_PRICE_START_DATE, PROMOTION_PRICE, PROMOTION_PRICE_START_DATE, PROMOTION_PRICE_END_DATE, COLOR_OR_TASTE
+    </sql>
+
+</mapper>

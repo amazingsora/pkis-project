@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.SsotokenMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Ssotoken">
+        <result column="SERNO" property="serno" />
+        <result column="SPIDJSON" property="spidjson" />
+        <result column="TOKEN" property="token" />
+        <result column="SPIDCOUNT" property="spidcount" />
+        <result column="LGCUSERID" property="lgcuserid" />
+        <result column="CREATEUSER" property="createuser" />
+        <result column="CREATEDATE" property="createdate" />
+        <result column="UPDATEUSER" property="updateuser" />
+        <result column="UPDATEDATE" property="updatedate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, SPIDJSON, TOKEN, SPIDCOUNT, LGCUSERID, CREATEUSER, CREATEDATE, UPDATEUSER, UPDATEDATE
+    </sql>
+
+</mapper>

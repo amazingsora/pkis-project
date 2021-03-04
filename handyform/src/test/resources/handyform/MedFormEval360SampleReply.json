@@ -1,0 +1,27 @@
+{
+	"period": { "id": 1, "type": "quesDateRange", "value": "評量時間", "required": true,
+		"begin": "2018/01/01", "end": "2018/10/31"  
+	},
+	"secTarget": [
+		{ "id": 1, "type": "quesRadioVal", "value": "性別", "required": true,
+			"options": [ "男", "女" ], "reply": "男"
+		},
+		{ "id": 2, "type": "quesRadioVal", "value": "評核對象", "required": true,
+			"options": [ "臨床教師", "同儕", "護理人員" ], "reply": "同儕"
+		}
+	],
+	"secEvalItems": [
+		{ "id": 1, "type": "caption", "value": "1.病例記載" },
+		{ "id": 2, "type": "ques06Point", "value": " 資料完整性", "required": true, "reply": "0" },
+		{ "id": 3, "type": "ques06Point", "value": " 內容一致性", "required": true, "reply": "4" },
+		{ "id": 4, "type": "ques06Point", "value": "2.實證醫學應用", "required": true, "reply": "2" },
+		{ "id": 5, "type": "ques06Point", "value": "3.追蹤及未來治療", "required": true, "reply": "1" },
+		{ "id": 6, "type": "caption", "value": "4.專業性討論" },
+		{ "id": 7, "type": "ques06Point", "value": " 人性化照顧能力", "required": true, "reply": "3" }
+	],
+	"satisfactionOnOff": true,
+	"satisfaction": { "id": 1999, "type": "ques10Point", "value": "受評者對此次評量滿意度", "required": false, "reply": "10" },
+	"satisfaction2": { "id": 2000, "type": "ques10Point", "value": "評量者對此次評量滿意度", "required": false, "reply": "9" },
+	"flow":"A→B→C",
+	"comments": "張三：OK^李四：好"
+}

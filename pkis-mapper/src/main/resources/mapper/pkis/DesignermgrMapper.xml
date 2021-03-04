@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.DesignermgrMapper">
+
+	<insert id="insertDesignermgr" parameterType="com.tradevan.mapper.pkis.model.Designermgr">
+  	INSERT INTO <include refid="CommonMapper.schema"/>DESIGNERMGR (
+  		DOCVER, UPDTIME, EFFTIME, PRDTIME, DROPTIME, 
+  		DOCSTATUS, MODULE, KIND, SPEC, EXTEND, 
+  		VERSION, DOCCODE, DISP, SHORTDISP, FULLPATH, 
+  		ERRMESSAGE, JSON, YEAR, CREATEUSER) VALUES (
+  			#{docver}, #{updtime}, #{efftime,jdbcType=DATE}, #{prdtime,jdbcType=DATE}, #{droptime,jdbcType=DATE},
+			#{docstatus}, #{module}, #{kind}, #{spec}, #{extend}, 
+			#{version}, #{doccode}, #{disp}, #{shortdisp}, #{fullpath}, 
+			#{errmessage}, #{json}, #{year}, #{createuser}
+  		)
+  		
+<!--   		ERRMESSAGE, JSON, YEAR, CREATEUSER) VALUES ( -->
+<!-- #{errmessage}, #{json}, #{year}, #{createuser} -->
+	</insert>
+
+	<select id="searchDesignermgr" parameterType="HashMap" resultType="HashMap">
+		SELECT D.DOCVER,
+			TO_CHAR(D.UPDTIME, 'YYYY/MM/DD') AS UPDTIME,
+			TO_CHAR(D.EFFTIME, 'YYYY/MM/DD') AS EFFTIME,
+			TO_CHAR(D.PRDTIME, 'YYYY/MM/DD') AS PRDTIME,
+			TO_CHAR(D.DROPTIME, 'YYYY/MM/DD') AS DROPTIME,
+			D.DOCSTATUS,
+			DECODE(D.MODULE, 'SC', '制式合約', '非制式合約') AS MODULE,
+			D.MODULE AS MODULECODE,
+			D.KIND,
+			D.SPEC,
+			D.EXTEND,
+			D.VERSION,
+			D.DOCCODE,
+			D.DISP,
+			D.SHORTDISP,
+			D.FULLPATH,
+			D.ERRMESSAGE,
+			D.YEAR,
+			D.CREATEUSER,
+			XU.USER_CNAME,
+			XSC.CNAME AS DOCSTATUSNAME
+		FROM <include refid="CommonMapper.schema"/>DESIGNERMGR D
+		LEFT JOIN <include refid="CommonMapper.schema"/> XAUTH_SYS_CODE XSC ON XSC.APP_ID = 'APPKIS' AND XSC.GP = 'TEMPLATE_STATUS_CODE' AND XSC.CODE = D.DOCSTATUS
+		LEFT JOIN <include refid="CommonMapper.schema"/> XAUTH_USERS XU ON XU.IDEN_ID = SUBSTR(D.CREATEUSER, 1, INSTR(D.CREATEUSER, ':') - 1) AND XU.USER_ID = SUBSTR(D.CREATEUSER, INSTR(D.CREATEUSER, ':') + 1)
+		WHERE 1=1
+		<if test="module != null">
+			AND MODULE = #{module,jdbcType=VARCHAR}
+		</if>
+		<if test="year != null">
+			AND YEAR = #{year,jdbcType=VARCHAR}
+		</if>
+		<if test="disp != null">
+			AND DISP = #{disp,jdbcType=VARCHAR}
+		</if>
+		<if test="fullpath != null">
+			AND FULLPATH = #{fullpath,jdbcType=VARCHAR}
+		</if>
+		<if test="docstatus != null">
+			AND DOCSTATUS = #{docstatus,jdbcType=VARCHAR}
+		</if>
+		<if test="docver != null">
+			AND DOCVER = #{docver,jdbcType=VARCHAR}
+		</if>
+		<if test="version != null">
+			AND VERSION LIKE #{version,jdbcType=VARCHAR} || '%'
+		</if>
+	<include refid="CommonMapper.orderBy"/> 
+	</select>
+
+</mapper>

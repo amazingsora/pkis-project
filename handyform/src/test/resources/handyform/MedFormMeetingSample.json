@@ -1,0 +1,23 @@
+{
+	"meetingDate": { "id": 1, "type": "quesDate", "value": "日期時間", "required": true },
+	"meetingPlace": { "id": 2, "type": "question", "value": "會議地點", "required": true },
+	"meetingHost": { "id": 3, "type": "quesUser", "value": "主持人", "required": true },
+	"meetingReporter": { "id": 4, "type": "quesUser", "value": "報告者", "required": false },
+	"meeingDesc": { "id": 5, "type": "question", "value": "會議說明", "required": true },
+	"meetingUsers": [],
+	"isShare": false,
+	"secNonScoring": [
+		{ "id": 1, "type": "question", "value": "討論內容：" },
+		{ "id": 2, "type": "question", "value": "結論：" },
+		{ "id": 3, "type": "question", "value": "教學活動中你最喜歡的活動為何？原因為何？", "required": true },
+		{ "id": 4, "type": "quesRadioVal", "value": "本科整體教學活動是否要改善？", "required": true,
+			"options": [ "是", "否" ]
+		},
+		{ "id": 5, "type": "quesComboVal", "value": "您是否了解實驗室安全衛生的要求是為了保護病串與工作人員的安全？", "required": true,
+			"options": [ "清楚", "不是很確定", "有聽過" ]
+		},
+		{ "id": 6, "type": "quesCheckVal", "value": "其他建議", "required": false,
+			"options": [ "增加實際操作", "增加課堂說明" ]
+		}
+	]
+}

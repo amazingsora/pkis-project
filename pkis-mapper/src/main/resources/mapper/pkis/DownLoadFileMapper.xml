@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.DownLoadFileMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.DownLoadFile">
+        <id column="SEQUENCE_NO" property="sequenceNo" />
+        <result column="FUNCTION_CODE" property="functionCode" />
+        <result column="ACTION_CODE" property="actionCode" />
+        <result column="DATE_START" property="dateStart" />
+        <result column="DATE_END" property="dateEnd" />
+        <result column="WEEK_START" property="weekStart" />
+        <result column="WEEK_END" property="weekEnd" />
+        <result column="MONTH_START" property="monthStart" />
+        <result column="MONTH_END" property="monthEnd" />
+        <result column="STORE_CODE" property="storeCode" />
+        <result column="PRODUCT_CODE" property="productCode" />
+        <result column="SUPPLIER_GLN" property="supplierGln" />
+        <result column="SUPPLIER_CODE" property="supplierCode" />
+        <result column="PRODUCT_DEPT" property="productDept" />
+        <result column="FILE_PATH" property="filePath" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="FILE_CREATE_TIME" property="fileCreateTime" />
+        <result column="FILE_DOWNLOAD_TIME" property="fileDownloadTime" />
+        <result column="FILE_DELETE_TIME" property="fileDeleteTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+        <result column="USER_TYPE" property="userType" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SEQUENCE_NO, FUNCTION_CODE, ACTION_CODE, DATE_START, DATE_END, WEEK_START, WEEK_END, MONTH_START, MONTH_END, STORE_CODE, PRODUCT_CODE, SUPPLIER_GLN, SUPPLIER_CODE, PRODUCT_DEPT, FILE_PATH, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, FILE_CREATE_TIME, FILE_DOWNLOAD_TIME, FILE_DELETE_TIME, SYSTEM_MEMO, USER_TYPE
+    </sql>
+
+</mapper>

@@ -1,0 +1,328 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.tradevan.pkis</groupId>
+		<artifactId>pkis-project</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>pkis-backend</artifactId>
+	
+	<dependencies>
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+		        <exclusion>
+			      	<groupId>org.springframework.boot</groupId>
+			      	<artifactId>spring-boot-starter-logging</artifactId>
+			    </exclusion>
+		    </exclusions>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.tradevan.xauthframework</groupId>
+		    <artifactId>${xauth-common.name}</artifactId>		    
+		    <version>${xauth-common.version}</version>
+		    <scope>system</scope>
+		    <systemPath>${basedir}/../lib/${xauth-common-finalname}.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.tradevan.framework</groupId>
+		    <artifactId>${xauth-dao.name}</artifactId>		    
+		    <version>${xauth-dao.version}</version>
+		    <scope>system</scope>
+		    <systemPath>${basedir}/../lib/${xauth-dao-finalname}.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.tradevan.pkis</groupId>
+			<artifactId>${mapper.name}</artifactId>
+		</dependency>
+		
+		<dependency>
+		  	<groupId>org.springframework.boot</groupId>
+		  	<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
+		    <version>2.2.6.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-aop</artifactId>
+	    </dependency>
+	    
+	    <dependency>
+		    <groupId>com.zaxxer</groupId>
+		    <artifactId>HikariCP</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>	
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.dataformat</groupId>
+		    <artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.tradevan.util</groupId>
+		    <artifactId>B64Hash</artifactId>
+		    <version>1.0.1</version>
+		</dependency>
+		
+		<!-- db -->
+		<dependency>
+		    <groupId>${oracle.groupId}</groupId>
+		    <artifactId>${oracle.name}</artifactId>	    
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.baomidou</groupId>
+		    <artifactId>mybatis-plus-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+		<!-- db -->	
+		
+		<!-- xauth-common -->
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.55</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>commons-net</groupId>
+		    <artifactId>commons-net</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>			
+		<!-- xauth-common -->	
+		<dependency>
+			<groupId>com.tradevan.pkis</groupId>
+			<artifactId>ap-common</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.tradevan.pkis</groupId>
+			<artifactId>ap-org</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+		
+	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profile.active>local</profile.active>
+			</properties>
+		</profile>
+	    <profile>
+	        <id>test</id>
+	        <properties>
+	            <profile.active>dev</profile.active>
+	        </properties>
+	    </profile>
+	    <profile>
+	        <id>ver</id>
+	        <properties>
+	            <profile.active>valid</profile.active>
+	        </properties>
+	    </profile>
+	    <profile>
+	        <id>pro</id>
+	        <properties>
+	            <profile.active>prod</profile.active>
+	        </properties>
+	    </profile>	    	    
+	</profiles>
+
+	<build>
+		<resources>
+		    <resource>
+		        <directory>src/main/resources</directory>
+		        <excludes>
+		            <exclude>application*.properties</exclude>
+		        </excludes>
+		    </resource>
+		    <resource>
+		        <directory>src/main/resources</directory>
+		        <filtering>true</filtering>
+		        <includes>
+		            <include>application.properties</include>
+		            <include>application-${profile.active}.properties</include>
+		        </includes>
+		    </resource>
+            <resource>
+                <directory>${project.basedir}/SCT/</directory>
+                <targetPath>SCT</targetPath>
+            </resource>
+            
+		</resources>
+		
+		<plugins>		
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-compiler-plugin</artifactId>
+			    <configuration>
+			        <source>1.8</source>
+			        <target>1.8</target>	 
+			        <skip>true</skip>        
+			    </configuration>
+			</plugin>	
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<outputDirectory>${project.basedir}/../target</outputDirectory>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/../target/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>  
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-antrun-plugin</artifactId>	            
+	            <executions>
+	                <execution>
+	                    <id>copy</id>
+	                    <phase>package</phase>
+	                    <configuration>
+	                        <target>
+	                            <echo>ANT TASK - copying jks....</echo>
+								<copy todir="${project.basedir}/../target/jks">
+									<fileset dir="${basedir}/jks"/>
+								</copy>
+								<echo>ANT TASK - copying SCT....</echo>
+								<copy todir="${project.basedir}/../target/SCT">
+									<fileset dir="${basedir}/SCT"/>
+								</copy>
+	                        </target>
+	                    </configuration>
+	                    <goals>
+	                        <goal>run</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	        </plugin>        
+		</plugins>
+	</build>
+	
+</project>

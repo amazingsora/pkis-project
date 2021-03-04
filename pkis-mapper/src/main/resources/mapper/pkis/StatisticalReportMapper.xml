@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.StatisticalReportMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.StatisticalReport">
+        <id column="RPTID" property="rptid" />
+        <result column="CREATEUSER" property="createuser" />
+        <result column="CREATEDATE" property="createdate" />
+        <result column="UPDATEUSER" property="updateuser" />
+        <result column="UPDATEDATE" property="updatedate" />
+        <result column="JSON" property="json" />
+        <result column="DOWNLOADPATH" property="downloadpath" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        RPTID, CREATEUSER, CREATEDATE, UPDATEUSER, UPDATEDATE, JSON, DOWNLOADPATH
+    </sql>
+<!--  -->
+<select id="selectStatisticalReportList" parameterType="HashMap" resultType="HashMap">
+		select 	RPTID ,
+				CREATEUSER ,
+				CREATEDATE ,
+				UPDATEUSER ,
+				UPDATEDATE ,
+				JSON ,
+				DOWNLOADPATH
+		from STATISTICALREPORT
+		WHERE  RPTID LIKE CONCAT(#{RPTID},'%')
+		<if test="CREATEUSER != null">
+			AND A.CREATEUSER = #{user}	  
+		</if>
+  </select>
+
+</mapper>

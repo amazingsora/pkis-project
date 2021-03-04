@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE handyflow SYSTEM "HandyFlow.dtd">
+<handyflow id="FlowA" name="Demo流程A" version="5">
+	<flowEvent id="Begin" type="BEGIN" desc="申請開始">
+	    <flowLink name="建立" to="Task1" />
+	</flowEvent>
+	<flowTask id="Task1" name="申請人" desc="申請人處理">
+		<flowConditions>
+			<flowLink action="Apply" name="送出" to="Task2_1" />
+			<flowLink action="Cancel" name="作廢" to="Cancel" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task2_1" name="課級主管" desc="課級主管處理" roles="level1Mgr" isHighLevelPass="true">
+		<flowConditions>
+			<flowLink action="Approve" name="送審" desc="大於1天" to="Task3" />
+	    	<flowLink action="FinalApprove" name="核准" desc="小於1天" to="End" />
+	    	<flowLink action="Rtn2Applicant" name="退回申請人" to="Task1" />
+	    	<flowLink action="Go2Countersign" name="會簽" to="Countersign" />
+	    </flowConditions>
+	</flowTask>
+	<flowParallel id="Countersign" name="多流程平行會簽" desc="會簽處理">
+		<flowLink name="會簽1" to="Sub1" />
+		<flowLink name="會簽2" to="Sub2" />
+		<flowLink name="會簽3" to="Sub3" />
+	</flowParallel>
+	<flowTask id="Task2_2" name="課級主管" desc="課級主管處理" sameUserAs="Task2_1" isHighLevelPass="true">
+		<flowConditions>
+			<flowLink action="Approve" name="送審" desc="大於1天" to="Task3" />
+	    	<flowLink action="FinalApprove" name="核准" desc="小於1天" to="End" />
+	    </flowConditions>
+	</flowTask>
+	<flowTask id="Task3" name="部級主管" desc="部級主管處理" roles="level2Mgr" isHighLevelPass="true">
+		<flowConditions>
+			<flowLink action="Approve" name="送審" desc="大於3天" to="Task4" />
+	    	<flowLink action="FinalApprove" name="核准" desc="小於3天" to="End" />
+	    	<flowLink action="Rtn2Applicant" name="退回申請人" to="Task1" />
+	    </flowConditions>
+	</flowTask>
+	<flowTask id="Task4" name="副總經理" desc="副總經理處理" roles="viceGeneralMgr" isHighLevelPass="true">
+		<flowConditions>
+	    	<flowLink action="Approve" name="送審" desc="大於5天" to="Task5" />
+	    	<flowLink action="FinalApprove" name="核准" desc="小於5天" to="End" />
+	    	<flowLink action="Rtn2Applicant" name="退回申請人" to="Task1" />
+	    </flowConditions>
+	</flowTask>
+	<flowTask id="Task5" name="總經理" desc="總經理處理" roles="generalMgr" isHighLevelPass="true">
+		<flowConditions>
+	    	<flowLink action="Approve" name="送審" desc="大於7天" to="Task6" />
+	    	<flowLink action="FinalApprove" name="核准" desc="小於7天" to="End" />
+	    	<flowLink action="Rtn2Applicant" name="退回申請人" to="Task1" />
+	    </flowConditions>
+	</flowTask>
+	<flowTask id="Task6" name="董事長" desc="董事長處理" roles="president">
+		<flowConditions>
+	    	<flowLink action="FinalApprove" name="核准" to="End" />
+	    	<flowLink action="Rtn2Applicant" name="退回申請人" to="Task1" />
+	    </flowConditions>
+	</flowTask>
+	<flowEvent id="End" type="END" desc="申請完成" />
+	<flowEvent id="Cancel" type="CANCEL" desc="申請單作廢" />
+	
+	<subFlow id="Sub1" name="會簽1子流程">
+		<flowEvent id="Sub1Begin" type="SUB_BEGIN" desc="會簽1">
+	    	<flowLink name="開始" to="Sub1Task1" />
+		</flowEvent>
+		<flowTask id="Sub1Task1" name="會簽1承辦" desc="會簽1承辦處理" dept="subDept6">
+			<flowConditions>
+	    		<flowLink action="Countersign" name="送審" to="Sub1Task2" />
+	    		<flowLink action="Rtn2Applicant" name="退回申請人" to="Sub1Return" />
+	    	</flowConditions>
+		</flowTask>
+		<flowTask id="Sub1Task2" name="會簽1主管" desc="會簽主管處理" roles="level1Mgr">
+			<flowConditions>
+	    		<flowLink action="MgrCountersign" name="送審" to="Sub1Finish" />
+	    		<flowLink action="Rtn2Countersign" name="退回承辦" to="Sub1Task1" />
+	    	</flowConditions>
+		</flowTask>
+		<flowEvent id="Sub1Finish" type="SUB_FINISH" desc="會簽1完成">
+			<flowLink name="完成" to="Task2_2" />
+		</flowEvent>
+		<flowEvent id="Sub1Return" type="SUB_RETURN" desc="會簽1退回">
+			<flowLink name="退回" to="Task2_1" />
+		</flowEvent>
+	</subFlow>
+	<subFlow id="Sub2" name="會簽2子流程">
+		<flowEvent id="Sub2Begin" type="SUB_BEGIN" desc="會簽2">
+	    	<flowLink name="開始" to="Sub2Task1" />
+		</flowEvent>
+		<flowTask id="Sub2Task1" name="會簽2承辦" desc="會簽2承辦處理" dept="subDept5">
+			<flowConditions>
+	    		<flowLink action="Countersign" name="送審" to="Sub2Task2" />
+	    		<flowLink action="Rtn2Applicant" name="退回申請人" to="Sub2Return" />
+	    	</flowConditions>
+		</flowTask>
+		<flowTask id="Sub2Task2" name="會簽2主管" desc="會簽2主管處理" roles="level1Mgr">
+			<flowConditions>
+	    		<flowLink action="MgrCountersign" name="送審" to="Sub2Finish" />
+	    		<flowLink action="Rtn2Countersign" name="退回承辦" to="Sub2Task1" />
+	    	</flowConditions>
+		</flowTask>
+		<flowEvent id="Sub2Finish" type="SUB_FINISH" desc="會簽2完成">
+			<flowLink name="完成" to="Task2_2" />
+		</flowEvent>
+		<flowEvent id="Sub2Return" type="SUB_RETURN" desc="會簽2退回">
+			<flowLink name="退回" to="Task2_1" />
+		</flowEvent>
+	</subFlow>
+	<subFlow id="Sub3" name="會簽3子流程">
+		<flowEvent id="Sub3Begin" type="SUB_BEGIN" desc="會簽3">
+	    	<flowLink name="開始" to="Sub3Task1" />
+		</flowEvent>
+		<flowTask id="Sub3Task1" name="會簽3承辦" desc="會簽3承辦處理" roles="oversea">
+			<flowConditions>
+	    		<flowLink action="Countersign" name="送審" to="Sub3Finish" />
+	    		<flowLink action="Rtn2Applicant" name="退回申請人" to="Sub3Return" />
+	    	</flowConditions>
+		</flowTask>
+		<flowEvent id="Sub3Finish" type="SUB_FINISH" desc="會簽3完成">
+			<flowLink name="完成" to="Task2_2" />
+		</flowEvent>
+		<flowEvent id="Sub3Return" type="SUB_RETURN" desc="會簽3退回">
+			<flowLink name="退回" to="Task2_1" />
+		</flowEvent>
+	</subFlow>
+</handyflow>

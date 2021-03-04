@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdPrdItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdPrdItem">
+        <id column="ITEM_CODE" property="itemCode" />
+        <result column="ITEM_TYPE" property="itemType" />
+        <result column="RETAILER_DEPARTMENT" property="retailerDepartment" />
+        <result column="CATE_1" property="cate1" />
+        <result column="CATE_2" property="cate2" />
+        <result column="CATE_3" property="cate3" />
+        <result column="CATE_4" property="cate4" />
+        <result column="COMP_BAN" property="compBan" />
+        <result column="SUPPLIER_CODE" property="supplierCode" />
+        <result column="MFRS_BAN" property="mfrsBan" />
+        <result column="PRD_NAME_TW" property="prdNameTw" />
+        <result column="PRD_NAME_EN" property="prdNameEn" />
+        <result column="PRD_DESCRIPTION_TW" property="prdDescriptionTw" />
+        <result column="PRD_DESCRIPTION_EN" property="prdDescriptionEn" />
+        <result column="BRAND" property="brand" />
+        <result column="ORGN_COUNTRY" property="orgnCountry" />
+        <result column="DATE_AVAILABLE" property="dateAvailable" />
+        <result column="PRD_STATUS" property="prdStatus" />
+        <result column="FOR_SEASON" property="forSeason" />
+        <result column="SHARE_DATA" property="shareData" />
+        <result column="CHANGE_SPEC" property="changeSpec" />
+        <result column="DATA_SOURCE" property="dataSource" />
+        <result column="IS_VARIABLE" property="isVariable" />
+        <result column="IS_DANGER" property="isDanger" />
+        <result column="START_AVAILABILITY_DATE" property="startAvailabilityDate" />
+        <result column="END_AVAILABILITY_DATE" property="endAvailabilityDate" />
+        <result column="STOP_SUPPLIER_DESC_TW" property="stopSupplierDescTw" />
+        <result column="STOP_SUPPLIER_DESC_EN" property="stopSupplierDescEn" />
+        <result column="RATE" property="rate" />
+        <result column="MAIN_SHIP_METHODS" property="mainShipMethods" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+        <result column="COPY_ITEM_CODE" property="copyItemCode" />
+        <result column="SUPPLIER_GLN" property="supplierGln" />
+        <result column="COMPANY_NAME" property="companyName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ITEM_CODE, ITEM_TYPE, RETAILER_DEPARTMENT, CATE_1, CATE_2, CATE_3, CATE_4, COMP_BAN, SUPPLIER_CODE, MFRS_BAN, PRD_NAME_TW, PRD_NAME_EN, PRD_DESCRIPTION_TW, PRD_DESCRIPTION_EN, BRAND, ORGN_COUNTRY, DATE_AVAILABLE, PRD_STATUS, FOR_SEASON, SHARE_DATA, CHANGE_SPEC, DATA_SOURCE, IS_VARIABLE, IS_DANGER, START_AVAILABILITY_DATE, END_AVAILABILITY_DATE, STOP_SUPPLIER_DESC_TW, STOP_SUPPLIER_DESC_EN, RATE, MAIN_SHIP_METHODS, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO, COPY_ITEM_CODE, SUPPLIER_GLN, COMPANY_NAME
+    </sql>
+
+</mapper>

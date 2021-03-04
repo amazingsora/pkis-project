@@ -1,0 +1,57 @@
+#!/bin/bash
+
+PGM_NAME=ImportCsvBatch
+SLEEP_TIME=600
+
+JAVA_VERSION=`java -version 2>&1 |awk 'NR==1{ gsub(/"/,""); print $3 }'`
+JAVA_NAME=ImportCsvBatch
+JAVA_PKG=com.tradevan.pkis.backend.batch
+
+JAVA_PATH=/APPKIS/JAVA
+LOG_PATH=/PPKIS/log/oxPCRC
+OS_ACCOUNT=pcrcmgr
+LOG_FILE=$LOG_PATH/ox${PGM_NAME}.log
+
+echo "${PGM_NAME} START"
+
+msgtolog()
+{
+    time_mark=`date +%D_%T`
+    echo $time_mark"  "$MSG
+    echo $time_mark"  "$MSG >> $LOG_FILE
+}
+
+isProcessAlive()
+{
+    retval="N"
+    isalive=`ps -ef | grep $OS_ACCOUNT | grep $JAVA_NAME | grep -v sct |grep -v grep | grep -v awk | awk '{print $2}'`
+    if [ -n "$isalive" ]; then
+        retval="Y"
+    fi
+	
+    echo "$retval"
+}
+
+alive=`isProcessAlive`
+if [ "$alive" = "Y" ]; then
+	MSG="${JAVA_NAME} is still alive!!"
+	msgtolog
+else
+	result=$(echo $JAVA_VERSION | grep "1.8")
+	cd $JAVA_PATH
+	while :
+	do
+		alive=`isProcessAlive`
+		if [ "$alive" = "N" ]; then
+			ymd=`date '+%Y%m%d'`
+			echo $ymd
+			if [ $result != "" ]; then
+				java -cp "${JAVA_PATH}/pkis-backend-1.0.0.jar:/APPKIS/INCLUDE/*" ${JAVA_PKG}.${JAVA_NAME} >> $LOG_PATH/${PGM_NAME}_${ymd}.log 2>> $LOG_PATH/${PGM_NAME}_${ymd}Err.log
+				sleep $SLEEP_TIME
+			else
+				java -cp "${JAVA_PATH}/pkis-backend-1.0.0.jar:/APPKIS/INCLUDE/*" ${JAVA_PKG}.${JAVA_NAME} >> $LOG_PATH/${PGM_NAME}_${ymd}.log 2>> $LOG_PATH/${PGM_NAME}_${ymd}Err.log
+				sleep $SLEEP_TIME
+			fi
+  		fi
+	done
+fi

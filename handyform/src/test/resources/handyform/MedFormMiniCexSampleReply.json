@@ -1,0 +1,57 @@
+{
+	"place": { "id": 1, "type": "quesRadioOther", "value": "評量地點", "required": true,
+		"options": [ "門診", "急診", "一般病房", "加護病房", "手術室", "其它" ], "reply": "其它", "other": "會議室"
+	},
+	"secPatient": [
+		{ "id": 1, "type": "quesRadioVal", "value": "病人資訊", "required": true,
+			"options": [ "男", "女" ], "reply": "男"
+		},
+		{ "id": 2, "type": "quesNumber", "value": "年齡", "required": true, "reply": "65" },
+		{ "id": 3, "type": "quesRadioVal", "value": "類型", "required": true,
+			"options": [ "新病人", "舊病人" ], "reply": "舊病人"
+		}
+	],
+	"secDiagnosis": [
+		{ "id": 1, "type": "quesRadioVal", "value": "病情複雜", "required": true,
+			"options": [ "低", "中", "高" ], "reply": "中"
+		},
+		{ "id": 2, "type": "question", "value": "診斷說明", "required": true, "reply": "診斷..." }
+	],
+	"phase": { "id": 1, "type": "quesRadioOther", "value": "評量階段", "required": true,
+		"options": [ "學前", "學後", "輔導後", "其它" ], "reply": "其它", "other": "輔導中"
+	},
+	"secEvaluation": [
+		{ "id": 1, "type": "question", "value": "評量主題", "required": true, "reply": "評量主題..." },
+		{ "id": 2, "type": "quesRadioVal", "value": "評量次數", "required": true,
+			"options": [ "1", "2", "3", "4次以上" ], "reply": "4次以上"
+		},
+		{ "id": 3, "type": "quesRadioVal", "value": "評量技術複雜程度", "required": true,
+			"options": [ "低", "中", "高" ], "reply": "中"
+		}
+	],
+	"secEvalItems": [
+		{ "id": 1, "type": "ques09Point", "value": "醫療面談", "required": true, "reply": "6" },
+		{ "id": 2, "type": "ques09Point", "value": "身體檢查", "required": true, "reply": "5" },
+		{ "id": 3, "type": "ques09Point", "value": "操作技能", "required": true, "reply": "4" },
+		{ "id": 4, "type": "ques09Point", "value": "諮商衛教", "required": true, "reply": "7" },
+		{ "id": 5, "type": "ques09Point", "value": "臨床判斷", "required": true, "reply": "3" },
+		{ "id": 6, "type": "ques09Point", "value": "組織效能", "required": true, "reply": "0" },
+		{ "id": 7, "type": "ques09Point", "value": "人道專業", "required": true, "reply": "8" }
+	],
+	"result": { "id": 2, "type": "quesRadioVal", "value": "評量者認為這位受評者的表現是", "required": true,
+		"options": [ "達預期標準(含)以上（通過）", "少部分必須再加強及評估", "未達預期標準，無法通過" ], "reply": "少部分必須再加強及評估"
+	},
+	"secTiming": [
+		{ "id": 1, "type": "quesNumber", "value": "直接觀察時間", "required": true, "reply": "30" },
+		{ "id": 2, "type": "quesNumber", "value": "回饋時間", "required": true, "reply": "15" }
+	],
+	"secComment": [
+		{ "id": 1, "type": "question", "value": "表現優良項目", "required": true, "reply": "表現優良項目..." },
+		{ "id": 2, "type": "question", "value": "建議加強項目", "required": true, "reply": "建議加強項目..." }
+	],
+	"satisfactionOnOff": true,
+	"satisfaction": { "id": 1999, "type": "ques10Point", "value": "受評者對此次評量滿意度", "required": false, "reply": "10" },
+	"satisfaction2": { "id": 2000, "type": "ques10Point", "value": "評量者對此次評量滿意度", "required": false, "reply": "9" },
+	"flow":"A→B→C",
+	"comments": "張三：OK^李四：好"
+}

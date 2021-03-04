@@ -1,0 +1,66 @@
+{
+"masterList":[
+	{ "id":1, "title":"一、基本資料", "subTitle":"", "detailList":[
+		{ "id":1, "topic":"教師", "type":"radio", "options":[
+				{ "value":"主治醫師", "isDefault":true }, { "value":"研究醫師" }, { "value":"總醫師" }, { "value":"住院醫師" }
+			]
+		},
+		{ "id":2, "topic":"學員", "type":"radio", "options":[
+				{ "value":"R1" }, { "value":"R2" }, { "value":"R3" }, { "value":"R4" }, { "value":"其它 (請輸入職級)", "withOthers":true }
+			]
+		},
+		{ "id":3, "topic":"日期", "type":"date" },
+		{ "id":4, "topic":"時間", "type":"time" },
+		{ "id":5, "topic":"時段", "type":"radio", "options":[{ "value":"上午" }, { "value":"下午" }, { "value":"晚上" } ] },
+		{ "id":6, "topic":"地點", "type":"radio", "options":[
+				{ "value":"門診", "isDefault":true }, { "value":"急診" }, { "value":"一般病房" }, { "value":"加護病房" }
+			]
+		},
+		{ "id":7, "topic":"病人", "type":"combo", "options":[{ "value":"男" }, { "value":"女" }] },
+		{ "id":8, "topic":"年齡", "type":"num", "min":1, "max":150 },
+		{ "id":9, "topic":"病人類別", "type":"radio", "options":[{ "value":"新病人" }, { "value":"舊病人" }] },
+		{ "id":10, "topic":"主述", "type":"text", "max":100 },
+		{ "id":11, "topic":"診斷", "type":"area", "max":300, "rows":3 },
+		{ "id":12, "topic":"病情複雜程度", "type":"radio", "options":[{ "value":"低" }, { "value":"中" }, { "value":"高" }] },
+		{ "id":13, "topic":"診療重點", "type":"check", "options":[
+				{ "value":"病情搜集" }, { "value":"診斷" }, { "value":"治療" }, { "value":"諮詢衛教" }
+			]
+		},
+		{ "id":14, "topic":"Family Tree", "type":"familyTree" }
+	]},
+	{ "id":2, "title":"二、評量項目", "subTitle":"", "detailList":[
+		{ "id":1, "topic":"演練評量 (劣 1 ~ 9 優)", "type":"radio", "options":[
+				{ "value":"未觀察", "scoreConv":0 }, { "value":"1", "scoreConv":10 }, { "value":"2", "scoreConv":20 }, 
+				{ "value":"3", "scoreConv":30 }, { "value":"4", "scoreConv":40 }, { "value":"5", "scoreConv":50 }, 
+				{ "value":"6", "scoreConv":60 }, { "value":"7", "scoreConv":70, "passConv":true }, { "value":"8", "scoreConv":80, "passConv":true }, 
+				{ "value":"9", "scoreConv":90, "passConv":true }
+			], "isEval":true,	"evalItems":[
+				{ "value":"醫療面談" }, { "value":"身體檢查" }, { "value":"人道專業" }, { "value":"臨床判斷" }, { "value":"諮商衛教" }
+			],
+			"scoringType":"LOW", "passType":"MAJOR", "formScoring":"SF", "formResult":"FS"
+		},
+		{ "id":2, "topic":"評分通過結果", "forReview":true, "type":"radio", "options":[
+				{ "value":"通過", "passConv":true }, { "value":"不通過" }
+			], "formResult":"ST"
+		}
+	]},
+	{ "id":3, "title":"三、觀察時間", "subTitle":"", "detailList":[
+		{ "id":1, "topic":"直接觀察時間(分鐘)", "type":"text", "max":3 },
+		{ "id":2, "topic":"回饋時間(分鐘)", "type":"text", "max":3 }
+	]},
+	{ "id":4, "title":"四、滿意度", "subTitle":"", "detailList":[
+		{ "id":1, "topic":"教師對本次評量滿意程度", "type":"radio", "options":[
+				{ "value":"1", "scoreConv":1 }, { "value":"2", "scoreConv":2 }, { "value":"3", "scoreConv":3 }, 
+				{ "value":"4", "scoreConv":4 }, { "value":"5", "scoreConv":5 }, { "value":"6", "scoreConv":6 }, 
+				{ "value":"7", "scoreConv":7 }, { "value":"8", "scoreConv":8 }, { "value":"9", "scoreConv":9 }
+			], "formResult":"S2"
+		},
+		{ "id":2, "topic":"學員對本次評量滿意程度", "forReview":true, "type":"radio", "options":[
+				{ "value":"1", "scoreConv":1 }, { "value":"2", "scoreConv":2 }, { "value":"3", "scoreConv":3 }, 
+				{ "value":"4", "scoreConv":4 }, { "value":"5", "scoreConv":5 }, { "value":"6", "scoreConv":6 }, 
+				{ "value":"7", "scoreConv":7 }, { "value":"8", "scoreConv":8 }, { "value":"9", "scoreConv":9 }
+			], "formResult":"S1"
+		}
+	]}
+]
+}

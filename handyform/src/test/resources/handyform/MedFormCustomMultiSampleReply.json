@@ -1,0 +1,29 @@
+{
+	"master1":{ "id":1, "title":"一、學習目標", "subTitle":"", "detailList":[
+		{ "id":1, "topic":"技能項目", "type":"text", "max":100, "reply":"技能項目..." },
+		{ "id":2, "topic":"學習科別", "type":"text", "max":100, "reply":"內科" }
+	]},
+	"master2":{ "id":2, "title":"二、學習記錄", "subTitle":"", "detailList":[
+		{ "id":1, "topic":"日期", "type":"date" },
+		{ "id":2, "topic":"病歷號碼", "type":"text", "max":20 },
+		{ "id":3, "topic":"親自照護", "type":"radio", "options":[{ "value":"是" }, { "value":"否" }] },
+		{ "id":4, "topic":"參與討論", "type":"radio", "options":[{ "value":"是" }, { "value":"否" }] },
+		{ "id":5, "topic":"學習重點", "type":"area", "max":300, "rows":3 },
+		{ "id":6, "topic":"評分", "type":"num", "min":0, "max":100, "formResult":"FS" },
+		{ "id":7, "topic":"成功/失敗", "forReview":true, "type":"radio", "options":[
+				{ "value":"成功", "passConv":true }, { "value":"失敗" }
+			], "formResult":"ST"
+		}
+	]},
+	"master3toN":[
+		{ "id":3, "title":"三、學習內容", "subTitle":"", "detailList":[
+			{ "id":1, "topic":"學習內容", "type":"text", "max":100, "reply":"學習內容..." },
+			{ "id":2, "topic":"學習內容說明", "type":"area", "max":300, "rows":3, "reply":"學習內容說明..." }
+		]},
+		{ "id":4, "title":"四、其它", "subTitle":"", "detailList":[
+			{ "id":1, "topic":"其它說明", "type":"area", "max":300, "rows":3, "reply":"其它說明..." }
+		]}
+	],
+	"flow":"A→B→C",
+	"comments": "張三：OK^李四：好"
+}

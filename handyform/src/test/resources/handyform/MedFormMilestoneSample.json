@@ -1,0 +1,39 @@
+{
+	"secEvalItems": [
+		{ "id": 1, "type": "ques09PointComment", "value": "Patient Care(PC1)、緊急穩定處置(Emergency Stablization)", "required": true, 
+			"desc": "急救危急病人時，按優先次序進行初步穩定措施，並且整合運用醫院之支援服務，且在執行急救後再度評估。",
+			"level1": "辨識異常生命徵象",
+			"level2": "辨識病人的狀態是不穩定、需立即處理的。<br>執行危急病人的初級評估(primary assessment)。<br>辨別相關數據資料以形成初步診斷(diagnostic impression)和治療計畫。",
+			"level3": "處理以及辨別危急病人的輕重緩急優先順序。<br>急救危急病人時，優先進行關鍵的初步穩定措施。<br>執行急救後，再次評估病況。評估DNR 醫囑的效力。",
+			"level4": "即時察覺進一步的臨床處置將會是沒有效益的。<br>整合運用院內相關支援服務於困難的急救情境。",
+			"level5": "發展危急病人處置及轉送之策略與流程。"
+		},
+		{ "id": 2, "type": "ques09PointComment", "value": "Patient Care 2(PC2). 焦點式病史詢問及理學檢查 (Performance of Focused History & Physical Exam)", "required": true, 
+			"desc": "歸納整理多重慢性疾病病人的本次就醫焦點，且適切地與其過去醫療紀錄比較，找出現在與過去表現的重要差異。",
+			"level1": "Level1評估描述",
+			"level2": "Level2評估描述",
+			"level3": "Level3評估描述",
+			"level4": "Level4評估描述",
+			"level5": "Level5評估描述"
+		},
+		{ "id": 3, "type": "ques09PointComment", "value": "Patient Care 3(PC3). 診斷性檢查及檢驗 (Diagnostic Studies)", "required": true, 
+			"desc": "安排適切的檢查及檢驗並應用其結果。",
+			"level1": "Level1評估描述",
+			"level2": "Level2評估描述",
+			"level3": "Level3評估描述",
+			"level4": "Level4評估描述",
+			"level5": "Level5評估描述"
+		},
+		{ "id": 4, "type": "ques09PointComment", "value": "Interpersonal & Communication Skills 2(ICS2). 團隊管理 (Team Management)", "required": true, 
+			"desc": "領導以病人為中心的團隊，並確保團員間能有效溝通且互相尊重。",
+			"level1": "Level1評估描述",
+			"level2": "Level2評估描述",
+			"level3": "Level3評估描述",
+			"level4": "Level4評估描述",
+			"level5": "Level5評估描述"
+		}
+	],
+	"satisfactionOnOff": true,
+	"satisfaction": { "id": 1999, "type": "ques10Point", "value": "受評者對此次評量滿意度", "required": false },
+	"satisfaction2": { "id": 2000, "type": "ques10Point", "value": "評量者對此次評量滿意度", "required": false }
+}

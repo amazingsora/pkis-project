@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE handyflow SYSTEM "HandyFlow.dtd">
+<handyflow id="TestContractFlow" name="測試合約流程" version="1">
+	<flowEvent id="Begin" type="BEGIN" desc="申請開始">
+	    <flowLink name="建立" to="Task1" />
+	</flowEvent>
+	<flowTask id="Task1" name="申請人" desc="申請送出">
+		<flowConditions>
+		<flowLink action="Apply" name="送出" to="Task2" />
+		<flowLink action="Cancel" name="作廢" to="Cancel" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task2" name="法務" roles="roleLegal" desc="審核通過">
+		<flowConditions>
+		<flowLink action="Apply" name="送出" to="Task3" />
+		<flowLink action="Return" name="退回" to="Task1" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task3" name="乙方"  roles="roleSupplier" desc="確認簽章">
+		<flowConditions>
+		<flowLink action="CheckSign" name="確認簽章" to="Task4" />
+		<flowLink action="Return" name="退回" to="Task1" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task4" name="申請人"  roles="roleApply" desc="合約確認">
+		<flowConditions>
+		<flowLink action="Check" name="確認簽章" to="Task5" />
+		<flowLink action="Return" name="退回" to="Task4" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task5" name="申請人"  roles="roleApply" desc="送出內部審查">
+		<flowConditions>
+		<flowLink action="Check" name="確認簽章" to="Task6" />
+		<flowLink action="Return" name="退回" to="Task1" />
+		<flowLink action="Cancel" name="作廢" to="Cancel" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task6" name="主管A"  roles="roleLevel1" desc="主管處理">
+		<flowConditions>
+		<flowLink action="Check" name="送審" to="Task7" />
+		<flowLink action="Return" name="退回" to="Task5" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task7" name="主管B"  roles="roleLevel2" desc="主管處理">
+		<flowConditions>
+		<flowLink action="Check" name="送審" to="Task8" />
+		<flowLink action="Return" name="退回" to="Task5" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task8" name="主管C"  roles="roleLevel3" desc="主管處理">
+		<flowConditions>
+		<flowLink action="Check" name="送審" to="Task10" />
+		<flowLink action="Return" name="退回" to="Task5" />
+		</flowConditions>
+	</flowTask>
+	<flowTask id="Task9" name="主管C"  roles="roleLevel3" desc="主管處理">
+		<flowConditions>
+		<flowLink action="CheckSign" name="核准簽章" to="End" />
+		<flowLink action="Return" name="退回" to="Task5" />
+		</flowConditions>
+	</flowTask>
+	<flowEvent id="End" type="END" desc="申請完成" />
+	<flowEvent id="Cancel" type="CANCEL" desc="申請單作廢" />
+</handyflow>

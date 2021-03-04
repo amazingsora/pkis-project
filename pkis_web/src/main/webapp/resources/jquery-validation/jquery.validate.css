@@ -1,0 +1,6 @@
+label.error { 
+	display: block; 
+	float: none; 
+	color: red;
+	vertical-align: top; 
+}

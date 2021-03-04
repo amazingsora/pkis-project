@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.ProfScheduleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.ProfSchedule">
+        <id column="SEQUENCENO" property="sequenceno" />
+        <result column="SCHEDULE_TYPE" property="scheduleType" />
+        <result column="EXEC_SECOND" property="execSecond" />
+        <result column="EXEC_MINUTE" property="execMinute" />
+        <result column="EXEC_HOUR" property="execHour" />
+        <result column="EXEC_DAY" property="execDay" />
+        <result column="EXEC_MONTH" property="execMonth" />
+        <result column="EXEC_WEEK" property="execWeek" />
+        <result column="SCHEDULE_NAME" property="scheduleName" />
+        <result column="PROGRAM_NAME" property="programName" />
+        <result column="SCHEDULE_VALUE" property="scheduleValue" />
+        <result column="SCHEDULE_STATE" property="scheduleState" />
+        <result column="SLEEP_VALUE" property="sleepValue" />
+        <result column="PROCESS_STATE" property="processState" />
+        <result column="NOTIFY_EMAIL" property="notifyEmail" />
+        <result column="FAILURE_EMAIL" property="failureEmail" />
+        <result column="REDO_STATE" property="redoState" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="REDO_USER" property="redoUser" />
+        <result column="REDO_TIME" property="redoTime" />
+        <result column="REDO_MEMO" property="redoMemo" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SEQUENCENO, SCHEDULE_TYPE, EXEC_SECOND, EXEC_MINUTE, EXEC_HOUR, EXEC_DAY, EXEC_MONTH, EXEC_WEEK, SCHEDULE_NAME, PROGRAM_NAME, SCHEDULE_VALUE, SCHEDULE_STATE, SLEEP_VALUE, PROCESS_STATE, NOTIFY_EMAIL, FAILURE_EMAIL, REDO_STATE, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, REDO_USER, REDO_TIME, REDO_MEMO, SYSTEM_MEMO
+    </sql>
+
+</mapper>

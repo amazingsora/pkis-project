@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.FlowxmlMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Flowxml">
+        <id column="SERNO" property="serno" />
+        <result column="FLOWID" property="flowid" />
+        <result column="FLOWVERSION" property="flowversion" />
+        <result column="FLOWXML" property="flowxml" />
+        <result column="CREATEUSERID" property="createuserid" />
+        <result column="CREATEAGENTID" property="createagentid" />
+        <result column="CREATETIME" property="createtime" />
+        <result column="SYSMEMO" property="sysmemo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, FLOWID, FLOWVERSION, FLOWXML, CREATEUSERID, CREATEAGENTID, CREATETIME, SYSMEMO
+    </sql>
+
+</mapper>

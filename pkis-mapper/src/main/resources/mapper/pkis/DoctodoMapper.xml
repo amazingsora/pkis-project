@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.DoctodoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.Doctodo">
+        <id column="SERNO" property="serno" />
+        <result column="FORMID" property="formid" />
+        <result column="TODONO" property="todono" />
+        <result column="SERIALNO" property="serialno" />
+        <result column="USERID" property="userid" />
+        <result column="SYSID" property="sysid" />
+        <result column="PROJID" property="projid" />
+        <result column="SUBJECT" property="subject" />
+        <result column="STATUS" property="status" />
+        <result column="OLDSTATUS" property="oldstatus" />
+        <result column="MAINFORMSERNO" property="mainformserno" />
+        <result column="OTHERINFO" property="otherinfo" />
+        <result column="OTHERSERNO" property="otherserno" />
+        <result column="CREATEUSERID" property="createuserid" />
+        <result column="UPDATEUSERID" property="updateuserid" />
+        <result column="CREATEAGENTID" property="createagentid" />
+        <result column="UPDATEAGENTID" property="updateagentid" />
+        <result column="CREATETIME" property="createtime" />
+        <result column="UPDATETIME" property="updatetime" />
+        <result column="SYSMEMO" property="sysmemo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        SERNO, FORMID, TODONO, SERIALNO, USERID, SYSID, PROJID, SUBJECT, STATUS, OLDSTATUS, MAINFORMSERNO, OTHERINFO, OTHERSERNO, CREATEUSERID, UPDATEUSERID, CREATEAGENTID, UPDATEAGENTID, CREATETIME, UPDATETIME, SYSMEMO
+    </sql>
+
+</mapper>

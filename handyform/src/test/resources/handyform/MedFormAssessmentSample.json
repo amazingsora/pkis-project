@@ -1,0 +1,25 @@
+{
+	"period": { "id": 1, "type": "quesDateRange", "value": "訓練期間", "required": false 
+	},
+	"secEvalItems": [
+		{ "id": 1, "type": "caption", "value": "1.病人照顧" },
+		{ "id": 2, "type": "ques5Point", "value": " 照顧病患之態度", "required": true },
+		{ "id": 3, "type": "ques5Point", "value": " 臨床問診與影像判讀能力", "required": true },
+		{ "id": 4, "type": "caption", "value": "2.知識" },
+		{ "id": 5, "type": "ques5Point", "value": " 臨床與基礎醫學知識", "required": true },
+		{ "id": 6, "type": "caption", "value": "3.專業素養" },
+		{ "id": 7, "type": "ques5Point", "value": " 工作責任感", "required": true }
+	],
+	"secEvalRangeItems": [
+		{ "id": 1, "type": "caption", "value": "加分項目：" },
+		{ "id": 2, "type": "quesNumRangeRank", "value": " 加分項目一", "begin": 0, "end": 5, "required": true },
+		{ "id": 3, "type": "quesNumRangeRank", "value": " 加分項目二", "begin": 0, "end": 3, "required": true },
+		{ "id": 4, "type": "caption", "value": "扣分項目：" },
+		{ "id": 5, "type": "quesNumRangeRank", "value": " 扣分項目一", "begin": -5, "end": 0, "required": true },
+		{ "id": 6, "type": "quesNumRangeRank", "value": " 扣分項目二", "begin": -3, "end": 0, "required": true }
+	],
+	"finalComment": { "id": 1, "type": "question", "value": "總評", "required": false },
+	"satisfactionOnOff": true,
+	"satisfaction": { "id": 1999, "type": "ques10Point", "value": "受評者對此次評量滿意度", "required": false },
+	"satisfaction2": { "id": 2000, "type": "ques10Point", "value": "評量者對此次評量滿意度", "required": false }
+}

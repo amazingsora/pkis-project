@@ -1,0 +1,3 @@
+{ "id": 0, "type": "quesCheck", "value": "選擇題三...？", "answer": "2", 
+	"options": [ "選項一", "選項二", "選項三" ]
+}

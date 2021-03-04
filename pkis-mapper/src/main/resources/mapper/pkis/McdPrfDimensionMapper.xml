@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tradevan.mapper.pkis.dao.McdPrfDimensionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tradevan.mapper.pkis.model.McdPrfDimension">
+        <id column="DIMENSION_ID" property="dimensionId" />
+        <result column="COMP_BAN" property="compBan" />
+        <result column="DIMENSION_NUM" property="dimensionNum" />
+        <result column="DIMENSION_UNIT" property="dimensionUnit" />
+        <result column="CATE1" property="cate1" />
+        <result column="CATE2" property="cate2" />
+        <result column="CATE3" property="cate3" />
+        <result column="SORT_INDEX" property="sortIndex" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="SYSTEM_MEMO" property="systemMemo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        DIMENSION_ID, COMP_BAN, DIMENSION_NUM, DIMENSION_UNIT, CATE1, CATE2, CATE3, SORT_INDEX, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME, SYSTEM_MEMO
+    </sql>
+
+</mapper>
