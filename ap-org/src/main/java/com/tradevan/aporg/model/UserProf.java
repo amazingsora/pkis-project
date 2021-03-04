@@ -298,7 +298,7 @@ public class UserProf extends GenericEntity<Long> implements Comparable<UserProf
 	}
 
 	public UserProf(String userId, String name, String pwdHash, String email, DeptProf dept, String sysId, String createUserId) {
-		this(userId, UserType.APCRC02, name, pwdHash, email, dept, sysId, createUserId);
+		this(userId, UserType.APPKIS02, name, pwdHash, email, dept, sysId, createUserId);
 	}
 	
 	public UserProf(String userId, UserType userType, String name, String pwdHash, String email, DeptProf dept, String sysId, String createUserId) {

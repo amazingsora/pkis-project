@@ -688,7 +688,7 @@ public class ImportCsvBatchService extends DefaultService {
 //				xauthUsers.setUserPw("1234");
 				
 				xauthUsers.setEmail(EMAIL);
-				xauthUsers.setUserType(UserType.APCRC02.getCode()); // 02:使用者
+				xauthUsers.setUserType(UserType.APPKIS02.getCode()); // 02:使用者
 				xauthUsers.setIsFirst("1");
 				if(!StringUtils.equals(onJob, "Y")) {
 					xauthUsers.setEnabled("0");

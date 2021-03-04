@@ -967,7 +967,7 @@ class Emp {
 		u.setName(this.empName);
 		u.setEmail(this.mailInternal);
 		u.setStatus("1");
-		u.setUserType(UserType.APCRC02.getCode());
+		u.setUserType(UserType.APPKIS02.getCode());
 		u.setCreateUserId("SYSTEM");
 		u.setIsFirst("1");
 		

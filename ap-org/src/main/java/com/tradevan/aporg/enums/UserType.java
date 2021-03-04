@@ -12,9 +12,9 @@ public enum UserType {
 
 	IN("院內", "IN", "in"),
 	OUT("院外","OUT", "out"),
-	APCRC00("系統管理員","00", "00"),
-	APCRC01("管理員","01", "01"),
-	APCRC02("使用者","02", "02");
+	APPKIS00("系統管理員","00", "00"),
+	APPKIS01("管理員","01", "01"),
+	APPKIS02("使用者","02", "02");
 	
 	private String type;
 	private String code;
